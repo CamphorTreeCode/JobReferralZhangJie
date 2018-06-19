@@ -1,0 +1,58 @@
+<!--pages/returnfee/returnfee.wxml-->
+<view class='header'>
+  <picker mode="date" value="{{date}}" start="1978-01-01" end="{{dates}}" bindchange="bindDateChange">
+    <text>{{dates}} </text>
+    <image bindchange="bindDateChange" src='/img/postdetails/rili.png'></image>
+  </picker>
+</view>
+<!--  -->
+<view class='fenlei'>
+  <view class='leimu'>
+    <view>
+      <text>工厂</text>
+    </view>
+    <view>
+      <text>入职日期</text>
+    </view>
+    <view>
+      <text>其他</text>
+    </view>
+  </view>
+  <!-- 1091 -->
+  <!-- <scroll-view scroll-y="true" style="height: 821rpx">    -->
+  <view class='each' wx:for='{{factory}}'>
+    <view class='leibie'>
+      <view>
+        <text>{{item.name}}</text>
+      </view>
+      <view>
+        <text>{{item.date}}</text>
+      </view>
+      <view>
+        <text catchtap='chakan'>查看同厂</text>
+      </view>
+    </view>
+    <view class='bottom'>
+      <scroll-view scroll-x="true" style=" white-space: nowrap; display: flex">
+        <text wx:for='{{item.title}}' wx:for-item='idx'>{{idx.name}}</text>
+      </scroll-view>
+    </view>
+  </view>
+  <!-- </scroll-view> -->
+</view>
+
+<!-- 底部 -->
+<view class='foter'>
+  <view class='left' bindtap='pageon'>
+    <view>
+      <image src='/img/postdetails/xiayiye.png'> </image>
+      <text>上一页</text>
+    </view>
+  </view>
+  <view class='right' bindtap='pageup'>
+    <view>
+      <image src='/img/postdetails/xiayiye2.png'> </image>
+      <text>下一页</text>
+    </view>
+  </view>
+</view>

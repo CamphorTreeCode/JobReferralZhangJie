@@ -1,0 +1,96 @@
+<!--pages/classification/classification.wxml-->
+ <scroll-view scroll-y="false" style='height:100%' bindscroll='bindscro' scroll-top='{{abba}}'>  
+<view class='header'>
+  <input placeholder='在此输入企业名称以搜索'></input>
+  <button>搜索</button>
+</view>
+<view class='foter'>
+  <view class='waw' wx:if='{{gao!=0}}' style='height:{{clientY}}px'>
+    <swiper class='dingwei' bindchange='gaibain' current='{{curren}}' style=' height:{{gao}}rpx' duration='0'>
+      <swiper-item  class='active' data-index='{{index}}'>
+        <text wx:for='{{leixing}}' wx:for-item="idx" class='ass  {{idx.state==1?"beijing":""}}' catchtap='textdianji' data-ind='{{index}}'>{{idx.name}}              </text>
+        <button data-in='{{index}}' catchtap='btn'>确认</button>
+      </swiper-item>
+       <swiper-item class='active' data-index='{{index}}'>
+        <text wx:for='{{jine}}' wx:for-item="idx" class='ass {{idx.state==1?"beijing":""}}' catchtap='textdiana' data-ia='{{index}}'>{{idx.name}}         </text>
+        <button data-in='{{index}}' catchtap='btn'>确认</button>
+      </swiper-item>
+      <swiper-item class='active' data-index='{{index}}'>
+        <text wx:for='{{hezong}}' wx:for-item="idx" class='ass {{idx.state==1?"beijing":""}}' catchtap='textdianb' data-ib='{{index}}'>{{idx.name}} </text>
+        <button data-in='{{index}}' catchtap='btn'>确认</button>
+      </swiper-item>
+      <swiper-item class='active' data-index='{{index}}'>
+        <view class='xingbie'>性别要求</view>
+        <view>
+          <text wx:for='{{xingbie}}' catchtap='textdian'  class='ass {{item.state==1?"beijing":""}}' data-id='{{index}}'>{{item.name}}            </text>
+          <!-- <text>男可做</text>
+          <text>女可做</text> -->
+        </view>
+        <view class='gongzi'>工资范围</view>
+        <view class='gongz'>
+          <input> </input><image src='/img/center/hengxian.png'></image><input></input>
+        </view>
+        <button data-in='{{index}}' catchtap='btn'>确认</button>
+      </swiper-item>
+    </swiper>
+  </view>
+  
+  <view class='top-head' bindtap='huidaotop' style='position:{{post}}'>
+    <view bindtap='sanlei' class='{{xuanze==0?"activeshow":""}}'>
+      <image src='/img/center/leixing.png'></image>
+      <text>类型</text>
+    </view>
+    <view bindtap='sanprice' class='{{xuanze==1?"activeshow":""}}'>
+      <image src='/img/center/fanxian.png'></image>
+      <text>返现金额</text>
+    </view>
+    <view bindtap='sanzong' class='{{xuanze==2?"activeshow":""}}'>
+      <image src='/img/center/zonghe.png'></image>
+      <text>综合排序</text>
+    </view>
+    <view bindtap='sanshai' class='{{xuanze==3?"activeshow":""}}'>
+      <image src='/img/center/shaixuan.png'></image>
+      <text>筛选</text>
+    </view>
+  </view>
+  <view class='bottom pinga'  style='margin-top:{{juli}}rpx'>
+    
+    <view class='mingpian' wx:for='{{foterlist}}'>
+    <image class='imga' mode='aspectFill' src='https://www.chuanshoucs.com/ServerImg/2018-05-28/56c2d674-1537-41cc-b4e6-f99c827bc844.png'></image>
+      <view class='left'>
+        <image mode='aspectFill' src='{{item.url}}'></image>
+      </view>
+      <view class='right'>
+        <view>{{item.name}}</view>
+        <view>
+          <text wx:for='{{item.title}}' wx:for-item="idx">{{idx.name}}</text>
+        </view>
+        <view>返{{item.fanli}}</view>
+        <view>{{item.price}}</view>
+      </view>
+    </view>
+  </view>
+  <view class='top'>
+    <text>换一批</text>
+    <image src='/img/index/huanyipi.png'></image>
+  </view>
+  
+  <view class='bottom'>
+    <view class='mingpian' wx:for='{{foterlist1}}'>
+      <view class='left'>
+        <image mode='aspectFill' src='{{item.url}}'></image>
+      </view>
+      <view class='right'>
+        <view>{{item.name}}</view>
+        <view>
+          <text wx:for='{{item.title}}' wx:for-item="idx">{{idx.name}}</text>
+        </view>
+        <view>返{{item.fanli}}</view>
+        <view>{{item.price}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+</scroll-view>
+
+<!-- 底部分类 -->

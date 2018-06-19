@@ -1,0 +1,18 @@
+<!--pages/identical/identical.wxml-->
+<view class='header'>
+  <image src='/img/postdetails/gongsi.png'></image>
+  <text>常熟新市</text>
+</view>
+
+<view class='content'>
+  <view class='fenlei'>
+    <view>姓名</view>
+    <view>返费金额</view>
+    <view>返费日期</view>
+  </view> 
+    <view class='fenlei lei' wx:for='{{fanfei}}'>
+    <view>{{item.name}}</view>
+    <view>{{item.price}}</view>
+    <view>{{item.date}}</view>
+  </view>
+</view>

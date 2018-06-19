@@ -1,0 +1,13 @@
+<image class="shang" src='https://www.chuanshoucs.com/ServerImg/2018-05-28/39dca335-7b01-4acc-aa7c-2b79bd79d229.png'></image>
+<view class='clear'></view> 
+<view class='zhong'>
+  <image class='icon' src='/image/gongsi.png'></image>
+  <text>张杰职介</text>
+</view>
+<view class='xia'>
+  <image class='icon' src='/image/xiangqing.png'></image>
+  <text>简介</text>
+</view>
+<view class='down'>
+    {{jianjie}}
+</view>

@@ -1,0 +1,16 @@
+<!--pages/applycenter/applycenter.wxml-->
+<view class='header'>
+    <image src='/img/center/bmcg2.png'></image>
+    <text>报名成功</text>
+</view>
+
+
+
+<view class='content' wx:for='{{dates}}'>
+    <image class='aw' src='/img/center/bmcg.png'></image>
+    <text class='tat'>报名成功</text>
+    <view>{{item.name}}</view>
+    <view class='txt'><text wx:for='{{item.title}}' wx:for-item="idx">{{idx.name}}</text></view>
+    <view class='img'><image src='/img/center/dingwei.png'></image><text>{{item.dizhi}}</text></view>
+    <view class='price'><text>{{item.price}}</text>/月</view>
+</view>

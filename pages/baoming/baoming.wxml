@@ -1,0 +1,95 @@
+<form bindsubmit="formSubmit" bindreset="formReset">
+  <view class='section'>
+    <image src='/image/xingming.png'></image>
+    <text>姓名</text>
+    <input type='text' placeholder='填写你的姓名(必填)'></input>
+  </view>
+  <view class='section dianhua'>
+    <image src='/image/lianxifangshi.png'></image>
+    <text>联系电话</text>
+    <input type='text' placeholder='填写你的联系电话(必填)'></input>
+  </view>
+  <view class='section'>
+    <image src='/image/xingbie.png'></image>
+    <text>性别</text>
+    
+    <radio-group bindchange="xingbie"> 
+      <view class="flex_box"> 
+        <view class="flex_item">
+          <image style="display:{{radioCheckVal==0?'block':''}}" src='/image/xiajiantou.png'></image>
+          <label class="{{radioCheckVal==0?'active':''}}">男
+          <radio value="0"  hidden="true"></radio>
+          </label> 
+        </view> 
+        <view class="flex_item">
+          <image style="display:{{radioCheckVal==1?'block':''}}" src='/image/xiajiantou.png'></image>
+          <label class="{{radioCheckVal==1?'active':''}}">女 
+          <radio value="1" hidden="true"></radio>
+          </label> 
+        </view> 
+      </view> 
+    </radio-group> 
+  </view>
+  
+  <view class='section'>
+    <image src='/image/rili.png'></image>
+    <text>出生日期</text>
+    <picker mode="date" value="{{date}}" start="1900-09-01" end="2018-06-01" bindchange="bindDateChange">
+      <view class="picker">
+        {{date}}
+      </view>
+    </picker>
+    <image class='you' src='/image/jinatou.png'></image>
+  </view>
+  
+  <view class='section address'>
+    <image src='/image/dizhi.png'></image>
+    <text>现住址</text>
+    <textarea placeholder='请填写你的现地址' maxlength='60'></textarea>
+  </view>
+  <view class='section shenfen'>
+    <image src='/image/shenfen.png'></image>
+    <text>身份证号</text>
+    <input type='text' placeholder='填写你的身份证号(必填)'></input>
+  </view>
+  <view class='section dianhua'>
+    <image src='/image/zhengzhi.png'></image>
+    <text>政治面貌</text>
+    <input type='text' placeholder='填写你的政治面貌'></input>
+  </view>
+  
+  <!-- <view class='section'>
+    <image src='/image/shenti.png'></image>
+    <text>身体状况</text>
+    <radio-group bindchange="shenti"> 
+      <view class="flex_box"> 
+        <view class="flex_item jiankang">
+          <image style="display:{{radioVal==0?'block':''}}" src='/image/xiajiantou.png'></image>
+          <label class="{{radioVal==0?'active':''}}">健康
+          <radio value="0"  hidden="true"></radio>
+          </label> 
+        </view> 
+        <view class="flex_item jiankang">
+          <image style="display:{{radioVal==1?'block':''}}" src='/image/xiajiantou.png'></image>
+          <label class="{{radioVal==1?'active':''}}">不健康 
+          <radio value="1" hidden="true"></radio>
+          </label> 
+        </view> 
+      </view> 
+    </radio-group>
+  </view> -->
+  <!-- <view class='aaa'>
+     <textarea placeholder='如不健康请说明理由' maxlength='70'></textarea>
+  </view> -->
+  
+  <view class='section address'>
+    <image src='/image/pingjia.png'></image>
+    <text>自我评价</text>
+    <textarea placeholder='填写你对自己的评价' maxlength='70'></textarea>
+  </view>
+  <view class='kong'></view>
+  <view class='kong'>
+    <button bindtap='baocun'>保存</button
+  ></view>
+  <view class='kong'></view>
+</form>

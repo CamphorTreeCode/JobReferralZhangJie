@@ -1,0 +1,18 @@
+<view class='total {{item.state==true?"hua":" "}}' wx:for="{{array}}" data-index='{{index}}' bindtouchstart='touchstart' bindtouchmove='touchmove'>
+  <view class='zuo'>
+    <view class='one'>{{item.name}}</view>
+    <view class='two'>
+      <text class='biaoqian' wx:for="{{item.tag}}">{{item.tagname}}</text>
+    </view>
+    <view class='three'>
+        <image src='/image/dingwei.png'></image>
+        <text>{{item.address}}</text>
+    </view>
+    <view class='four'>{{item.money}}/月</view>
+    <button bindtap="baoming">去报名</button>
+  </view>
+  <view class='yincang' catchtap='quxiao' data-index="{{index}}">
+      取消收藏
+  </view>
+</view>
+
