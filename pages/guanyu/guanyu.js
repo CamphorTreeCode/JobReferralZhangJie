@@ -1,3 +1,4 @@
+var app = getApp()  
 // pages/me/guanyu/guanyu.js
 Page({
 
@@ -5,14 +6,34 @@ Page({
    * 页面的初始数据
    */
   data: {
-    "jianjie":"职介梭的萨芬决定萨拉空间法拉第；是进口量的时间考虑发神经的拉丁；神经分裂；啊速度加快立法；是大家啊；监控力度是解放啦；时间考虑法拉的时间法律撒的健康路附近拉开的是福建拉多少"
+
+    aboutUsContent: '',
+    aboutUsimg: '',
+    //"jianjie":"职介梭的萨芬决定萨拉空间法拉第；是进口量的时间考虑发神经的拉丁；神经分裂；啊速度加快立法；是大家啊；监控力度是解放啦；时间考虑法拉的时间法律撒的健康路附近拉开的是福建拉多少"
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var aboutMe = this
+    wx.request({
+      url: app.globalData.appUrl + 'admin/about/findAboutUsDetails',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded', // 默认值
+        xcxuser_name: "xcxuser_name"
+      },
+      success: function (res) {
+        console.info(res);
+        console.info(res.data[0].content)
+        console.info(res.data[0].images)
+        aboutMe.setData({
+
+          aboutUsContent: res.data[0].content,
+          aboutUsimg: res.data[0].images
+        })
+      }
+    })
   },
 
   /**
