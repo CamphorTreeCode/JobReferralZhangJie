@@ -1,3 +1,6 @@
 {
+  "usingComponents": {
+    "my-component": "/utils/getUserTemplate/getUserTemplate"
+  },
   "navigationBarTitleText": "本地招聘"
 }

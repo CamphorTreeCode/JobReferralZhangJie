@@ -1,4 +1,8 @@
 <!--pages/returnfee/returnfee.wxml-->
+<!--遮罩-->
+<my-component>
+</my-component>
+<!--遮罩-->
 <view class='header'>
   <picker mode="date" value="{{date}}" start="1978-01-01" end="{{dates}}" bindchange="bindDateChange">
     <text>{{dates}} </text>

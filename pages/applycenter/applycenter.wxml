@@ -1,4 +1,8 @@
 <!--pages/applycenter/applycenter.wxml-->
+<!--遮罩-->
+<my-component>
+</my-component>
+<!--遮罩-->
 <view class='header'>
     <image src='/img/center/bmcg2.png'></image>
     <text>报名成功</text>

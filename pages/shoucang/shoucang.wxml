@@ -1,3 +1,7 @@
+<!--遮罩-->
+<my-component>
+</my-component>
+<!--遮罩-->
 <view class='total {{item.state==true?"hua":" "}}' wx:for="{{array}}" data-index='{{index}}' bindtouchstart='touchstart' bindtouchmove='touchmove'>
   <view class='zuo'>
     <view class='one'>{{item.name}}</view>

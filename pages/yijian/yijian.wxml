@@ -1,3 +1,7 @@
+<!--遮罩-->
+<my-component>
+</my-component>
+<!--遮罩-->
 <view class='top'>
   <image src='/image/yijian.png'></image>
   <text>给我们留言</text>

@@ -1,2 +1,6 @@
 <!--pages/fenye/fenye.wxml-->
 <text>pages/fenye/fenye.wxml</text>
+<!--遮罩-->
+<my-component>
+</my-component>
+<!--遮罩-->

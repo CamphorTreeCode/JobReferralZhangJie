@@ -1,3 +1,7 @@
+<!--遮罩-->
+<my-component>
+</my-component>
+<!--遮罩-->
 <form bindsubmit="formSubmit" bindreset="formReset">
   <view class='section'>
     <image src='/image/xingming.png'></image>

@@ -1,4 +1,5 @@
 var tankuang = false;
+var app = getApp();
 Page({
 
   /**

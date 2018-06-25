@@ -1,4 +1,8 @@
 <!--pages/classification/classification.wxml-->
+<!--遮罩-->
+<my-component>
+</my-component>
+<!--遮罩-->
  <scroll-view scroll-y="false" style='height:100%' bindscroll='bindscro' scroll-top='{{abba}}'>  
 <view class='header'>
   <input placeholder='在此输入企业名称以搜索'></input>

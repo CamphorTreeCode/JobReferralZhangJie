@@ -1,4 +1,5 @@
 //app.js
+var userLogin = require('utils/userlogin.js');
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -33,7 +34,26 @@ App({
       }
     })
   },
+    getOpenId: function () {
+    console.log("獲取opoenid")
+    var that = this
+    userLogin.getOpenid()
+  },
+  returnOpenId: function () {
+    var openid = wx.getStorageSync('openid')
+    console.log(openid)
+    if (openid) {
+      console.log("有openid")
+    } else {
+      console.log("沒有openid")
+      this.getOpenId();
+      openid = wx.getStorageSync('openid')
+    }
+    return openid
+  },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    appUrl:"http://localhost/ZhangJie/",
+    appId: "wxb39d67b4e5dda79d"
   }
 })

@@ -1,3 +1,7 @@
+<!--遮罩-->
+<my-component>
+</my-component>
+<!--遮罩-->
 <view class='userinfo'>
    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 授权登录 </button>
     <block wx:else>

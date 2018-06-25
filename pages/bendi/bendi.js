@@ -1,4 +1,50 @@
 // pages/bendi/bendi.js
+var app =getApp();
+
+var pagesize = 0;
+function selectTypePage(that) {
+console.log("21")
+  wx.request({
+    url: app.globalData.appUrl + 'WXCompanyJob/selectCompanyJobPage',
+    data: {
+      
+      currentPage: ++pagesize,
+
+    },
+    header: {
+      // 'content-type': 'application/x-www-form-urlencoded' // 默认值
+      'content-type': 'application/x-www-form-urlencoded', // 默认值
+      xcxuser_name: "xcxuser_name"
+    },
+    method: 'POST',
+    success: function (res) {
+
+      console.log(res)
+
+      if (res.data[0].lists.length > 0) {
+
+        var shopList = that.data.shopList
+        for (var i = 0; i < res.data[0].lists.length; i++) {
+          shopList.push(res.data[0].lists[i])
+        }
+
+
+        console.info(res.data[0].lists, shopList)
+        that.setData({
+          shopList,
+          showData: true,
+          showLoading: true
+        })
+      } else {
+        that.setData({
+          bottomText: false,
+          showLoading: true
+        })
+      }
+ 
+    }
+  })
+}
 Page({
 
   /**
@@ -110,13 +156,21 @@ Page({
         fanli: "3700",
         price: "4000-5000/月"
       }
-    ]
+    ],
+    shopList:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(JSON.parse("[\"人气\",\"返现最高\"]"))
+    
+    let scrollHeight = wx.getSystemInfoSync().windowHeight;
+    this.setData({
+      scrollHeight: scrollHeight
+    });
+    var that = this
     wx.setNavigationBarTitle({
       title: options.key,
       success: function(res) {},
@@ -132,13 +186,34 @@ Page({
     this.setData({
       clientY: ss
     })
+    //获取商品数据 start 
+    pagesize = 0;
+    selectTypePage(that)
+    //获取商品数据 end
+    //获取所有分类的方法 start
+
+    wx.request({
+      url: app.globalData.appUrl + 'WXJobCategory/selectJobCategoryType',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded', // 默认值
+        xcxuser_name: "xcxuser_name"
+      },
+      success: function (res) {
+        console.info(res);
+    that.setData({
+      leixing:res.data
+    })     
+        
+      }
+    })
+    //获取所有分类的方法 end
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+  //获取所有分类http://localhost/ZhangJie/WXJobCategory/selectJobCategoryType
   },
 
   /**
@@ -281,7 +356,7 @@ Page({
     var that = this;
     var gaodu = 0;
     if (this.data.curren == 2 && this.data.disan == "true") {
-      var ss = setInterval(function () {
+      var ss = setInterval( function () {
         // console.log(gaodu)
         gaodu += 40;
         that.setData({
@@ -386,6 +461,7 @@ Page({
   },                                          
   btn: function (e) {
     var index = e.currentTarget.dataset.in;
+    console.log(e)
     this.setData({
       gao: 0,
       post: "relative",
@@ -396,19 +472,21 @@ Page({
     })
   },
   textdianji: function (e) {
+    var that = this
     var index = e.currentTarget.dataset.ind;
-    // console.log(index)
-    // console.log(this.data.leixing[index].state)
+    console.log(index)
+ 
+    var leixing = that.data.leixing
+
     if (this.data.leixing[index].state == 1) {
-      this.data.leixing[index].state = 0;
-      // console.log(0)
+      leixing[index].state = 0;
+
     }
-    else if (this.data.leixing[index].state == 0) {
-      this.data.leixing[index].state = 1;
-      // console.log(0)
+    else{
+      leixing[index].state = 1;
     }
-    this.setData({
-      leixing: this.data.leixing
+    that.setData({
+      leixing: leixing
     })
   },
   textdian: function (e) {
@@ -417,11 +495,9 @@ Page({
     // console.log(this.data.xingbie[index].state)
     if (this.data.xingbie[index].state == 1) {
       this.data.xingbie[index].state = 0;
-      // console.log(0)
     }
     else if (this.data.xingbie[index].state == 0) {
       this.data.xingbie[index].state = 1;
-      // console.log(0)
     }
     this.setData({
       xingbie: this.data.xingbie
@@ -463,5 +539,13 @@ Page({
     wx.pageScrollTo({
       scrollTop: 0
     })
+  },
+  lower:function(){
+    console.log("..")
+    var that = this
+    that.setData({
+      showLoading: false
+    })
+    selectTypePage(that)
   }
 })

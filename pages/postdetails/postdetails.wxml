@@ -1,4 +1,8 @@
 <!--pages/postdetails/postdetails.wxml-->
+ <!--遮罩-->
+<my-component>
+</my-component>
+<!--遮罩-->
   <!-- 阴影遮罩层 -->
     <view class='waw' wx:if='{{gao!=0}}' >
    </view> 
