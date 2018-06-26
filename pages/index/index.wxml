@@ -78,7 +78,7 @@
         <button data-in='{{index}}' catchtap='btn'>确认</button>
       </swiper-item>
       <swiper-item class='active' data-index='{{index}}'>
-        <text wx:for='{{jine}}' wx:for-item="idx" class='ass {{idx.state==1?"beijing":""}}' catchtap='textdiana' data-ia='{{index}}'>{{idx.name}}         </text>
+        <text wx:for='{{jine}}' wx:for-item="idx" class='ass {{pricex==index?"beijing":""}}' catchtap='textdiana' data-ia='{{index}}'>{{idx.name}}        </text>
         <button data-in='{{index}}' catchtap='btn'>确认</button>
       </swiper-item>
       <swiper-item class='active' data-index='{{index}}'>

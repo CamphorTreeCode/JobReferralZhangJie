@@ -21,7 +21,7 @@
   position: absolute;
   /* height: 560rpx;  */
   padding-bottom: 20rpx;
-  top: 115rpx;
+  top: 111rpx;
   left: 0;
   z-index: 10;
   color: #999;
@@ -64,7 +64,7 @@
 .beijing{
   background: #DAEDFE;
   color: #33A1FF ;
-  border: 0;
+  border: 1px solid white !important;
 }
 
 .foter .top-head{
@@ -198,6 +198,7 @@
   border-radius: 10rpx;
   padding: 5rpx 20rpx;
   margin: 20rpx ;
+  font-size: 34rpx;
   /* margin-left: 40rpx; */
 }
 
