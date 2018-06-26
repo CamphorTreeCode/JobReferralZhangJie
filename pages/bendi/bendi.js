@@ -6,10 +6,10 @@ function selectTypePage(that) {
 console.log("21")
   wx.request({
     url: app.globalData.appUrl + 'WXCompanyJob/selectCompanyJobPage',
-    data: {
-      
+    data: {     
       currentPage: ++pagesize,
-
+      jobCategoryId: that.data.jobCategoryId
+    
     },
     header: {
       // 'content-type': 'application/x-www-form-urlencoded' // 默认值
@@ -25,6 +25,7 @@ console.log("21")
 
         var shopList = that.data.shopList
         for (var i = 0; i < res.data[0].lists.length; i++) {
+          res.data[0].lists[i].jobLabels = JSON.parse(res.data[0].lists[i].jobLabels)
           shopList.push(res.data[0].lists[i])
         }
 
@@ -157,14 +158,16 @@ Page({
         price: "4000-5000/月"
       }
     ],
-    shopList:[]
+    shopList:[],
+    jobCategoryId:[]
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(JSON.parse("[\"人气\",\"返现最高\"]"))
+
     
     let scrollHeight = wx.getSystemInfoSync().windowHeight;
     this.setData({
@@ -460,8 +463,38 @@ Page({
     })
   },                                          
   btn: function (e) {
+    var that = this
     var index = e.currentTarget.dataset.in;
-    console.log(e)
+    if (index =="leixing"){
+      var jobCategoryId=[]
+      var leixing = that.data.leixing
+      for (var i = 0; i < leixing.length;i++){
+        if (leixing[i].state==1){
+          jobCategoryId.push(that.data.leixing[i].jobCategoryId)
+        }
+       
+      }
+      if (jobCategoryId.length>0){
+        that.setData({
+          jobCategoryId,
+          shopList:[]
+        })
+       pagesize = 0
+       selectTypePage(that)
+      
+}    
+    }
+    else if (index =="jine"){
+      var returnMoney = [];
+      var jine = that.data.jine
+      for (var i = 0; i < jine.length; i++) {
+        if (jine[i].state == 1) {
+          returnMoney.push(jine[i].name)
+        }
+
+      }
+    }
+       console.log(e)
     this.setData({
       gao: 0,
       post: "relative",
@@ -471,6 +504,7 @@ Page({
       disan: "true"
     })
   },
+ //类型选择
   textdianji: function (e) {
     var that = this
     var index = e.currentTarget.dataset.ind;
@@ -489,6 +523,7 @@ Page({
       leixing: leixing
     })
   },
+  //类型选择
   textdian: function (e) {
     var index = e.currentTarget.dataset.id;
     // console.log(index)
@@ -503,6 +538,7 @@ Page({
       xingbie: this.data.xingbie
     })
   },
+  //返现选择
   textdiana: function (e) {
     var index = e.currentTarget.dataset.ia;
     // console.log(index)

@@ -5,13 +5,13 @@
 	},
 	"setting": {
 		"urlCheck": false,
-		"es6": true,
+		"es6": false,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.0.8",
+	"libVersion": "2.1.1",
 	"appid": "wxb39d67b4e5dda79d",
 	"projectname": "%E5%BC%A0%E6%9D%B0%E8%81%8C%E4%BB%8B",
 	"isGameTourist": false,
