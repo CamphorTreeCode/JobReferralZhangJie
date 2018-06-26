@@ -78,6 +78,7 @@
   /* box-shadow:5px 5px 10px #ccc; */
   border-bottom-left-radius: 90rpx;
   border-bottom-right-radius: 90rpx;
+  font-size:34rpx;
 }
 
 .active .xingbie, .active .gongzi, .active .gongz {
@@ -93,6 +94,7 @@
 }
 
 .active text {
+  font-size:32rpx;
   display: inline-block;
   /* color: #999; */
   border-radius: 10rpx;
@@ -149,7 +151,7 @@
   margin: 0 2%;
   background: #f5f5f5;
   text-align: center;
-  font-size: 24rpx;
+  font-size: 27rpx;
   padding: 18rpx 0;
   border-radius: 10rpx;
   padding-left: 4%;

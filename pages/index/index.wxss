@@ -439,6 +439,7 @@ width: 70%;
   padding: 5rpx 20rpx;
   margin: 20rpx 0;
   margin-left: 40rpx;
+  font-size:32rpx;
 }
 .active:nth-of-type(2) text{
  margin-left:24rpx; 
