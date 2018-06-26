@@ -18,15 +18,15 @@ Page({
   onLoad: function (options) {
     var aboutMe = this
     wx.request({
-      url: app.globalData.appUrl + 'admin/about/findAboutUsDetails',
+      url: app.globalData.appUrl + 'WXAboutUs/findAboutUsDetails',
       header: {
         'content-type': 'application/x-www-form-urlencoded', // 默认值
         xcxuser_name: "xcxuser_name"
       },
       success: function (res) {
         console.info(res);
-        console.info(res.data[0].content)
-        console.info(res.data[0].images)
+        //console.info(res.data[0].content)
+        //console.info(res.data[0].images)
         aboutMe.setData({
 
           aboutUsContent: res.data[0].content,
