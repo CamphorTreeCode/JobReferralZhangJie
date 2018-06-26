@@ -8,8 +8,8 @@ console.log("21")
     url: app.globalData.appUrl + 'WXCompanyJob/selectCompanyJobPage',
     data: {     
       currentPage: ++pagesize,
-      jobCategoryId: that.data.jobCategoryId
-    
+      jobCategoryId: that.data.jobCategoryId,
+      returnMoney: that.data.returnMoney
     },
     header: {
       // 'content-type': 'application/x-www-form-urlencoded' // 默认值
@@ -52,6 +52,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    pricex:"false",//返现金额选择
         diyige: "true",
     dier: "true",
     disan: "true",
@@ -159,7 +160,10 @@ Page({
       }
     ],
     shopList:[],
-    jobCategoryId:[]
+    jobCategoryId:[],
+    showData: true,
+    bottomText: true,
+    returnMoney:null
 
   },
 
@@ -487,12 +491,13 @@ Page({
     else if (index =="jine"){
       var returnMoney = [];
       var jine = that.data.jine
-      for (var i = 0; i < jine.length; i++) {
-        if (jine[i].state == 1) {
-          returnMoney.push(jine[i].name)
-        }
-
+      if (that.data.pricex!=false){
+        that.setData({
+          returnMoney: that.data.jine[that.data.pricex].name,
+          shopList: []
+        })
       }
+  
     }
        console.log(e)
     this.setData({
@@ -541,19 +546,26 @@ Page({
   //返现选择
   textdiana: function (e) {
     var index = e.currentTarget.dataset.ia;
+    console.log(index, this.data.pricex)
+    if (this.data.pricex == index) { return false; }
+    else {
+      this.setData({
+        pricex: index
+      })
+    }
     // console.log(index)
-    console.log(this.data.jine[index].state)
-    if (this.data.jine[index].state == 1) {
-      this.data.jine[index].state = 0;
-      // console.log(0)
-    }
-    else if (this.data.jine[index].state == 0) {
-      this.data.jine[index].state = 1;
-      // console.log(0)
-    }
-    this.setData({
-      jine: this.data.jine
-    })
+    // console.log(this.data.jine[index].state)
+    // if (this.data.jine[index].state == 1) {
+    //   this.data.jine[index].state = 0;
+    //   // console.log(0)
+    // }
+    // else if (this.data.jine[index].state == 0) {
+    //   this.data.jine[index].state = 1;
+    //   // console.log(0)
+    // }
+    // this.setData({
+    //   jine: this.data.jine
+    // })
   },
   textdianb: function (e) {
     var index = e.currentTarget.dataset.ib;

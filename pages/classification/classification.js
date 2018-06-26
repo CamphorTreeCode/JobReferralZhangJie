@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据  
    */
   data: {
+    pricex:"false",//返现金额选择
     // 下拉框第一个显示
     diyige: "true",
     dier: "true",
@@ -178,11 +179,11 @@ Page({
   sanlei: function () {
     
     if (this.data.curren == 0 && this.data.diyige == "true") {
+      // if (this.data.curren != 1) {
       var that = this;
       var gaodu = 0;
       setTimeout(function () {
         var ss = setInterval(function () {
-          // console.log(gaodu)
           gaodu += 40;
           that.setData({
             xuanze: 0,
@@ -200,12 +201,12 @@ Page({
           }
         }, 10)
       }, 30)
+      // }
     } else if (this.data.curren != 0 && this.data.diyige == "true") {
       var that = this;
       var gaodu = 0;
       setTimeout(function () {
         var ss = setInterval(function () {
-          // console.log(gaodu)
           gaodu += 40;
           that.setData({
             xuanze: 0,
@@ -214,7 +215,7 @@ Page({
             xianshi: "block",
             post: "fixed",
             diyige: "false",
-            dier: "ture",
+            dier: "true",
             disan: "true",
             disi: "true"
           })
@@ -436,19 +437,27 @@ Page({
   },
   textdiana: function (e) {
     var index = e.currentTarget.dataset.ia;
+
+    if (this.data.pricex == index) { return false; }
+    else {
+      this.setData({
+        pricex: index
+      })
+    }
+
     // console.log(index)
-    console.log(this.data.jine[index].state)
-    if (this.data.jine[index].state == 1) {
-      this.data.jine[index].state = 0;
-      // console.log(0)
-    }
-    else if (this.data.jine[index].state == 0) {
-      this.data.jine[index].state = 1;
-      // console.log(0)
-    }
-    this.setData({
-      jine: this.data.jine
-    })
+    // console.log(this.data.jine[index].state)
+    // if (this.data.jine[index].state == 1) {
+    //   this.data.jine[index].state = 0;
+    //   // console.log(0)
+    // }
+    // else if (this.data.jine[index].state == 0) {
+    //   this.data.jine[index].state = 1;
+    //   // console.log(0)
+    // }
+    // this.setData({
+    //   jine: this.data.jine
+    // })
   },
   textdianb: function (e) {
     var index = e.currentTarget.dataset.ib;

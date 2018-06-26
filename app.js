@@ -53,7 +53,9 @@ App({
   },
   globalData: {
     userInfo: null,
+
     appUrl:"http://localhost/ZhangJie/",
     appId: "wxb39d67b4e5dda79d"
+
   }
 })

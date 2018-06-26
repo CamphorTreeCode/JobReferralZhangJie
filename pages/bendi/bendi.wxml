@@ -12,8 +12,12 @@
         <button data-in='leixing' catchtap='btn'>确认</button>
       </swiper-item>
        <swiper-item class='active' data-index='{{index}}'>
-        <text wx:for='{{jine}}' wx:for-item="idx" class='ass {{idx.state==1?"beijing":""}}' catchtap='textdiana' data-ia='{{index}}'>{{idx.name}}         </text>
-        <button data-in='jine' catchtap='btn'>确认</button>
+
+        <text wx:for='{{jine}}' wx:for-item="idx" class='ass {{index==pricex?"beijing":""}}' catchtap='textdiana' data-ia='{{index}}'>{{idx.name}}         </text>
+        <button data-in='s' catchtap='btn'>确认</button>
+
+
+
       </swiper-item>
       <swiper-item class='active' data-index='{{index}}'>
         <text wx:for='{{hezong}}' wx:for-item="idx" class='ass {{idx.state==1?"beijing":""}}' catchtap='textdianb' data-ib='{{index}}'>{{idx.name}} </text>
@@ -60,7 +64,7 @@
   <!--显示列表  -->
 <scroll-view scroll-y="true"  style='height:{{scrollHeight}}px' class="scoll-h"   bindscrolltolower="lower">
   <view class='bottom'>
-    <view class='mingpian' wx:for='{{shopList}}' data-id="{{item.companyJobId}}">
+    <view class="mingpian {{item.jobStick==1?'zhiding':''}}" wx:for='{{shopList}}' data-id="{{item.companyJobId}}">
       <view class='left'>
         <image mode='aspectFill' src='/img/index/banner.jpg'></image>
       </view>

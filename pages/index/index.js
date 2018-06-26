@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    pricex:"false",//返现金额选择
     juli: -11,
     // 下拉框第一个显示
     diyige: "true",
@@ -54,10 +55,10 @@ Page({
       { name: "叉车/铲车", state: 0 }
     ],
     jine: [
-      { name: "1000-2000", state: 0 },
-      { name: "2000-3000", state: 0 },
-      { name: "3000-4000", state: 0 },
-      { name: "4000以上", state: 0 }
+      { name: "1000-2000" },
+      { name: "2000-3000" },
+      { name: "3000-4000" },
+      { name: "4000以上" }
     ],
     hezong: [
       { name: "最新发布", state: 0 },
@@ -659,17 +660,25 @@ Page({
   },
   textdiana: function (e) {
     var index = e.currentTarget.dataset.ia;
-    console.log(this.data.jine[index].state)
-    if (this.data.jine[index].state == 1) {
-      this.data.jine[index].state = 0;
+
+    if (this.data.pricex == index) { return false; }
+    else {
+      this.setData({
+        pricex: index
+      })
     }
-    else if (this.data.jine[index].state == 0) {
-      this.data.jine[index].state = 1;
-      // console.log(0)
-    }
-    this.setData({
-      jine: this.data.jine
-    })
+
+    // console.log(this.data.jine[index].state)
+    // if (this.data.jine[index].state == 1) {
+    //   this.data.jine[index].state = 0;
+    // }
+    // else if (this.data.jine[index].state == 0) {
+    //   this.data.jine[index].state = 1;
+    //   // console.log(0)
+    // }
+    // this.setData({
+    //   jine: this.data.jine
+    // })
   },
   textdianb: function (e) {
     var index = e.currentTarget.dataset.ib;
