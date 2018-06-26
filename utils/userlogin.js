@@ -53,8 +53,8 @@ function getOpenid() {
             data: { jscode: res.code },
             method: "POST",
             header: {
-              // 'content-type': 'application/x-www-form-urlencoded' // 默认值
-              'content-type': 'application/json', // 默认值
+               'content-type': 'application/x-www-form-urlencoded',// 默认值
+              //'content-type': 'application/json', // 默认值
               xcxuser_name: "xcxuser_name"
             },
             success: function (res) {
