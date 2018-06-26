@@ -13,11 +13,8 @@
       </swiper-item>
        <swiper-item class='active' data-index='{{index}}'>
 
-        <text wx:for='{{jine}}' wx:for-item="idx" class='ass {{index==pricex?"beijing":""}}' catchtap='textdiana' data-ia='{{index}}'>{{idx.name}}         </text>
-        <button data-in='s' catchtap='btn'>确认</button>
-
-
-
+        <text wx:for='{{jine}}' wx:for-item="idx" class='ass {{index==pricex?"beijing":""}}' catchtap='textdiana' data-ia='{{index}}'>{{idx.name}}  </text>
+        <button data-in='jine' catchtap='btn'>确认</button>
       </swiper-item>
       <swiper-item class='active' data-index='{{index}}'>
         <text wx:for='{{hezong}}' wx:for-item="idx" class='ass {{idx.state==1?"beijing":""}}' catchtap='textdianb' data-ib='{{index}}'>{{idx.name}} </text>
@@ -26,15 +23,15 @@
       <swiper-item class='active' data-index='{{index}}'>
         <view class='xingbie'>性别要求</view>
         <view>
-          <text wx:for='{{xingbie}}' catchtap='textdian'  class='ass {{item.state==1?"beijing":""}}' data-id='{{index}}'>{{item.name}}            </text>
+          <text wx:for='{{xingbie}}' catchtap='textdian'  class='ass {{selectsx==index?"beijing":""}}' data-id='{{index}}'>{{item.name}}            </text>
           <!-- <text>男可做</text>
           <text>女可做</text> -->
         </view>
         <view class='gongzi'>工资范围</view>
         <view class='gongz'>
-          <input> </input><image src='/img/center/hengxian.png'></image><input></input>
+          <input id="min" placeholder="" bindinput="inputTyping" value="{{jobSalaryMin}}"> </input><image src='/img/center/hengxian.png'></image><input placeholder="" id="max" bindinput="inputTyping" value="{{jobSalaryMax}}"></input>
         </view>
-        <button data-in='{{index}}' catchtap='btn'>确认</button>
+        <button data-in='saixuan' catchtap='btn'>确认</button>
       </swiper-item>
     </swiper>
   </view>
@@ -78,7 +75,7 @@
       </view>
     </view>
   </view>
-        <!--没有数据暂无数据  -->
+<!--没有数据暂无数据  -->
 <view class="spinner cl" hidden='{{showLoading}}'>
   <view class="rect1"></view>
   <view class="rect2"></view>
