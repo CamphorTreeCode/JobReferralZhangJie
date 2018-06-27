@@ -1,6 +1,6 @@
 // pages/bendi/bendi.js
 var app =getApp();
-
+var util = require('../../utils/util')
 var pagesize = 0;
 function selectTypePage(that) {
 console.log("21")
@@ -12,7 +12,9 @@ console.log("21")
       returnMoney: that.data.returnMoney,
       jobRecruitsGender: that.data.jobRecruitsGender,
       jobSalaryMin: that.data.jobSalaryMin,
-      jobSalaryMax: that.data.jobSalaryMax
+      jobSalaryMax: that.data.jobSalaryMax,
+      companyAddress: that.data.companyAddress,
+      createTimes: that.data.createTimes
     },
     header: {
       // 'content-type': 'application/x-www-form-urlencoded' // 默认值
@@ -82,7 +84,7 @@ Page({
       { name: "4000以上", state: 0 }
     ],
     hezong: [
-      { name: "最新发布", state: 0 },
+      { name: "最新发布", state: 1 },
       { name: "离我最近", state: 0 }
     ],
     xuanze: "a",
@@ -175,7 +177,11 @@ Page({
     //工资最小值
     jobSalaryMin:null,
     //工资最大值
-    jobSalaryMax:null
+    jobSalaryMax:null,
+    //当前的地址
+    companyAddress:null,
+    //最新时间排序
+    createTimes:"true"
 
   },
 
@@ -184,7 +190,6 @@ Page({
    */
   onLoad: function (options) {
 
-    
     let scrollHeight = wx.getSystemInfoSync().windowHeight;
     this.setData({
       scrollHeight: scrollHeight
@@ -539,6 +544,55 @@ else{
       }
   
     }
+    //综合排序
+    else if (index="address"){
+      // city + district
+      var hezong = that.data.hezong
+   
+      if (hezong[1].state == 1){
+
+        if (hezong[0].state == 0) {
+          that.setData({
+            createTimes: null          
+          })
+      
+        }else{
+          that.setData({
+            createTimes: "true",
+          })
+        }
+    
+          
+          that.setData({
+            companyAddress: that.data.city + "," + that.data.district,
+            shopList:[],
+            city:null,
+            district:null
+          })
+          pagesize = 0
+          selectTypePage(that)
+      
+      } else {
+        if (hezong[0].state == 0) {
+          that.setData({
+            createTimes: null
+          })
+
+        } else {
+          that.setData({
+            createTimes: "true",
+          })
+        }
+
+        that.setData({
+          companyAddress: null,
+          shopList: [],
+
+        })
+        pagesize = 0
+        selectTypePage(that)
+      }
+    }
     //赛选选择
     else if (index =="saixuan"){
       if (that.data.jobSalaryMin != null && that.data.jobSalaryMax==null){
@@ -670,9 +724,13 @@ else{
     // })
   },
   textdianb: function (e) {
+    console.log("离我最进")
     var index = e.currentTarget.dataset.ib;
-    // console.log(index)
+     console.log(index)
     console.log(this.data.hezong[index].state)
+    if (index==1){
+      util.getLocationDetails(this)
+    }
     if (this.data.hezong[index].state == 1) {
       this.data.hezong[index].state = 0;
       // console.log(0)
@@ -690,6 +748,7 @@ else{
       scrollTop: 0
     })
   },
+  //下拉刷新
   lower:function(){
     console.log("..")
     var that = this
@@ -698,6 +757,7 @@ else{
     })
     selectTypePage(that)
   },
+  //工资输入框
   inputTyping:function(e){
     var id = e.currentTarget.id
     console.log(e, id)
@@ -711,5 +771,10 @@ else{
       jobSalaryMax: e.detail.value
       })
     }
-  }
+  },
+  // 获取地理位置
+  getPostion() {
+    /*登陆的位置 */
+    check.getLocationCheck(this)
+  },
 })

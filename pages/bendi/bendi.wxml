@@ -18,7 +18,7 @@
       </swiper-item>
       <swiper-item class='active' data-index='{{index}}'>
         <text wx:for='{{hezong}}' wx:for-item="idx" class='ass {{idx.state==1?"beijing":""}}' catchtap='textdianb' data-ib='{{index}}'>{{idx.name}} </text>
-        <button data-in='{{index}}' catchtap='btn'>确认</button>
+        <button data-in='address' catchtap='btn'>确认</button>
       </swiper-item>
       <swiper-item class='active' data-index='{{index}}'>
         <view class='xingbie'>性别要求</view>
