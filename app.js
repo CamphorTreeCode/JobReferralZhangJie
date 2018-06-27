@@ -33,6 +33,8 @@ App({
         }
       }
     })
+
+    //获取用户是否填写报名表
   },
     getOpenId: function () {
     console.log("獲取opoenid")
