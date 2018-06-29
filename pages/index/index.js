@@ -1,3 +1,4 @@
+var app = getApp();
 // pages/index/index.js
 Page({
 
@@ -163,6 +164,20 @@ Page({
     this.setData({
       clientY: ss
     })
+    
+ 
+    //判断用户是否有报名表
+    if (app.globalData.applicantUser == true) {
+
+      this.setData({
+        dcancel: 'none'
+      })
+    } else {
+      this.setData({
+        dcancel: 'block'
+      })
+    }
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -175,11 +190,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // setInterval(function(){
-    //   wx.pageScrollTo({
-    //     scrollTop: 560
-    //   })
-    // },10)
+
   },
 
   /**

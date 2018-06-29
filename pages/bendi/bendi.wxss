@@ -115,7 +115,7 @@
 
 .bottom{
   /* margin-top: 80rpx; */
-  padding: 20rpx 0;
+  padding: 25rpx 0;
 }
 .bottom .left{
   overflow: hidden;

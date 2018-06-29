@@ -59,9 +59,10 @@ function getOpenid() {
             },
             success: function (res) {
               console.log(res)
-
+              var that = this;
+              
               try {
-                wx.setStorageSync('openid', res.data.openId)
+                wx.setStorageSync('openid', res.data.openId);
               } catch (e) {
               }
             }

@@ -9,12 +9,19 @@
 </view>
 
 
-
-<view class='content' wx:for='{{dates}}'>
+<scroll-view scroll-y="true"  style='height:{{scrollHeight}}px' class="scoll-h"   bindscrolltolower="lower">
+<view class='content'  wx:for='{{applicantList}}' catchtap='companyJobDetails' data-id="{{applicantList[index].companyJobId}}" >
+  <view>
     <image class='aw' src='/img/center/bmcg.png'></image>
     <text class='tat'>报名成功</text>
-    <view>{{item.name}}</view>
-    <view class='txt'><text wx:for='{{item.title}}' wx:for-item="idx">{{idx.name}}</text></view>
-    <view class='img'><image src='/img/center/dingwei.png'></image><text>{{item.dizhi}}</text></view>
-    <view class='price'><text>{{item.price}}</text>/月</view>
+    <view wx:for='{{item.companyJob}}' wx:for-item="ll">
+       {{ll.company.companyName}}
+    </view>
+    <view class='txt'><text wx:for='{{item.companyJob[0].jobLabels}}' wx:for-item="j">{{j}}</text></view>
+    <view class='img'>
+      <image src='/img/center/dingwei.png'></image><text>{{item.companyJob[0].company.companyAddress}}</text></view>
+    <view class='price'><text >{{item.companyJob[0].jobSalaryMin}}-{{item.companyJob[0].jobSalaryMax}}</text>/月</view>
 </view>
+</view>
+<view class="bottomText" hidden='{{bottomText}}'>已经到底了</view>
+</scroll-view>

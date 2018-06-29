@@ -58,7 +58,11 @@ Page({
   data: {
     radioCheckVal: 0,
     radioVal:0,
-    dateTime:''
+    dateTime:'',
+    applicantList:[],
+    date:'',
+    radioCheckVal:''
+
   },
 
   /**
@@ -69,8 +73,27 @@ Page({
     this.data.dateTime = new Date();
     var myDate = this.data.dateTime.getFullYear() + '-' + (this.data.dateTime.getMonth() + 1) + '-' + this.data.dateTime.getDate();
     this.setData({
-      dateTime:myDate
+      dateTime: myDate
     })
+    console.info("用户报名表状态为：" + app.globalData.applicantUser)
+    if (app.globalData.applicantUser == true) {
+      var that = this;
+      wx.request({
+        url: app.globalData.appUrl + 'WXApplicant/findApplicantMsg',
+        data: { openId: options.openId },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded', // 默认值
+          xcxuser_name: "xcxuser_name"
+        },
+        success: function (res) {
+          that.setData({
+            applicantList: res.data.applicant,
+            date: res.data.applicant.applicantBirthday,
+            radioCheckVal: res.data.applicant.applicantGender
+          })
+        }
+      })
+    }
   },
 
   /**
@@ -155,30 +178,15 @@ Page({
           'content-type': 'application/x-www-form-urlencoded', // 默认值
           xcxuser_name: "xcxuser_name"
         },
-        success: function (res) {
-          console.info("**********************************")
-          console.info(res);
-          if (res.data) {
-            wx.showToast({
-              title: '提交成功！',
-              icon: 'none',
-              duration: 2000
-            })
-            // wx.switchTab({
-              
-            // })
-            that.setData({
-              applicantAll: res.data.applicantAll
-            })
-            wx.reLaunch({
-              url: '/pages/me/me?name=' + that.data.applicantAll+'',
-            })
-            
-
-          }
+        success:function(){
+          app.globalData.applicantUser = true;
         }
       })
+      wx.switchTab({
+        url: '/pages/me/me',
+      })
     } 
+    
 
   }
 })

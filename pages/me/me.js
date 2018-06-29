@@ -15,27 +15,13 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (canshu) {
+  onLoad: function () {
 
-    console.info('返回数据###################')
-    console.info(canshu)
-    //判断信息是否填写完整
-    if (canshu.name == 'true') {
-     this.setData({
-       //完整不显示待完善
-       state : 1
-     })
-    } else {
-      this.setData({
-        //不完整显示待完善
-        state: 0
-      })
-    }
  
     var that=this;
     wx.getUserInfo({
       success: function (res) {
-        // console(res.userInfo)
+        //console(res.userInfo)
         that.setData({
           userInfo: res.userInfo,
         })
@@ -43,7 +29,40 @@ Page({
     })
 
   },
-  
+
+  onShow: function () {
+
+    //查询用户信息是否填写完整
+    var that = this;
+    wx.request({
+      url: app.globalData.appUrl + 'WXApplicant/findUserFullApplicantMsg?openId=' + wx.getStorageSync('openid') + '', //仅为示例，并非真实的接口地址
+      header: {
+        'content-type': 'application/x-www-form-urlencoded', // 默认值
+        xcxuser_name: "xcxuser_name"
+      },
+
+      success: function (res) {
+        //console.info("下面是查询用户信息是否填写完整结果")
+        var fullMsg = res.data.applicantMsgAll;
+        // console.log(fullMsg)
+        // console.info('返回数据###################')
+        // console.log("完整状态为：" + fullMsg)
+        //判断信息是否填写完整
+        if (fullMsg == true) {
+          that.setData({
+            //完整不显示待完善
+            state: 1
+          })
+        } else {
+          that.setData({
+            //不完整显示待完善
+            state: 0
+          })
+        }
+        //console.log("最后状态为：" + that.data.state)
+      }
+    })
+  },
   shoucang: function(){
     wx.navigateTo({
       url: '/pages/shoucang/shoucang',
@@ -56,7 +75,7 @@ Page({
   },
   baoming: function(){
     wx.navigateTo({
-      url: '/pages/baoming/baoming',
+      url: '/pages/baoming/baoming?openId=' + wx.getStorageSync('openid') +'',
     })
   },
   dianhua: function(){
