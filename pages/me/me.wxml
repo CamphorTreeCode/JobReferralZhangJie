@@ -24,8 +24,10 @@
 <view bindtap="baoming" class="fenlei">
   <image class="icon" src='../../image/jianli.png'></image>
   <text>报名信息</text>
-  <text class="money {{state==1?'active':''}}">待完善</text>
-  <image class="jiantou" src='{{tubiao}}'></image>
+  <text wx:if="{{state==1}}" class="money {{state==1?'active':''}}">待完善</text>
+  <text wx:elif="{{state==0}}" class="money {{state==1?'active':''}}">待完善</text>
+  <image  wx:if="{{state==1}}" class="jiantou" src='{{tubiao1}}'></image>
+  <image  wx:elif="{{state==0}}" class="jiantou" src='{{tubiao}}'></image>
 </view>
 <view bindtap="dianhua" class="fenlei">
   <image class="icon" src='../../image/lianxi.png'></image>

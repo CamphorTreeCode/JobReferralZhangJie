@@ -16,19 +16,21 @@
 }
 
 .section input {
-  width: 76%;
+  display: inline-block;
   height: 100%;
   float: right;
+  margin-right: 100rpx;
   color: #808080;
 }
-
-/* 电话 */
+/* 
+ 电话 
 
 .dianhua input {
   width: 75%;
   color: #808080;
+  height: 100%;
   margin-right: -9%;
-}
+} */
 
 /* 出生日期 */
 
@@ -84,9 +86,9 @@
 }
 
 .shenfen input {
-  width: 100%;
+  width: 98%;
   height: 100rpx;
-  padding-left: 15rpx;
+  padding-left: 2%; 
   float: left;
 }
 
