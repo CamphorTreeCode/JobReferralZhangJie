@@ -14,7 +14,8 @@ console.log("21")
       jobSalaryMin: that.data.jobSalaryMin,
       jobSalaryMax: that.data.jobSalaryMax,
       companyAddress: that.data.companyAddress,
-      createTimes: that.data.createTimes
+      createTimes: that.data.createTimes,
+      companyName: that.data.companyName
     },
     header: {
       // 'content-type': 'application/x-www-form-urlencoded' // 默认值
@@ -181,7 +182,11 @@ Page({
     //当前的地址
     companyAddress:null,
     //最新时间排序
-    createTimes:"true"
+    createTimes:"true",
+    //根据企业名称查询
+    companyName: null
+
+
 
   },
 

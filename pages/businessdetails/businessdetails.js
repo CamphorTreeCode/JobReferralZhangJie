@@ -1,4 +1,5 @@
 // pages/businessdetails/businessdetails.js
+var app = getApp();
 Page({
 
   /**
@@ -12,7 +13,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    console.log(options.companyId)
+  //获取所有分类的方法 start
+  var that = this
+    wx.request({
+      url: app.globalData.appUrl + 'WXCompanyJob/selectCompany',
+      data: { companyId: options.companyId},
+      header: {
+        'content-type': 'application/x-www-form-urlencoded', // 默认值
+        xcxuser_name: "xcxuser_name"
+      },
+      success: function (res) {
+        console.info(res);
+        that.setData({
+          company:res.data[0]
+        })
+
+      }
+    })
+    //获取所有分类的方法 end
   },
 
   /**

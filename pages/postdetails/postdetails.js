@@ -1,9 +1,26 @@
 // pages/postdetails/postdetails.js
+var app = getApp()
+function getDate(str){
+  var date = new Date(str);
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  if (month < 10) {
+    month = "0" + month;
+  }
+  if (day < 10) {
+    day = "0" + day;
+  }
+  var nowDate = year + "年" + month + "月" + day + '日';
+  return nowDate
+  
+}
 Page({
 
   /**
    * 页面的初始数据
    */
+
   data: {
       // 控制报名信息的显示
       gao : 0,
@@ -31,7 +48,31 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      
+    getDate('2018-06-26 14:15:05')
+    var that  = this
+    wx.request({
+      url: app.globalData.appUrl + 'WXCompanyJob/selectCompanyJob', //仅为示例，并非真实的接口地址
+      data: { CompanyJobId: options.CompanyJobId },
+      method: "get",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',// 默认值
+        //'content-type': 'application/json', // 默认值
+        xcxuser_name: "xcxuser_name"
+      },
+      success: function (res) {
+        console.log(res)
+        res.data[0].company.companyAddress = res.data[0].company.companyAddress.replace(/,/g, '');
+        res.data[0].createTime = getDate(res.data[0].createTime)
+
+        res.data[0].jobLabels = JSON.parse(res.data[0].jobLabels)
+        res.data[0].jobSwiperImages = JSON.parse(res.data[0].jobSwiperImages)
+        that.setData({
+          companyJob:res.data
+        })
+        
+      }
+
+    })
   },
 
   /**
@@ -169,12 +210,14 @@ Page({
   },
   
   // 跳转企业详情页
-  tiaozhuan:function(){
+  tiaozhuan:function(e){
+    console.log(e, e.currentTarget.dataset.id)
+    var companyId = e.currentTarget.dataset.id
     this.setData({
       gao: 0
     })
     wx.navigateTo({
-      url: '/pages/businessdetails/businessdetails'
+      url: '/pages/businessdetails/businessdetails?companyId=' + companyId
     })
   }
 

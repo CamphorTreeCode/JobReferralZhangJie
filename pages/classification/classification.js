@@ -1,4 +1,56 @@
 // pages/classification/classification.js
+var app = getApp()
+var pagesize = 0;
+function selectTypePage(that) {
+  console.log("21")
+  wx.request({
+    url: app.globalData.appUrl + 'WXCompanyJob/selectCompanyJobPage',
+    data: {
+      currentPage: ++pagesize,
+      jobCategoryId: that.data.jobCategoryId,
+      returnMoney: that.data.returnMoney,
+      jobRecruitsGender: that.data.jobRecruitsGender,
+      jobSalaryMin: that.data.jobSalaryMin,
+      jobSalaryMax: that.data.jobSalaryMax,
+      companyAddress: that.data.companyAddress,
+      createTimes: that.data.createTimes,
+      companyName: that.data.companyName
+    },
+    header: {
+      // 'content-type': 'application/x-www-form-urlencoded' // 默认值
+      'content-type': 'application/x-www-form-urlencoded', // 默认值
+      xcxuser_name: "xcxuser_name"
+    },
+    method: 'POST',
+    success: function (res) {
+
+      console.log(res)
+
+      if (res.data[0].lists.length > 0) {
+    
+        var shopList = that.data.shopList
+        for (var i = 0; i < res.data[0].lists.length; i++) {
+          res.data[0].lists[i].jobLabels = JSON.parse(res.data[0].lists[i].jobLabels)
+          shopList.push(res.data[0].lists[i])
+        }
+
+
+        console.info(res.data[0].lists, shopList)
+        that.setData({
+          shopList,
+          showData: true,
+          showLoading: true
+        })
+      } else {
+        that.setData({
+          bottomText: false,
+          showLoading: true
+        })
+      }
+
+    }
+  })
+} 
 Page({
 
   /**
@@ -114,12 +166,40 @@ Page({
     hezong: [
       { name: "最新发布", state: 0 },
       { name: "离我最近", state: 0 }
-    ]
+    ],
+    //轮播图集
+    shopList: [],
+    //选择的类型
+    jobCategoryId: [],
+    showData: true,
+    bottomText: true,
+    //返费
+    returnMoney: null,
+    //选择的性别
+    jobRecruitsGender: null,
+    //工资最小值
+    jobSalaryMin: null,
+    //工资最大值
+    jobSalaryMax: null,
+    //当前的地址
+    companyAddress: null,
+    //最新时间排序
+    createTimes: "true",
+    //根据企业名称查询
+    companyName: null
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    //设置下滑高度 start
+    var that = this
+    let scrollHeight = wx.getSystemInfoSync().windowHeight;
+    this.setData({
+      scrollHeight: scrollHeight
+    });
+    //设置下滑高度 end
+
     var ss = 0;
     wx.getSystemInfo({
       success: function (res) {
@@ -129,6 +209,27 @@ Page({
     this.setData({
       clientY: ss
     })
+    //获取商品数据 start 
+    pagesize = 0;
+    selectTypePage(that)
+    //获取商品数据 end
+    //获取所有分类的方法 start
+
+    wx.request({
+      url: app.globalData.appUrl + 'WXJobCategory/selectJobCategoryType',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded', // 默认值
+        xcxuser_name: "xcxuser_name"
+      },
+      success: function (res) {
+        console.info(res);
+        that.setData({
+          leixing: res.data
+        })
+
+      }
+    })
+    //获取所有分类的方法 end
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -390,61 +491,219 @@ Page({
     })
   },
   btn: function (e) {
+
+    var that = this
     var index = e.currentTarget.dataset.in;
+    //类型选择
+    if (index == "leixing") {
+      var jobCategoryId = []
+      var leixing = that.data.leixing
+      for (var i = 0; i < leixing.length; i++) {
+        if (leixing[i].state == 1) {
+          jobCategoryId.push(that.data.leixing[i].jobCategoryId)
+        }
+
+      }
+      if (jobCategoryId.length > 0) {
+        that.setData({
+          jobCategoryId,
+          shopList: []
+        })
+        pagesize = 0
+        selectTypePage(that)
+
+      }
+      //全取消的恢复空条件查询
+      else {
+        that.setData({
+          jobCategoryId: [],
+          shopList: []
+        })
+        pagesize = 0
+        selectTypePage(that)
+      }
+    }
+    //返现金额选择
+    else if (index == "jine") {
+      var returnMoney = [];
+      var jine = that.data.jine
+      if (that.data.pricex != -1) {
+        console.log("进来了")
+        console.log(that.data.jine[that.data.pricex].name)
+        if (that.data.jine[that.data.pricex].name == "4000以上") {
+          that.data.jine[that.data.pricex].name = "4000-"
+        }
+        that.setData({
+          returnMoney: that.data.jine[that.data.pricex].name,
+          shopList: [],
+
+        })
+        pagesize = 0
+        selectTypePage(that)
+
+      } else {
+        that.setData({
+          returnMoney: null,
+          shopList: [],
+
+        })
+        pagesize = 0
+        selectTypePage(that)
+      }
+
+    }
+    //综合排序
+    else if (index = "address") {
+      // city + district
+      var hezong = that.data.hezong
+
+      if (hezong[1].state == 1) {
+
+        if (hezong[0].state == 0) {
+          that.setData({
+            createTimes: null
+          })
+
+        } else {
+          that.setData({
+            createTimes: "true",
+          })
+        }
+
+
+        that.setData({
+          companyAddress: that.data.city + "," + that.data.district,
+          shopList: [],
+          city: null,
+          district: null
+        })
+        pagesize = 0
+        selectTypePage(that)
+
+      } else {
+        if (hezong[0].state == 0) {
+          that.setData({
+            createTimes: null
+          })
+
+        } else {
+          that.setData({
+            createTimes: "true",
+          })
+        }
+
+        that.setData({
+          companyAddress: null,
+          shopList: [],
+
+        })
+        pagesize = 0
+        selectTypePage(that)
+      }
+    }
+    //赛选选择
+    else if (index == "saixuan") {
+      if (that.data.jobSalaryMin != null && that.data.jobSalaryMax == null) {
+        wx.showToast({
+          title: '请填写工资最大值',
+          icon: 'none',
+          duration: 1500
+        })
+        return
+      } else if (that.data.jobSalaryMin == null && that.data.jobSalaryMax != null) {
+        wx.showToast({
+          title: '请填写工资最小值',
+          icon: 'none',
+          duration: 1500
+        })
+        return
+      }
+      var selectsx = that.data.selectsx
+      if (selectsx != -1 && selectsx != 0) {
+        that.setData({
+          jobRecruitsGender: selectsx - 1,
+          shopList: [],
+        })
+        pagesize = 0
+        selectTypePage(that)
+      } else {
+        that.setData({
+          jobRecruitsGender: null,
+          shopList: [],
+
+        })
+        pagesize = 0
+        selectTypePage(that)
+      }
+
+
+    }
+    console.log(e)
     this.setData({
       gao: 0,
-      // post: "relative",
+      post: "relative",
       diyige: "true",
-      dier: "true",
-      disan: "true",
       disi: "true",
-      abba: 74,
-      juli: '130'
+      dier: "true",
+      disan: "true"
     })
   },
   // swiper分类选择
   textdianji: function (e) {
+    var that = this
     var index = e.currentTarget.dataset.ind;
-    // console.log(index)
-    console.log(this.data.leixing[index].state)
+    console.log(index)
+
+    var leixing = that.data.leixing
+
     if (this.data.leixing[index].state == 1) {
-      this.data.leixing[index].state = 0;
-      // console.log(0)
+      leixing[index].state = 0;
     }
-    else if (this.data.leixing[index].state == 0) {
-      this.data.leixing[index].state = 1;
-      // console.log(0)
+    else {
+      leixing[index].state = 1;
     }
-    this.setData({
-      leixing: this.data.leixing
+    that.setData({
+      leixing: leixing
     })
   },
+  //筛选的选择
   textdian: function (e) {
     var index = e.currentTarget.dataset.id;
-    // console.log(index)
-    // console.log(this.data.xingbie[index].state)
-    if (this.data.xingbie[index].state == 1) {
-      this.data.xingbie[index].state = 0;
-      // console.log(0)
-    }
-    else if (this.data.xingbie[index].state == 0) {
-      this.data.xingbie[index].state = 1;
-      // console.log(0)
-    }
-    this.setData({
-      xingbie: this.data.xingbie
-    })
-  },
-  textdiana: function (e) {
-    var index = e.currentTarget.dataset.ia;
 
-    if (this.data.pricex == index) { return false; }
+    console.log(index, this.data.selectsx)
+    if (this.data.selectsx == index) {
+      console.log("ss")
+      this.setData({
+        selectsx: -1
+      })
+      return false;
+    }
     else {
+      console.log("xx")
+      this.setData({
+        selectsx: index
+      })
+    }
+  },
+  //返现的选择
+  textdiana: function (e) {
+    var index = e.currentTarget.dataset.id;
+
+    var index = e.currentTarget.dataset.ia;
+    console.log(index, this.data.pricex)
+    if (this.data.pricex == index) {
+      console.log("ss")
+      this.setData({
+        pricex: -1
+      })
+      return false;
+    }
+    else {
+      console.log("xx")
       this.setData({
         pricex: index
       })
     }
-
     // console.log(index)
     // console.log(this.data.jine[index].state)
     // if (this.data.jine[index].state == 1) {
@@ -459,14 +718,22 @@ Page({
     //   jine: this.data.jine
     // })
   },
+  //综合的选择
   textdianb: function (e) {
+    console.log("离我最进")
     var index = e.currentTarget.dataset.ib;
+    console.log(index)
     console.log(this.data.hezong[index].state)
+    if (index == 1) {
+      util.getLocationDetails(this)
+    }
     if (this.data.hezong[index].state == 1) {
       this.data.hezong[index].state = 0;
+      // console.log(0)
     }
     else if (this.data.hezong[index].state == 0) {
       this.data.hezong[index].state = 1;
+      // console.log(0)
     }
     this.setData({
       hezong: this.data.hezong
@@ -497,6 +764,35 @@ Page({
         juli: '0',
       })
     }
-  }
+  },
+  //下拉刷新
+  lower: function () {
+    console.log("..")
+    var that = this
+    that.setData({
+      showLoading: false
+    })
+    selectTypePage(that)
+  },
+  //工资输入框
+  inputTyping: function (e) {
+    var id = e.currentTarget.id
+    console.log(e, id)
+    if (id == "min") {
+      this.setData({
+        jobSalaryMin: e.detail.value
+      })
+    }
+    else if (id == "max") {
+      this.setData({
+        jobSalaryMax: e.detail.value
+      })
+    }
+    else if(id == "search"){
+      this.setData({
+        companyName: e.detail.value
+      })
+    }
+  },
 })
 

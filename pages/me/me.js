@@ -41,6 +41,7 @@ Page({
     //     }
     //   })
     // }
+    
     var that=this;
     wx.getUserInfo({
       success: function (res) {
