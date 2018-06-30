@@ -43,35 +43,35 @@
 </view>
 <!-- 头部分类 -->
 
-<!-- 返费通知 -->
+<!-- 返费通知start-->
 <view class='returnfee' catchtap='returnfee'>
   <image src='/img/index/fafei.png'></image>
   <text>返费通知</text>
   <image src='/img/index/xiangiqng.png'></image>
 </view>
-<!-- 返费通知 -->
+<!-- 返费通知end -->
 
-<!-- 换一批 -->
+<!-- 优职推荐start -->
 <view class='change'>
   <view class='top'>
     <image src='/img/index/zan.png'></image>
     <text>优职推荐</text>
-    <text>换一批</text>
-    <image src='/img/index/huanyipi.png'></image>
+    <text catchtap='changeJob'>换一批</text>
+    <image src='/img/index/huanyipi.png' catchtap='changeJob'></image>
   </view>
   <!-- 2张卡片 -->
   <view class='content'>
     <!-- style='background:url({{item.url}}) 100% ' -->
-    <view class='mingpian' wx:for='{{change}}'>
-      <view>{{item.name}}</view>
+    <view class='mingpian' wx:for='{{goodJob}}'>
+      <view>{{item.company.companyName}}</view>
       <view>
-        <text wx:for='{{item.title}}' wx:for-item="idx">{{idx.name}}</text>
+        <text wx:for='{{item.jobLabels}}' wx:for-item="idx">{{idx}}</text>
       </view>
-      <view>{{item.price}}</view>
+      <view>{{item.jobSalaryMin}}-{{item.jobSalaryMax}}/月</view>
     </view>
   </view>
 </view>
-<!-- 换一批 -->
+<!-- 优职推荐end -->
 
 <!-- 底部分类 -->
 <view class='foter' >

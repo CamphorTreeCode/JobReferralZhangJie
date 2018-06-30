@@ -1,21 +1,22 @@
 var app = getApp();
 // pages/index/index.js
 var app = getApp()
-function getHomeSwiper(that){
+
+function getHomeSwiper(that) {
   wx.request({
     url: app.globalData.appUrl + 'WXHomeSwiper/selectHomeSwiperList', //仅为示例，并非真实的接口地址
     method: "POST",
     header: {
-      'content-type': 'application/x-www-form-urlencoded',// 默认值
+      'content-type': 'application/x-www-form-urlencoded', // 默认值
       //'content-type': 'application/json', // 默认值
       xcxuser_name: "xcxuser_name"
     },
-    success: function (res) {
+    success: function(res) {
       console.log(res)
-    that.setData({
-      HomeSwiper:res.data
+      that.setData({
+        HomeSwiper: res.data
 
-    })
+      })
     }
 
   })
@@ -23,6 +24,7 @@ function getHomeSwiper(that){
 
 var util = require('../../utils/util')
 var pagesize = 0;
+
 function selectTypePage(that) {
   console.log("21")
   wx.request({
@@ -44,8 +46,7 @@ function selectTypePage(that) {
       xcxuser_name: "xcxuser_name"
     },
     method: 'POST',
-    success: function (res) {
-
+    success: function(res) {
       console.log(res)
 
       if (res.data[0].lists.length > 0) {
@@ -72,14 +73,16 @@ function selectTypePage(that) {
 
     }
   })
-} 
+}
+
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    pricex:"false",//返现金额选择
+    pricex: "false", //返现金额选择
     juli: -11,
     // 下拉框第一个显示
     diyige: "true",
@@ -92,56 +95,107 @@ Page({
     post: "relative",
     tophead: 0,
     // 头部轮播图
-    slider: [
-      { picUrl: "/img/index/banner.jpg" },
-      { picUrl: "https://www.chuanshoucs.com/ServerImg/2018-05-28/ef6245ff-1ffe-442f-9cd2-f996ba9f54b5.jpg" },
-      { picUrl: "https://www.chuanshoucs.com/ServerImg/2018-05-28/4a333764-8229-420d-8f4d-c91ac0f159e1.jpg" },
-      { picUrl: "https://www.chuanshoucs.com/ServerImg/2018-05-28/e99b9c44-8f0c-4223-a1f5-a1735473d4c0.jpg" },
-      { picUrl: "https://www.chuanshoucs.com/ServerImg/2018-05-28/62c32dd7-df0f-4ad6-b041-6d85d2c1b772.jpg" }
+    slider: [{
+        picUrl: "/img/index/banner.jpg"
+      },
+      {
+        picUrl: "https://www.chuanshoucs.com/ServerImg/2018-05-28/ef6245ff-1ffe-442f-9cd2-f996ba9f54b5.jpg"
+      },
+      {
+        picUrl: "https://www.chuanshoucs.com/ServerImg/2018-05-28/4a333764-8229-420d-8f4d-c91ac0f159e1.jpg"
+      },
+      {
+        picUrl: "https://www.chuanshoucs.com/ServerImg/2018-05-28/e99b9c44-8f0c-4223-a1f5-a1735473d4c0.jpg"
+      },
+      {
+        picUrl: "https://www.chuanshoucs.com/ServerImg/2018-05-28/62c32dd7-df0f-4ad6-b041-6d85d2c1b772.jpg"
+      }
     ],
-    suoyouc:0,
+    suoyouc: 0,
     swiperCurrent: 0,
     // 换一批的数据
-    change: [
-      {
+    change: [{
         name: "上海胜瑞日铭",
-        title: [
-          { name: "人气" },
-          { name: "返现最高" }
+        title: [{
+            name: "人气"
+          },
+          {
+            name: "返现最高"
+          }
         ],
         price: "4000-5000/月"
       },
       {
         name: "天下第一仓:菜鸟",
-        title: [
-          { name: "人气" },
-          { name: "返现最高" }
+        title: [{
+            name: "人气"
+          },
+          {
+            name: "返现最高"
+          }
         ],
         price: "4000-5000/月"
       }
     ],
-    leixing: [
-      { name: "普工", state: 0 },
-      { name: "包装工", state: 0 },
-      { name: "质检员", state: 0 },
-      { name: "仓库员", state: 0 },
-      { name: "电工", state: 0 },
-      { name: "叉车/铲车", state: 0 }
+    leixing: [{
+        name: "普工",
+        state: 0
+      },
+      {
+        name: "包装工",
+        state: 0
+      },
+      {
+        name: "质检员",
+        state: 0
+      },
+      {
+        name: "仓库员",
+        state: 0
+      },
+      {
+        name: "电工",
+        state: 0
+      },
+      {
+        name: "叉车/铲车",
+        state: 0
+      }
     ],
-    jine: [
-      { name: "1000-2000" },
-      { name: "2000-3000" },
-      { name: "3000-4000" },
-      { name: "4000以上" }
+    jine: [{
+        name: "1000-2000"
+      },
+      {
+        name: "2000-3000"
+      },
+      {
+        name: "3000-4000"
+      },
+      {
+        name: "4000以上"
+      }
     ],
-    hezong: [
-      { name: "最新发布", state: 0 },
-      { name: "离我最近", state: 0 }
+    hezong: [{
+        name: "最新发布",
+        state: 0
+      },
+      {
+        name: "离我最近",
+        state: 0
+      }
     ],
-    xingbie: [
-      { name: "全部", state: 0 },
-      { name: "男可做", state: 0 },
-      { name: "女可做", state: 0 }
+    xingbie: [{
+        name: "全部",
+        state: 0
+      },
+      {
+        name: "男可做",
+        state: 0
+      },
+      {
+        name: "女可做",
+        state: 0
+      }
     ],
     xuanze: "a",
     curren: "",
@@ -149,13 +203,15 @@ Page({
     xianshi: "none",
 
     // 底部列表显示
-    foterlist: [
-      {
+    foterlist: [{
         name: "上海胜瑞日铭",
         url: "https://www.chuanshoucs.com/ServerImg/2018-05-28/7a412589-1159-42bc-ae8c-f014b8247843.jpg",
-        title: [
-          { name: "人气" },
-          { name: "返现最高" }
+        title: [{
+            name: "人气"
+          },
+          {
+            name: "返现最高"
+          }
         ],
         fanli: "3400",
         price: "4000-5000/月"
@@ -163,9 +219,12 @@ Page({
       {
         name: "天下第一仓:菜鸟",
         url: "https://www.chuanshoucs.com/ServerImg/2018-05-28/801519c6-74e7-43f8-bfa5-f473cf8780cf.jpg",
-        title: [
-          { name: "人气" },
-          { name: "返现最高" }
+        title: [{
+            name: "人气"
+          },
+          {
+            name: "返现最高"
+          }
         ],
         fanli: "3700",
         price: "4000-5000/月"
@@ -173,9 +232,12 @@ Page({
       {
         name: "上海胜瑞日铭",
         url: "https://www.chuanshoucs.com/ServerImg/2018-05-28/81672414-0c6f-473e-8b86-6204d0bb49ff.jpg",
-        title: [
-          { name: "人气" },
-          { name: "返现最高" }
+        title: [{
+            name: "人气"
+          },
+          {
+            name: "返现最高"
+          }
         ],
         fanli: "3400",
         price: "4000-5000/月"
@@ -183,9 +245,12 @@ Page({
       {
         name: "天下第一仓:菜鸟",
         url: "https://www.chuanshoucs.com/ServerImg/2018-05-28/20a58256-d943-479f-8278-dcbd18881785.jpg",
-        title: [
-          { name: "人气" },
-          { name: "返现最高" }
+        title: [{
+            name: "人气"
+          },
+          {
+            name: "返现最高"
+          }
         ],
         fanli: "3700",
         price: "4000-5000/月"
@@ -193,9 +258,12 @@ Page({
       {
         name: "天下第一仓:菜鸟",
         url: "https://www.chuanshoucs.com/ServerImg/2018-05-28/8f735726-01af-440b-a923-fef845c55088.jpg",
-        title: [
-          { name: "人气" },
-          { name: "返现最高" }
+        title: [{
+            name: "人气"
+          },
+          {
+            name: "返现最高"
+          }
         ],
         fanli: "3700",
         price: "4000-5000/月"
@@ -203,9 +271,12 @@ Page({
       {
         name: "天下第一仓:菜鸟",
         url: "https://www.chuanshoucs.com/ServerImg/2018-05-28/20a58256-d943-479f-8278-dcbd18881785.jpg",
-        title: [
-          { name: "人气" },
-          { name: "返现最高" }
+        title: [{
+            name: "人气"
+          },
+          {
+            name: "返现最高"
+          }
         ],
         fanli: "3700",
         price: "4000-5000/月"
@@ -213,16 +284,19 @@ Page({
       {
         name: "天下第一仓:菜鸟",
         url: "https://www.chuanshoucs.com/ServerImg/2018-05-28/8f735726-01af-440b-a923-fef845c55088.jpg",
-        title: [
-          { name: "人气" },
-          { name: "返现最高" }
+        title: [{
+            name: "人气"
+          },
+          {
+            name: "返现最高"
+          }
         ],
         fanli: "3700",
         price: "4000-5000/月"
       }
     ],
     //轮播图集合
-    HomeSwiper:[],
+    HomeSwiper: [],
     shopList: [],
     //选择的类型
     jobCategoryId: [],
@@ -241,14 +315,17 @@ Page({
     //最新时间排序
     createTimes: "true",
     //根据企业名称查询
-    companyName:null
-
+    companyName: null,
+    //优职推荐
+    goodJob: [],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
+
+   
     //设置下滑高度
     var that = this
     let scrollHeight = wx.getSystemInfoSync().windowHeight;
@@ -259,18 +336,17 @@ Page({
     getHomeSwiper(this)
     var ss = 0;
     wx.getSystemInfo({
-      success: function (res) {
+      success: function(res) {
         ss = res.screenHeight;
       },
     })
     this.setData({
       clientY: ss
     })
-    
- 
-    //判断用户是否有报名表
-    if (app.globalData.applicantUser == true) {
 
+
+    //判断用户是否有报名表start
+    if (app.globalData.applicantUser == true) {
       this.setData({
         dcancel: 'none'
       })
@@ -279,19 +355,21 @@ Page({
         dcancel: 'block'
       })
     }
+    //判断用户是否有报名表end
+
     //获取商品数据 start 
     pagesize = 0;
     selectTypePage(that)
     //获取商品数据 end
     //获取所有分类的方法 start
-
+   
     wx.request({
       url: app.globalData.appUrl + 'WXJobCategory/selectJobCategoryType',
       header: {
         'content-type': 'application/x-www-form-urlencoded', // 默认值
         xcxuser_name: "xcxuser_name"
       },
-      success: function (res) {
+      success: function(res) {
         console.info(res);
         that.setData({
           leixing: res.data
@@ -300,56 +378,84 @@ Page({
       }
     })
     //获取所有分类的方法 end
+    
+    //优职推荐start
+    wx.request({
+      url: app.globalData.appUrl + 'WXCompanyJob/findTwoCompanyJob',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded', // 默认值
+        xcxuser_name: "xcxuser_name"
+      },
+      success: function(res) {
+        //console.info("优职推荐开始")
+        if (res.data.length > 0) {
+          var goodJob1 = that.data.goodJob;
+          for (var i = 0; i < res.data.length; i++) {
+            res.data[i].jobLabels = JSON.parse(res.data[i].jobLabels)
+            goodJob1.push(res.data[i]);
+          }
+          that.setData({
+            goodJob: goodJob1
+          })
+          //console.info(goodJob)
+        }
+        //console.info("优职推荐结束")
+      }
+    })
+    //优职推荐end
+
+
+
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
-  onPageScroll: function (e) {
-    console.log(e);//{scrollTop:99}
+  onPageScroll: function(e) {
+    console.log(e); //{scrollTop:99}
     if (e.scrollTop >= 565) {
       this.setData({
         post: 'fixed',
         juli: '140'
       })
-    }
-    else {
+    } else {
       this.setData({
         post: 'relative',
         juli: '0',
@@ -371,43 +477,82 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
+
+  //换一批事件start
+  changeJob: function(e) {
+    // console.info("换一批事件开始")
+    // console.info(e)
+    var that=this;
+    wx.request({
+      url: app.globalData.appUrl + 'WXCompanyJob/findTwoCompanyJob',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded', // 默认值
+        xcxuser_name: "xcxuser_name"
+      },
+      success: function(res) {
+        // console.info("下面是优职推荐数据：")
+        // console.info(res.data.length)
+        that.data.goodJob = [];
+        that.setData({
+          goodJob: that.data.goodJob
+        })
+        if (res.data.length > 0) {
+          var goodJob1 = that.data.goodJob;
+          for (var i = 0; i < res.data.length; i++) {
+            res.data[i].jobLabels = JSON.parse(res.data[i].jobLabels)
+            goodJob1.push(res.data[i]);
+          }
+          // console.info(goodJob1)
+          // console.info("上面是优职推荐数据：")
+          that.setData({
+            goodJob: goodJob1
+          })
+        }
+
+      }
+    })
+
+    //console.info("换一批事件结束")
+  },
+  //换一批事件end
+  
   //获取当前swiper的current，修改swiper指示点
-  swiperChange: function (e) {
+  swiperChange: function(e) {
     this.setData({
       swiperCurrent: e.detail.current
     })
   },
   // 头部4个分类跳转
-  fanli: function () {
+  fanli: function() {
     wx.navigateTo({
       url: '/pages/bendi/bendi?key=高返现'
     })
   },
-  zuixin: function () {
+  zuixin: function() {
     wx.navigateTo({
       url: '/pages/bendi/bendi?key=今日最新'
     })
   },
-  bendi: function () {
+  bendi: function() {
     wx.navigateTo({
       url: '/pages/bendi/bendi?key=本地招聘'
     })
   },
-  mingqi: function () {
+  mingqi: function() {
     wx.navigateTo({
       url: '/pages/bendi/bendi?key=名企招聘'
     })
   },
-  returnfee: function () {
+  returnfee: function() {
     wx.navigateTo({
       url: '/pages/returnfee/returnfee',
     })
   },
   // 头部4个分类跳转
-  sanlei: function (e) {
+  sanlei: function(e) {
     var that = this;
 
     // tophead距离顶部的值
@@ -415,7 +560,7 @@ Page({
 
     // console.log(this.data.diyige)
     if (this.data.curren == 0 && this.data.diyige == "true") {
-      var ww = setInterval(function () {
+      var ww = setInterval(function() {
         clienty -= 10;
         that.setData({
           tophead: clienty,
@@ -431,8 +576,8 @@ Page({
       }, 1)
 
       var gaodu = 0;
-      setTimeout(function () {
-        var ss = setInterval(function () {
+      setTimeout(function() {
+        var ss = setInterval(function() {
           // console.log(gaodu)
           if (that.data.tophead == 0) {
             gaodu += 40;
@@ -454,7 +599,7 @@ Page({
         }, 10)
       }, 1)
     } else if (this.data.curren != 0 && this.data.diyige == "true") {
-      var ww = setInterval(function () {
+      var ww = setInterval(function() {
         clienty -= 10;
         that.setData({
           tophead: clienty,
@@ -471,7 +616,7 @@ Page({
       var that = this;
       var gaodu = 0;
       // setTimeout(function () {
-      var ss = setInterval(function () {
+      var ss = setInterval(function() {
         // console.log(gaodu)
         if (that.data.tophead == 0) {
           gaodu += 40;
@@ -495,7 +640,7 @@ Page({
     }
   },
 
-  sanprice: function (e) {
+  sanprice: function(e) {
 
     // wx.pageScrollTo({
     //   scrollTop: 560
@@ -506,7 +651,7 @@ Page({
 
 
     if (this.data.curren != 1 && this.data.dier == "true") {
-      var ww = setInterval(function () {
+      var ww = setInterval(function() {
         clienty -= 10;
         that.setData({
           tophead: clienty,
@@ -523,7 +668,7 @@ Page({
 
       var gaodu = 0;
       // setTimeout(function () {
-      var ss = setInterval(function () {
+      var ss = setInterval(function() {
         if (that.data.tophead == 0) {
           gaodu += 40;
           that.setData({
@@ -544,7 +689,7 @@ Page({
       }, 10)
       // }, 300)
     } else if (this.data.curren == 1 && this.data.dier == "true") {
-      var ww = setInterval(function () {
+      var ww = setInterval(function() {
         clienty -= 10;
         that.setData({
           tophead: clienty,
@@ -561,7 +706,7 @@ Page({
 
       var gaodu = 0;
       // setTimeout(function () {
-      var ss = setInterval(function () {
+      var ss = setInterval(function() {
         if (that.data.tophead == 0) {
           gaodu += 40;
           that.setData({
@@ -584,7 +729,7 @@ Page({
     }
   },
 
-  sanzong: function (e) {
+  sanzong: function(e) {
 
     // wx.pageScrollTo({
     //   scrollTop: 560
@@ -593,7 +738,7 @@ Page({
     var clienty = e.touches[0].clientY;
 
     if (this.data.curren != 2 && this.data.disan == "true") {
-      var ww = setInterval(function () {
+      var ww = setInterval(function() {
         clienty -= 10;
         that.setData({
           tophead: clienty,
@@ -610,7 +755,7 @@ Page({
       // var that = this;
       var gaodu = 0;
       // setTimeout(function () {
-      var ss = setInterval(function () {
+      var ss = setInterval(function() {
         if (that.data.tophead == 0) {
           gaodu += 40;
           that.setData({
@@ -631,7 +776,7 @@ Page({
       }, 10)
       // }, 300)
     } else if (this.data.curren == 2 && this.data.disan == "true") {
-      var ww = setInterval(function () {
+      var ww = setInterval(function() {
         clienty -= 10;
         that.setData({
           tophead: clienty,
@@ -648,7 +793,7 @@ Page({
       // var that = this;
       var gaodu = 0;
       // setTimeout(function () {
-      var ss = setInterval(function () {
+      var ss = setInterval(function() {
         if (that.data.tophead == 0) {
           gaodu += 40;
           that.setData({
@@ -670,89 +815,89 @@ Page({
       // }, 300)
     }
   },
-  sanshai: function (e) {
-    
+  sanshai: function(e) {
+
     var that = this;
     var clienty = e.touches[0].clientY;
-      if (this.data.curren != 3 && this.data.disi == "true") {
-        var ww = setInterval(function () {
-          clienty -= 10;
-          that.setData({
-            tophead: clienty,
-            post: "fixed"
-          })
-          if (that.data.tophead <= 0) {
-            clearInterval(ww)
-            that.setData({
-              tophead: 0,
-              post: "fixed"
-            })
-          }
-        }, 1)
-        // var that = this;
-        var gaodu = 0;
-        // setTimeout(function () {
-        var ss = setInterval(function () {
-          if (that.data.tophead == 0) {
-            gaodu += 40;
-            that.setData({
-              xuanze: 3,
-              curren: 3,
-              gao: gaodu,
-              xianshi: "block",
-              post: "fixed",
-              diyige: "true",
-              dier: "true",
-              disan: "true",
-              disi: "false",
-            })
-            if (gaodu > 500) {
-              clearInterval(ss);
-            }
-          }
-        }, 10)
-        // }, 300)
-      } else if (this.data.curren == 3 && this.data.disi == "true") {
-        var ww = setInterval(function () {
-          clienty -= 10;
+    if (this.data.curren != 3 && this.data.disi == "true") {
+      var ww = setInterval(function() {
+        clienty -= 10;
+        that.setData({
+          tophead: clienty,
+          post: "fixed"
+        })
+        if (that.data.tophead <= 0) {
+          clearInterval(ww)
           that.setData({
             tophead: 0,
             post: "fixed"
           })
-          if (that.data.tophead <= 0) {
-            clearInterval(ww)
-            that.setData({
-              tophead: 0,
-              post: "fixed"
-            })
+        }
+      }, 1)
+      // var that = this;
+      var gaodu = 0;
+      // setTimeout(function () {
+      var ss = setInterval(function() {
+        if (that.data.tophead == 0) {
+          gaodu += 40;
+          that.setData({
+            xuanze: 3,
+            curren: 3,
+            gao: gaodu,
+            xianshi: "block",
+            post: "fixed",
+            diyige: "true",
+            dier: "true",
+            disan: "true",
+            disi: "false",
+          })
+          if (gaodu > 500) {
+            clearInterval(ss);
           }
-        }, 1)
-        // var that = this;
-        var gaodu = 0;
-        // setTimeout(function () {
-        var ss = setInterval(function () {
-          if (that.data.tophead == 0) {
-            gaodu += 40;
-            that.setData({
-              xuanze: 3,
-              curren: 3,
-              gao: gaodu,
-              xianshi: "block",
-              post: "fixed",
-              diyige: "true",
-              dier: "true",
-              disan: "true",
-              disi: "false",
-            })
-            if (gaodu > 500) {
-              clearInterval(ss);
-            }
+        }
+      }, 10)
+      // }, 300)
+    } else if (this.data.curren == 3 && this.data.disi == "true") {
+      var ww = setInterval(function() {
+        clienty -= 10;
+        that.setData({
+          tophead: 0,
+          post: "fixed"
+        })
+        if (that.data.tophead <= 0) {
+          clearInterval(ww)
+          that.setData({
+            tophead: 0,
+            post: "fixed"
+          })
+        }
+      }, 1)
+      // var that = this;
+      var gaodu = 0;
+      // setTimeout(function () {
+      var ss = setInterval(function() {
+        if (that.data.tophead == 0) {
+          gaodu += 40;
+          that.setData({
+            xuanze: 3,
+            curren: 3,
+            gao: gaodu,
+            xianshi: "block",
+            post: "fixed",
+            diyige: "true",
+            dier: "true",
+            disan: "true",
+            disi: "false",
+          })
+          if (gaodu > 500) {
+            clearInterval(ss);
           }
-        }, 10)
-        // }, 300)
-      }
+        }
+      }, 10)
+      // }, 300)
+    }
   },
-  gaibain: function (e) {
+  gaibain: function(e) {
     var index = e.detail.current;
     if (index == 0) {
       this.data.xuanze = 0;
@@ -767,7 +912,7 @@ Page({
       xuanze: this.data.xuanze
     })
   },
-  btn: function (e) {
+  btn: function(e) {
     var that = this
     var index = e.currentTarget.dataset.in;
     //类型选择
@@ -925,7 +1070,7 @@ Page({
     })
   },
   //类型选择
-  textdianji: function (e) {
+  textdianji: function(e) {
     var that = this
     var index = e.currentTarget.dataset.ind;
     console.log(index)
@@ -934,8 +1079,7 @@ Page({
 
     if (this.data.leixing[index].state == 1) {
       leixing[index].state = 0;
-    }
-    else {
+    } else {
       leixing[index].state = 1;
     }
     that.setData({
@@ -943,24 +1087,23 @@ Page({
     })
   },
   //返现选择
-  textdiana: function (e) {
- var index = e.currentTarget.dataset.id;
-   
- var index = e.currentTarget.dataset.ia;
- console.log(index, this.data.pricex)
- if (this.data.pricex == index) {
-   console.log("ss")
-   this.setData({
-     pricex: -1
-   })
-   return false;
- }
- else {
-   console.log("xx")
-   this.setData({
-     pricex: index
-   })
- }
+  textdiana: function(e) {
+    var index = e.currentTarget.dataset.id;
+
+    var index = e.currentTarget.dataset.ia;
+    console.log(index, this.data.pricex)
+    if (this.data.pricex == index) {
+      console.log("ss")
+      this.setData({
+        pricex: -1
+      })
+      return false;
+    } else {
+      console.log("xx")
+      this.setData({
+        pricex: index
+      })
+    }
     // console.log(this.data.jine[index].state)
     // if (this.data.jine[index].state == 1) {
     //   this.data.jine[index].state = 0;
@@ -974,7 +1117,7 @@ Page({
     // })
   },
   //综合选择
-  textdianb: function (e) {
+  textdianb: function(e) {
     console.log("离我最进")
     var index = e.currentTarget.dataset.ib;
     console.log(index)
@@ -985,8 +1128,7 @@ Page({
     if (this.data.hezong[index].state == 1) {
       this.data.hezong[index].state = 0;
       // console.log(0)
-    }
-    else if (this.data.hezong[index].state == 0) {
+    } else if (this.data.hezong[index].state == 0) {
       this.data.hezong[index].state = 1;
       // console.log(0)
     }
@@ -995,7 +1137,7 @@ Page({
     })
   },
   //筛选选择
-  textdian: function (e) {
+  textdian: function(e) {
     var index = e.currentTarget.dataset.id;
 
     console.log(index, this.data.selectsx)
@@ -1005,8 +1147,7 @@ Page({
         selectsx: -1
       })
       return false;
-    }
-    else {
+    } else {
       console.log("xx")
       this.setData({
         selectsx: index
@@ -1014,12 +1155,12 @@ Page({
     }
   },
   // 填写报名信息显示和隐藏
-  dcancel: function () {
+  dcancel: function() {
     this.setData({
       dcancel: "none"
     })
   },
-  dconfirm: function () {
+  dconfirm: function() {
     this.setData({
       dcancel: "none"
     })
@@ -1028,20 +1169,20 @@ Page({
       url: '/pages/baoming/baoming',
     })
   },
-  xiangqing: function (e) {
+  xiangqing: function(e) {
     console.log(e)
     wx.navigateTo({
       url: '/pages/postdetails/postdetails?CompanyJobId=' + e.currentTarget.dataset.id,
     })
   },
-  huidaotop: function () {
+  huidaotop: function() {
     console.log(this.data.gao)
     if (this.data.gao == 0) {
       wx.pageScrollTo({
         scrollTop: 565
       })
       this.setData({
-        abba : 565
+        abba: 565
       })
     }
     this.setData({
@@ -1049,22 +1190,21 @@ Page({
       juli: '100'
     })
   },
-  bindscro:function(e){
+  bindscro: function(e) {
     if (e.detail.scrollTop >= 565) {
       this.setData({
         post: 'fixed',
         juli: '100'
       })
-    }
-    else {
+    } else {
       this.setData({
         post: 'relative',
         juli: '-17',
       })
     }
   },
-   //下拉刷新
-  lower: function () {
+  //下拉刷新
+  lower: function() {
     console.log("..")
     var that = this
     that.setData({
@@ -1073,15 +1213,14 @@ Page({
     selectTypePage(that)
   },
   //工资输入框
-  inputTyping: function (e) {
+  inputTyping: function(e) {
     var id = e.currentTarget.id
     console.log(e, id)
     if (id == "min") {
       this.setData({
         jobSalaryMin: e.detail.value
       })
-    }
-    else if (id == "max") {
+    } else if (id == "max") {
       this.setData({
         jobSalaryMax: e.detail.value
       })

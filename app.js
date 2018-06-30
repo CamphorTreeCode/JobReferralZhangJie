@@ -48,17 +48,8 @@ App({
           'content-type': 'application/x-www-form-urlencoded', // 默认值
           xcxuser_name: "xcxuser_name"
         },
-
         success: function (res) {
-          // console.info("用户openId为：" + wx.getStorageSync('openid'))
-          // console.info("下面是查询用户是否填写报名表结果")
-          // console.log("app.js用户报名表状态1为:" + res.data.applicantUser)
-          // console.info("*************************************")
-          // console.log(res)
-          // console.info("*************************************")
-          // console.info(that.globalData)
           that.globalData.applicantUser = res.data.applicantUser;        
-          //console.log("app.js用户报名表状态2为:" + that.globalData.applicantUser)
         }
       })
     // }, 500);
