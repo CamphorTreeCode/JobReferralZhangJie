@@ -3,60 +3,69 @@
 <my-component>
 </my-component>
 <!--遮罩-->
- <scroll-view scroll-y="false" style='height:100%' bindscroll='bindscro' scroll-top='{{abba}}'>  
+ <scroll-view scroll-y="false" style='height:100%' bindscroll='bindscro' scroll-top='{{abba}}' bindscrolltolower="lower">  
 <view class='header'>
-  <input placeholder='在此输入企业名称以搜索'></input>
+  <input id="search" placeholder='在此输入企业名称以搜索' bindinput="inputTyping"></input>
   <button>搜索</button>
 </view>
-<view class='foter'>
-  <view class='waw' wx:if='{{gao!=0}}' style='height:{{clientY}}px'>
+
+<!-- 底部分类 -->
+<view class='foter' >
+<!-- style='height:{{clientY}}px' -->
+  <view class='waw' wx:if='{{gao!=0}}' >
     <swiper class='dingwei' bindchange='gaibain' current='{{curren}}' style=' height:{{gao}}rpx' duration='0'>
       <swiper-item  class='active' data-index='{{index}}'>
-        <text wx:for='{{leixing}}' wx:for-item="idx" class='ass  {{idx.state==1?"beijing":""}}' catchtap='textdianji' data-ind='{{index}}'>{{idx.name}}              </text>
-        <button data-in='{{index}}' catchtap='btn'>确认</button>
+        <text wx:for='{{leixing}}' wx:for-item="idx" class='ass  {{idx.state==1?"beijing":""}}' catchtap='textdianji' data-ind='{{index}}'>{{idx.jobCategoryName}}              </text>
+        <button data-in='leixing' catchtap='btn'>确认</button>
       </swiper-item>
        <swiper-item class='active' data-index='{{index}}'>
-        <text wx:for='{{jine}}' wx:for-item="idx" class='ass {{pricex==index?"beijing":""}}' catchtap='textdiana' data-ia='{{index}}'>{{idx.name}}         </text>
-        <button data-in='{{index}}' catchtap='btn'>确认</button>
+
+        <text wx:for='{{jine}}' wx:for-item="idx" class='ass {{index==pricex?"beijing":""}}' catchtap='textdiana' data-ia='{{index}}'>{{idx.name}}  </text>
+        <button data-in='jine' catchtap='btn'>确认</button>
       </swiper-item>
       <swiper-item class='active' data-index='{{index}}'>
         <text wx:for='{{hezong}}' wx:for-item="idx" class='ass {{idx.state==1?"beijing":""}}' catchtap='textdianb' data-ib='{{index}}'>{{idx.name}} </text>
-        <button data-in='{{index}}' catchtap='btn'>确认</button>
+        <button data-in='address' catchtap='btn'>确认</button>
       </swiper-item>
       <swiper-item class='active' data-index='{{index}}'>
         <view class='xingbie'>性别要求</view>
         <view>
-          <text wx:for='{{xingbie}}' catchtap='textdian'  class='ass {{item.state==1?"beijing":""}}' data-id='{{index}}'>{{item.name}}            </text>
+          <text wx:for='{{xingbie}}' catchtap='textdian'  class='ass {{selectsx==index?"beijing":""}}' data-id='{{index}}'>{{item.name}}            </text>
           <!-- <text>男可做</text>
           <text>女可做</text> -->
         </view>
         <view class='gongzi'>工资范围</view>
         <view class='gongz'>
-          <input> </input><image src='/img/center/hengxian.png'></image><input></input>
+          <input id="min" placeholder="" bindinput="inputTyping" value="{{jobSalaryMin}}"> </input><image src='/img/center/hengxian.png'></image><input placeholder="" id="max" bindinput="inputTyping" value="{{jobSalaryMax}}"></input>
         </view>
-        <button data-in='{{index}}' catchtap='btn'>确认</button>
+        <button data-in='saixuan' catchtap='btn'>确认</button>
       </swiper-item>
     </swiper>
   </view>
+  <!-- 占位置 -->
+  <view class='zhanwei'>
   
-  <view class='top-head' bindtap='huidaotop' style='position:{{post}}'>
-    <view bindtap='sanlei' class='{{xuanze==0?"activeshow":""}}'>
-      <image src='/img/center/leixing.png'></image>
-      <text>类型</text>
+  </view>
+  <!-- 占位置 -->
+  <view class='top-head'  bindtap='huidaotop' style='position:{{post}} ;top:{{0}}px'>
+    <view bindtap='sanlei' class='{{xuanze==0?"activeshow":""}}' >
+      <image src='/img/index/xiala.png'></image>
+      类型
     </view>
     <view bindtap='sanprice' class='{{xuanze==1?"activeshow":""}}'>
-      <image src='/img/center/fanxian.png'></image>
-      <text>返现金额</text>
+      <image src='/img/index/xiala.png'></image>
+      返现金额
     </view>
     <view bindtap='sanzong' class='{{xuanze==2?"activeshow":""}}'>
-      <image src='/img/center/zonghe.png'></image>
-      <text>综合排序</text>
+      <image src='/img/index/xiala.png'></image>
+      综合排序
     </view>
     <view bindtap='sanshai' class='{{xuanze==3?"activeshow":""}}'>
-      <image src='/img/center/shaixuan.png'></image>
-      <text>筛选</text>
+      <image src='/img/index/xiala.png'></image>
+      筛选
     </view>
   </view>
+  <!--显示列表  -->
   <view class='bottom pinga'  style='margin-top:{{juli}}rpx'>
     
     <view class='mingpian' wx:for='{{foterlist}}'>
@@ -80,21 +89,32 @@
   </view>
   
   <view class='bottom'>
-    <view class='mingpian' wx:for='{{foterlist1}}'>
+    <view class="mingpian {{item.jobStick==1?'zhiding':''}}" wx:for='{{shopList}}' data-id="{{item.companyJobId}}">
       <view class='left'>
-        <image mode='aspectFill' src='{{item.url}}'></image>
+        <image mode='aspectFill' src='/img/index/banner.jpg'></image>
       </view>
       <view class='right'>
-        <view>{{item.name}}</view>
+        <view>{{item.company.companyName}}</view>
         <view>
-          <text wx:for='{{item.title}}' wx:for-item="idx">{{idx.name}}</text>
+          <text wx:for='{{item.jobLabels}}' wx:for-item="idx">{{idx}}</text>
         </view>
-        <view>返{{item.fanli}}</view>
-        <view>{{item.price}}</view>
+        <view>返{{item.returnMoney}}</view>
+        <view>{{item.jobSalaryMin}}-{{item.jobSalaryMax}}/月</view>
       </view>
     </view>
   </view>
+<!--没有数据暂无数据  -->
+<view class="spinner cl" hidden='{{showLoading}}'>
+  <view class="rect1"></view>
+  <view class="rect2"></view>
+  <view class="rect3"></view>
+  <view class="rect4"></view>
+  <view class="rect5"></view>
 </view>
+<view class="bottomText cl" hidden='{{bottomText}}'>已经到底了</view>
+
+</view>
+<!-- 底部分类 -->
 </scroll-view>
 
 <!-- 底部分类 -->

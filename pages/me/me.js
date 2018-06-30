@@ -18,6 +18,7 @@ Page({
   onLoad: function () {
 
  
+
     var that=this;
     wx.getUserInfo({
       success: function (res) {

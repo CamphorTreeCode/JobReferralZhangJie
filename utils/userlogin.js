@@ -19,14 +19,12 @@ function login(that){
             url: app.globalData.appUrl + 'WXUser/addUser', //仅为示例，并非真实的接口地址
             data: userInfo,
             header: {
-              'content-type': 'application/x-www-form-urlencoded', // 默认值
+             'content-type': 'application/x-www-form-urlencoded', // 默认值
               xcxuser_name: "xcxuser_name"
             },
-            
-
             method: "post",
             success: function (res) {
-              console.log(res)
+            console.log(res)
             }
           })
         }
@@ -62,7 +60,8 @@ function getOpenid() {
               var that = this;
               
               try {
-                wx.setStorageSync('openid', res.data.openId);
+                wx.setStorageSync('openid', res.data.openId); 
+                app.globalData.openid = res.data.openId
               } catch (e) {
               }
             }

@@ -50,7 +50,7 @@ function selectApplicant(that) {
 Page({
 
   /**
-   * 页面的初始数据
+   * 页面的初始数据 
    */
   data: {
     flag: true,
@@ -141,6 +141,7 @@ Page({
     this.setData({ flag: true })
 
   },
+  //岗位详情
   companyJobDetails:function(e){
     console.log(e.currentTarget.dataset.id);
     var companyJobId = e.currentTarget.dataset.id;

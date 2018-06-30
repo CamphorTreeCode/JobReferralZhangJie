@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 9,
+			"current": 0,
 			"list": [
 				{
 					"id": -1,
@@ -92,7 +92,8 @@
 				{
 					"id": -1,
 					"name": "申请中心",
-					"pathName": "pages/applycenter/applycenter"
+					"pathName": "pages/applycenter/applycenter",
+					"query": ""
 				}
 			]
 		}

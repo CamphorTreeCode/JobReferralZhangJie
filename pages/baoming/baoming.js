@@ -1,4 +1,3 @@
-
 //表单验证
 function yanzheng(applicantList) {
   if (applicantList.applicantName == '') {
@@ -16,15 +15,15 @@ function yanzheng(applicantList) {
       duration: 2000
     })
     return false;
-  }else{
-    if (!/^((\d{3,4}-)?\d{7,8})$|(1[0-9]{10})/.test(applicantList.applicantPhoneNo)){
+  } else {
+    if (!/^((\d{3,4}-)?\d{7,8})$|(1[0-9]{10})/.test(applicantList.applicantPhoneNo)) {
       wx.showToast({
         title: '请按照正确联系方式填写',
         icon: 'none',
         duration: 2000
       })
       return false;
-    }else{
+    } else {
       // return true;
     }
   }
@@ -35,20 +34,19 @@ function yanzheng(applicantList) {
       duration: 2000
     })
     return false;
-  }else{
-    if (!/^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/.test(applicantList.applicantIDCardNo)){
+  } else {
+    if (!/^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/.test(applicantList.applicantIDCardNo)) {
       wx.showToast({
         title: '请正确填写身份证号码',
         icon: 'none',
         duration: 2000
-      })  
-    }else{
+      })
+    } else {
       return true;
     }
   }
 }
-
-var app=getApp();
+var app = getApp();
 // pages/me/baoming/baoming.js
 Page({
 
@@ -57,12 +55,10 @@ Page({
    */
   data: {
     radioCheckVal: 0,
-    radioVal:0,
-    dateTime:'',
-    applicantList:[],
-    date:'',
-    radioCheckVal:''
-
+    radioVal: 0,
+    dateTime: '',
+    applicantList: [],
+    date: '',
   },
 
   /**
@@ -100,21 +96,21 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
@@ -128,21 +124,21 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   },
   bindDateChange: function (e) {
     this.setData({
@@ -159,9 +155,9 @@ Page({
       radioVal: e.detail.value
     })
   },
-  
+
   //提交表单
-  formSubmit:function(e){    
+  formSubmit: function (e) {
 
     console.info('触发事件');
     console.info(e);
@@ -178,15 +174,14 @@ Page({
           'content-type': 'application/x-www-form-urlencoded', // 默认值
           xcxuser_name: "xcxuser_name"
         },
-        success:function(){
+        success: function () {
           app.globalData.applicantUser = true;
         }
       })
       wx.switchTab({
         url: '/pages/me/me',
       })
-    } 
-    
+    }
 
   }
 })
