@@ -397,7 +397,6 @@ Page({
           that.setData({
             goodJob: goodJob1
           })
-          //console.info(goodJob)
         }
         //console.info("优职推荐结束")
       }
@@ -481,6 +480,17 @@ Page({
 
   },
 
+
+  //岗位详情
+  jobDetails: function (e) {
+    console.info("************************************")
+    console.log(e.currentTarget.dataset.id);
+    var companyJobId = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/postdetails/postdetails?companyJobId=' + companyJobId,
+    })
+  },
+  
   //换一批事件start
   changeJob: function(e) {
     // console.info("换一批事件开始")

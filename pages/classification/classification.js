@@ -186,7 +186,9 @@ Page({
     //最新时间排序
     createTimes: "true",
     //根据企业名称查询
-    companyName: null
+    companyName: null,
+    //优职推荐
+    goodJob: [],
   },
   /**
    * 生命周期函数--监听页面加载
@@ -215,7 +217,7 @@ Page({
     //获取商品数据 end
     //获取所有分类的方法 start
 
-    wx.request({
+    wx.request({ 
       url: app.globalData.appUrl + 'WXJobCategory/selectJobCategoryType',
       header: {
         'content-type': 'application/x-www-form-urlencoded', // 默认值
@@ -230,6 +232,36 @@ Page({
       }
     })
     //获取所有分类的方法 end
+
+    //优职推荐start
+    wx.request({
+      url: app.globalData.appUrl + 'WXCompanyJob/findTwoCompanyJob',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded', // 默认值
+        xcxuser_name: "xcxuser_name"
+      },
+      success: function (res) {
+        // console.info("优职推荐开始")
+        // console.info(res)
+        // console.info(res.data[0].jobSwiperImages)
+        if (res.data.length > 0) {
+          var goodJob1 = that.data.goodJob;
+          for (var i = 0; i < res.data.length; i++) {
+            res.data[i].jobLabels = JSON.parse(res.data[i].jobLabels)
+            res.data[i].jobSwiperImages = JSON.parse(res.data[i].jobSwiperImages)
+            goodJob1.push(res.data[i]);
+          }
+          console.info(goodJob1)
+          // console.info(res.data[0].jobSwiperImages[0])
+          that.setData({
+            goodJob: goodJob1
+          })
+          //console.info(that.data.goodJob)
+        }
+        //console.info("优职推荐结束")
+      }
+    })
+    //优职推荐end
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -277,6 +309,57 @@ Page({
   onShareAppMessage: function () {
     
   },
+
+  //岗位详情
+  jobDetails: function (e) {
+    console.info("************************************")
+    console.log(e.currentTarget.dataset.id);
+    var companyJobId = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/postdetails/postdetails?companyJobId=' + companyJobId,
+    })
+  },
+
+
+  //换一批事件start
+  changeJob: function (e) {
+    // console.info("换一批事件开始")
+    // console.info(e)
+    var that = this;
+    wx.request({
+      url: app.globalData.appUrl + 'WXCompanyJob/findTwoCompanyJob',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded', // 默认值
+        xcxuser_name: "xcxuser_name"
+      },
+      success: function (res) {
+        // console.info("下面是优职推荐数据：")
+        // console.info(res.data.length)
+        that.data.goodJob = [];
+        that.setData({
+          goodJob: that.data.goodJob
+        })
+        if (res.data.length > 0) {
+          var goodJob1 = that.data.goodJob;
+          for (var i = 0; i < res.data.length; i++) {
+            res.data[i].jobSwiperImages = JSON.parse(res.data[i].jobSwiperImages)
+            res.data[i].jobLabels = JSON.parse(res.data[i].jobLabels)
+            goodJob1.push(res.data[i]);
+          }
+          // console.info(goodJob1)
+          // console.info("上面是优职推荐数据：")
+          that.setData({
+            goodJob: goodJob1
+          })
+        }
+
+      }
+    })
+
+    //console.info("换一批事件结束")
+  },
+
+
   sanlei: function () {
     
     if (this.data.curren == 0 && this.data.diyige == "true") {
