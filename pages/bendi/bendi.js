@@ -15,7 +15,8 @@ console.log("21")
       jobSalaryMax: that.data.jobSalaryMax,
       companyAddress: that.data.companyAddress,
       createTimes: that.data.createTimes,
-      companyName: that.data.companyName
+      companyName: that.data.companyName,
+      key:that.data.key
     },
     header: {
       // 'content-type': 'application/x-www-form-urlencoded' // 默认值
@@ -184,7 +185,9 @@ Page({
     //最新时间排序
     createTimes:"true",
     //根据企业名称查询
-    companyName: null
+    companyName: null,
+    //功能查询
+    key:null
 
 
 
@@ -194,10 +197,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    //接收首页参数  start
+    var key =options.key
+    console.log(key)
+    //接收首页参数  end
     let scrollHeight = wx.getSystemInfoSync().windowHeight;
     this.setData({
-      scrollHeight: scrollHeight
+      scrollHeight: scrollHeight,
+      key:key
     });
     var that = this
     wx.setNavigationBarTitle({

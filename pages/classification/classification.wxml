@@ -6,9 +6,8 @@
  <scroll-view scroll-y="false" style='height:100%' bindscroll='bindscro' scroll-top='{{abba}}' bindscrolltolower="lower">  
 <view class='header'>
   <input id="search" placeholder='在此输入企业名称以搜索' bindinput="inputTyping"></input>
-  <button>搜索</button>
+  <button data-in='search' catchtap='btn'>搜索</button>
 </view>
-
 <!-- 底部分类 -->
 <view class='foter' >
 <!-- style='height:{{clientY}}px' -->
@@ -18,8 +17,7 @@
         <text wx:for='{{leixing}}' wx:for-item="idx" class='ass  {{idx.state==1?"beijing":""}}' catchtap='textdianji' data-ind='{{index}}'>{{idx.jobCategoryName}}              </text>
         <button data-in='leixing' catchtap='btn'>确认</button>
       </swiper-item>
-       <swiper-item class='active' data-index='{{index}}'>
-
+      <swiper-item class='active' data-index='{{index}}'>
         <text wx:for='{{jine}}' wx:for-item="idx" class='ass {{index==pricex?"beijing":""}}' catchtap='textdiana' data-ia='{{index}}'>{{idx.name}}  </text>
         <button data-in='jine' catchtap='btn'>确认</button>
       </swiper-item>

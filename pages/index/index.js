@@ -13,7 +13,6 @@ function getHomeSwiper(that){
       console.log(res)
     that.setData({
       HomeSwiper:res.data
-
     })
     }
 
@@ -35,7 +34,8 @@ function selectTypePage(that) {
       jobSalaryMax: that.data.jobSalaryMax,
       companyAddress: that.data.companyAddress,
       createTimes: that.data.createTimes,
-      companyName: that.data.companyName
+      companyName: that.data.companyName,
+      key: that.data.key
     },
     header: {
       // 'content-type': 'application/x-www-form-urlencoded' // 默认值
@@ -240,7 +240,9 @@ Page({
     //最新时间排序
     createTimes: "true",
     //根据企业名称查询
-    companyName:null
+    companyName:null,
+    //key设置为null
+    key:null
 
   },
 
@@ -373,22 +375,22 @@ Page({
   // 头部4个分类跳转
   fanli: function () {
     wx.navigateTo({
-      url: '/pages/bendi/bendi?key=高返现'
+      url: '/pages/bendi/bendi?key=gfl'
     })
   },
   zuixin: function () {
     wx.navigateTo({
-      url: '/pages/bendi/bendi?key=今日最新'
+      url: '/pages/bendi/bendi?key=jrzx'
     })
   },
   bendi: function () {
     wx.navigateTo({
-      url: '/pages/bendi/bendi?key=本地招聘'
+      url: '/pages/bendi/bendi?key=bdzp'
     })
   },
   mingqi: function () {
     wx.navigateTo({
-      url: '/pages/bendi/bendi?key=名企招聘'
+      url: '/pages/bendi/bendi?key=mqzp'
     })
   },
   returnfee: function () {
