@@ -3,37 +3,36 @@
 <my-component>
 </my-component>
 <!--遮罩-->
+
 <scroll-view scroll-y="false" style='height:100%' bindscroll='bindscro' scroll-top='{{abba}}' bindscrolltolower="lower">
   <view class='header'>
     <input id="search" placeholder='在此输入企业名称以搜索' bindinput="inputTyping"></input>
     <button>搜索</button>
   </view>
-
-  <!-- 底部分类 -->
-  <view class='foter'>
-    <!-- style='height:{{clientY}}px' -->
-    <view class='waw' wx:if='{{gao!=0}}'>
-      <swiper class='dingwei' bindchange='gaibain' current='{{curren}}' style=' height:{{gao}}rpx' duration='0'>
-        <swiper-item class='active' data-index='{{index}}'>
-          <text wx:for='{{leixing}}' wx:for-item="idx" class='ass  {{idx.state==1?"beijing":""}}' catchtap='textdianji' data-ind='{{index}}'>{{idx.jobCategoryName}}              </text>
-          <button data-in='leixing' catchtap='btn'>确认</button>
-        </swiper-item>
-        <swiper-item class='active' data-index='{{index}}'>
-
-          <text wx:for='{{jine}}' wx:for-item="idx" class='ass {{index==pricex?"beijing":""}}' catchtap='textdiana' data-ia='{{index}}'>{{idx.name}}  </text>
-          <button data-in='jine' catchtap='btn'>确认</button>
-        </swiper-item>
-        <swiper-item class='active' data-index='{{index}}'>
-          <text wx:for='{{hezong}}' wx:for-item="idx" class='ass {{idx.state==1?"beijing":""}}' catchtap='textdianb' data-ib='{{index}}'>{{idx.name}} </text>
-          <button data-in='address' catchtap='btn'>确认</button>
-        </swiper-item>
-        <swiper-item class='active' data-index='{{index}}'>
-          <view class='xingbie'>性别要求</view>
-          <view>
-            <text wx:for='{{xingbie}}' catchtap='textdian' class='ass {{selectsx==index?"beijing":""}}' data-id='{{index}}'>{{item.name}}            </text>
-            <!-- <text>男可做</text>
-          <text>女可做</text> -->
-          </view>
+<!-- 底部分类 -->
+<view class='foter' >
+<!-- style='height:{{clientY}}px' -->
+  <view class='waw' wx:if='{{gao!=0}}' >
+    <swiper class='dingwei' bindchange='gaibain' current='{{curren}}' style=' height:{{gao}}rpx' duration='0'>
+      <swiper-item  class='active' data-index='{{index}}'>
+        <text wx:for='{{leixing}}' wx:for-item="idx" class='ass  {{idx.state==1?"beijing":""}}' catchtap='textdianji' data-ind='{{index}}'>
+          {{idx.jobCategoryName}}
+        </text>
+        <button data-in='leixing' catchtap='btn'>确认</button>
+      </swiper-item>
+      <swiper-item class='active' data-index='{{index}}'>
+        <text wx:for='{{jine}}' wx:for-item="idx" class='ass {{index==pricex?"beijing":""}}' catchtap='textdiana' data-ia='{{index}}'>{{idx.name}}</text>
+        <button data-in='jine' catchtap='btn'>确认</button>
+      </swiper-item>
+      <swiper-item class='active' data-index='{{index}}'>
+        <text wx:for='{{hezong}}' wx:for-item="idx" class='ass {{idx.state==1?"beijing":""}}' catchtap='textdianb' data-ib='{{index}}'>{{idx.name}}</text>
+        <button data-in='address' catchtap='btn'>确认</button>
+      </swiper-item>
+      <swiper-item class='active' data-index='{{index}}'>
+        <view class='xingbie'>性别要求</view>
+        <view>
+          <text wx:for='{{xingbie}}' catchtap='textdian' class='ass{{selectsx==index?"beijing":""}}' data-id='{{index}}'>{{item.name}}</text>
+        </view>
           <view class='gongzi'>工资范围</view>
           <view class='gongz'>
             <input id="min" placeholder="" bindinput="inputTyping" value="{{jobSalaryMin}}"> </input>

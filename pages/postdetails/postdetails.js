@@ -12,15 +12,13 @@ function getDate(str){
     day = "0" + day;
   }
   var nowDate = year + "年" + month + "月" + day + '日';
-  return nowDate
-  
+  return nowDate 
 }
 Page({
 
   /**
    * 页面的初始数据
    */
-
   data: {
       // 控制报名信息的显示
       gao : 0,
@@ -28,7 +26,7 @@ Page({
       xianshi:3,
       xinxi:3, //初始显示的是去报名的弹窗  
       // 收藏图片的地址
-      shouimg:"/img/postdetails/weishoucang.png",
+  shouimg:"/img/postdetails/weishoucang.png",
       // 轮播图片
       slider: [
         { picUrl: "https://www.chuanshoucs.com/ServerImg/2018-05-28/4d62d4f4-3c71-4b72-9c64-a505e2e6f3ca.jpg" },
@@ -50,6 +48,7 @@ Page({
   onLoad: function (options) {
     getDate('2018-06-26 14:15:05')
     var that  = this
+    // 获取详细信息 start 
     wx.request({
       url: app.globalData.appUrl + 'WXCompanyJob/selectCompanyJob', //仅为示例，并非真实的接口地址
       data: { CompanyJobId: options.CompanyJobId },
@@ -63,21 +62,54 @@ Page({
         console.log(res)
         res.data[0].company.companyAddress = res.data[0].company.companyAddress.replace(/,/g, '');
         res.data[0].createTime = getDate(res.data[0].createTime)
-
         res.data[0].jobLabels = JSON.parse(res.data[0].jobLabels)
         res.data[0].jobSwiperImages = JSON.parse(res.data[0].jobSwiperImages)
         that.setData({
           companyJob:res.data
-        })
-        
+        })    
       }
-
     })
+   // 获取详细信息 end
+  // 增加商品浏览量  增加用户浏览 start
+    var openId = app.returnOpenId();
+    console.log(openId)
+    wx.request({
+      url: app.globalData.appUrl + 'WXCompanyJob/addCompanyJobJobBrowser', //仅为示例，并非真实的接口地址
+      data: { CompanyJobId: options.CompanyJobId,openId: openId},
+      method: "get",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',// 默认值
+        //'content-type': 'application/json', // 默认值
+        xcxuser_name: "xcxuser_name"
+      },
+      success: function (res) {
+        console.log(res)
+      }
+    })
+  // 增加商品的浏览量  增加用户浏览 end
+  // 查询用户的浏览数 start
+    console.log(openId)
+    wx.request({
+      url: app.globalData.appUrl + 'WXBrowserHistory/selectBrowserHistoryFour', //仅为示例，并非真实的接口地址
+      data: { CompanyJobId: options.CompanyJobId },
+      method: "get",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',// 默认值
+       //'content-type': 'application/json', // 默认值
+        xcxuser_name: "xcxuser_name"
+      },
+      success: function (res) {
+        console.log(res)
+      }
+    })
+  // 查询用户的浏览数 end
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
+   * 
+   * 生命周期函数--监听页面初次渲染成
+   *
+   * /
   onReady: function () {
       
   },
