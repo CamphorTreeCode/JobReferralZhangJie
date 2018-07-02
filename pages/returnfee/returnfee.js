@@ -1,3 +1,5 @@
+
+var app=getApp();
 // pages/returnfee/returnfee.js
 var util = require('../../utils/util.js');
 Page({

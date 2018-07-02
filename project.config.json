@@ -76,6 +76,24 @@
 					"name": "报名表",
 					"pathName": "pages/baoming/baoming",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "会员中心",
+					"pathName": "pages/huiyuan/huiyuan",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我",
+					"pathName": "pages/me/me",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "申请中心",
+					"pathName": "pages/applycenter/applycenter",
+					"query": ""
 				}
 			]
 		}

@@ -35,13 +35,33 @@ App({
       }
     })
 
-    //获取用户是否填写报名表
+    //  var pg=this;
+    // setTimeout(function () {
+    //   console.log(wx.getStorageSync('openid'))
+    //   //获取用户是否填写报名表 
+    //   var that = pg;
+      var that = this;
+      wx.request({
+        url: that.globalData.appUrl + 'WXApplicant/findUserApplicant?openId=' + wx.getStorageSync('openid') + '', //仅为示例，并非真实的接口地址
+        data: { openId: wx.getStorageSync('openid') },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded', // 默认值
+          xcxuser_name: "xcxuser_name"
+        },
+        success: function (res) {
+          that.globalData.applicantUser = res.data.applicantUser;        
+        }
+      })
+    // }, 500);
+
+ 
   },
     getOpenId: function () {
     console.log("獲取opoenid")
     var that = this
     userLogin.getOpenid()
   },
+
   returnOpenId: function () {
     var openid = wx.getStorageSync('openid')
     console.log(openid)
@@ -54,11 +74,14 @@ App({
     }
     return openid
   },
+
+
   globalData: {
     userInfo: null,
-
+    //用户是否有报名表
+    applicantUser:"",
     appUrl:"http://localhost/ZhangJie/",
-    appId: "wxb39d67b4e5dda79d"
+    appId: "wxb39d67b4e5dda79d",
 
   }
 })

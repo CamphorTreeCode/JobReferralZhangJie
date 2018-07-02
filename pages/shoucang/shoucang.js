@@ -1,47 +1,78 @@
+var app = getApp();
+
+var pagesize = 0
+function selectApplicant(that) {
+  var openId = app.returnOpenId();
+  wx.request({
+    url: app.globalData.appUrl + 'WXCollection/selectCollectionPage',
+    data: {
+      openId: openId,
+      currentPage: ++pagesize
+    },
+    header: {
+      'content-type': 'application/x-www-form-urlencoded', // 默认值
+      xcxuser_name: "xcxuser_name"
+    },
+    method: 'get',
+    success: function (res) {
+      console.info("下面是用户收藏职位的信息：")
+      console.log(res.data[0])
+      // console.info(res.data[0].lists[0].companyJob[0].jobLabels)-
+      // console.info(JSON.parse(res.data[0].lists[0].companyJob[0].jobLabels))
+      // console.info(res.data[0].lists[0].companyJob[0].company.companyAddress.split(",")[2])
+      //console.info(res.data[0].lists[0].companyJob[0].companyJobId)
+      if (res.data[0].lists.length > 0) {
+        var collectionList = that.data.collectionList;
+        console.info(collectionList)
+        for (var i = 0; i < res.data[0].lists.length; i++) {
+          res.data[0].lists[i].companyJob[0].jobLabels = JSON.parse(res.data[0].lists[i].companyJob[0].jobLabels)
+          res.data[0].lists[i].companyJob[0].company.companyAddress = res.data[0].lists[i].companyJob[0].company.companyAddress.split(",")[2];
+          res.data[0].lists[i].state= "false";
+
+          collectionList.push(res.data[0].lists[i]);
+
+          
+        }
+        console.info(res.data[0].lists, collectionList)
+        that.setData({
+          collectionList,
+          showLoading: true,
+        })
+      } else {
+        that.setData({
+          bottomText: false,
+          showLoading: true,
+        })
+      }
+    }
+  })
+}
+
+
 Page({
 
   /**
-   * 页面的初始数据
+   * 页面的初始数据 
    */
   
   data: {
-    array: [
-      {
-        "name":"浙江温州江南皮革厂",
-        "state": false,
-        tag: [
-          {
-            "tagname":"返现最高"
-          },
-          {
-            "tagname": "人气"
-          }
-        ],
-        "address":"温州",
-        "money":"4000-5000"
-      },
-      {
-        "name": "上海松江皮革厂",
-        "state": false,
-        tag: [
-          {
-            "tagname": "人气"
-          },
-          {
-            "tagname": "返现最高"
-          }
-        ],
-        "address": "松江",
-        "money": "4200-4800"
-      }
-    ]
+
+    collectionList: [],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+
+    //获取系统高度
+    let scrollHeight = wx.getSystemInfoSync().windowHeight;
+    this.setData({
+      scrollHeight: scrollHeight
+    });
+
+    pagesize = 0
+    selectApplicant(this)
   },
 
   /**
@@ -96,14 +127,14 @@ Page({
 // 左滑与右滑
   touchstart: function (e) {
     //开始触摸时 重置所有取消收藏
-    this.data.array.forEach(function (v, i) {
+    this.data.collectionList.forEach(function (v, i) {
       if (v.state)//只操作为true的
         v.state = false;
     })
     this.setData({
       startX: e.changedTouches[0].clientX,
       startY: e.changedTouches[0].clientY,
-      array: this.data.array
+      collectionList: this.data.collectionList
     })
   },
   //滑动事件处理
@@ -116,7 +147,7 @@ Page({
       touchMoveY = e.changedTouches[0].clientY,//滑动变化坐标
       //获取滑动角度
       angle = that.angle({ X: startX, Y: startY }, { X: touchMoveX, Y: touchMoveY });
-    that.data.array.forEach(function (v, i) {
+    that.data.collectionList.forEach(function (v, i) {
       v.state = false
       //滑动超过30度角 return
       if (Math.abs(angle) > 30) return;
@@ -129,7 +160,7 @@ Page({
     })
     //更新数据
     that.setData({
-      array: that.data.array
+      collectionList: that.data.collectionList
     })
   },
   angle: function (start, end) {
@@ -138,6 +169,7 @@ Page({
     //返回角度 /Math.atan()返回数字的反正切值
     return 360 * Math.atan(_Y / _X) / (2 * Math.PI);
   },
+
   // 去报名
   baoming: function(){
     // console.log("去报名");
@@ -148,6 +180,24 @@ Page({
   // 取消收藏
   quxiao: function(){
     console.log("取消收藏");
+  },
+
+  //下拉刷新功能
+  lower() {
+    console.log("分页啦")
+    this.setData({
+      showLoading: false
+    })
+    selectApplicant(this)
+  },
+
+  //岗位详情
+  companyJobDetails: function (e) {
+    console.log(e.currentTarget.dataset.id);
+    var companyJobId = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/postdetails/postdetails?companyJobId=' + companyJobId,
+    })
   }
 })
 
