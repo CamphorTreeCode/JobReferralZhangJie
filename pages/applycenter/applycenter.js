@@ -1,7 +1,7 @@
 // pages/applycenter/applycenter.js
 var app = getApp();
 var pagesize = 0
-function selectApplicant(that) {
+function selectApplicant(that) { 
   var openId = app.returnOpenId()
   wx.request({
     url: app.globalData.appUrl + 'WXApplicantCompantJob/selectApplicantCompanyJobPage',
