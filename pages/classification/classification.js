@@ -15,7 +15,8 @@ function selectTypePage(that) {
       jobSalaryMax: that.data.jobSalaryMax,
       companyAddress: that.data.companyAddress,
       createTimes: that.data.createTimes,
-      companyName: that.data.companyName
+      companyName: that.data.companyName,
+      key: that.data.key
     },
     header: {
       // 'content-type': 'application/x-www-form-urlencoded' // 默认值
@@ -59,6 +60,7 @@ Page({
    */
   data: {
     pricex: "false", //返现金额选择
+    selectsx: -1,//筛选的选择
     // 下拉框第一个显示
     diyige: "true",
     dier: "true",
@@ -254,6 +256,8 @@ Page({
 
     //企业名称input获取值
     companyNames: null,
+    //选择功能
+    key:null
 
   },
   /**

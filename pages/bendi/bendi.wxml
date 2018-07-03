@@ -61,7 +61,7 @@
   <!--显示列表  -->
 <scroll-view scroll-y="true"  style='height:{{scrollHeight}}px' class="scoll-h"   bindscrolltolower="lower">
   <view class='bottom'>
-    <view class="mingpian " wx:for='{{shopList}}' data-id="{{item.companyJobId}}">
+    <view class="mingpian " wx:for='{{shopList}}' data-id="{{item.companyJobId}}" catchtap='shopDetails'>
       <view class='left'>
         <image mode='aspectFill' src='/img/index/banner.jpg'></image>
       </view>

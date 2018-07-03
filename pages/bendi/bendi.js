@@ -603,7 +603,7 @@ else{
   
     }
     //综合排序
-    else if (index="address"){
+    else if (index=="address"){
       // city + district
       var hezong = that.data.hezong
    
@@ -835,4 +835,11 @@ else{
     /*登陆的位置 */
     check.getLocationCheck(this)
   },
+  //商品的图片地址
+  shopDetails(e) {
+    console.log(e, e.currentTarget.dataset.id);
+    wx.navigateTo({
+      url: '/pages/postdetails/postdetails?CompanyJobId=' + e.currentTarget.dataset.id,
+    })
+  }
 })
