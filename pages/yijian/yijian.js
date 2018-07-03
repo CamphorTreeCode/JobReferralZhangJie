@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    show: "true"
   },
 
   /**
@@ -104,7 +104,8 @@ Page({
     }
     if (bu) {
       this.setData({
-        tankuang: true
+        tankuang: true,
+        show: false
       })
       setTimeout(function() {
         wx.switchTab({

@@ -62,7 +62,7 @@
   <!-- 2张卡片 -->
   <view class='content'>
     <!-- style='background:url({{item.url}}) 100% ' -->
-    <view class='mingpian' wx:for='{{goodJob}}'>
+    <view class='mingpian' wx:for='{{goodJob}}' catchtap='jobDetails' data-id='{{goodJob[index].companyJobId}}'>
       <view>{{item.company.companyName}}</view>
       <view>
         <text wx:for='{{item.jobLabels}}' wx:for-item="idx">{{idx}}</text>
