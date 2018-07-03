@@ -2,6 +2,7 @@
 var app=getApp();
 // pages/returnfee/returnfee.js
 var util = require('../../utils/util.js');
+var pagesize = 0;
 Page({
 
   /**
@@ -11,7 +12,7 @@ Page({
     date: '', //代表自己定义的日期
     dates: "", //显示的日期
     // 工厂信息
-    factory: [
+    factory: [ 
       {
         name: "常熟新市常熟新市",
         date: "2018-3-23",
@@ -47,25 +48,28 @@ Page({
           { name: "学生" }
         ]
       },
-      {
+      { 
         name: "【扬州李尔",
         date: "2018-3-23",
         title: [
           { name: "学生" }
         ]
       }
-    ]
-
+    ],
+    backFactory:[],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
+
     // 先获取当前日期显示
     this.data.date = new Date();
     var ddd = new Date();
     var myDate = this.data.date.getFullYear() + '-' + (this.data.date.getMonth() + 1) + '-' + this.data.date.getDate()
+    
     var yayay = {
       year: ddd.getFullYear(),
       month: ddd.getMonth() +1,
@@ -86,10 +90,23 @@ Page({
     }
     // 再通过setData更改Page()里面的data，动态更新页面的数据  
     this.setData({
+      // dateend: myDate,      
       dates: myDate,
       date: yayay
     });
+
+    //获取系统高度
+    let scrollHeight = wx.getSystemInfoSync().windowHeight-66;
+    // console.info("下面是系统高度")
+    // console.info(scrollHeight)
+    this.setData({
+      scrollHeight: scrollHeight
+    });
+    pagesize = 0;
+    this.selectBackFactory();
+     //返费通知end
   },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -138,6 +155,7 @@ Page({
   },
   //  点击日期组件确定事件  
   bindDateChange: function (e) {
+
     //根据获取到的日期，进行解析，分别取到 年，月，日,然后赋值给日期数据
     var arr = e.detail.value.split('-');
     var er = [''], san = [''];
@@ -168,11 +186,14 @@ Page({
     this.setData({
       dates: e.detail.value,
       date: yayay
-    })
+    }) 
   },
-  chakan: function () {
+  chakan: function (e) {
+    console.log(e)
+    var factoryId = e.currentTarget.dataset.id;
+    console.log(factoryId)
     wx.navigateTo({
-      url: '/pages/identical/identical',
+      url: '/pages/identical/identical?factoryId=' + factoryId,
     })
   },
   pageon: function () {
@@ -230,11 +251,16 @@ Page({
         var myDate = datea.year + '-' + (datea.month) + '-' + datea.day;
       }
     }
-    
+    this.data.backFactory="";
+    this.setData({
+      backFactory: this.data.backFactory
+    })
     this.setData({
       date: datea,  //日期数据
       dates: myDate //拼接后的日期
     });
+    pagesize = 0;
+    this.selectBackFactory();
   },
   pageup: function () {
     var datea = this.data.date;
@@ -298,9 +324,93 @@ Page({
         var myDate = datea.year + '-' + (datea.month) + '-' + datea.day;
       }
     }
+
+    this.data.backFactory = "";
+    this.setData({
+      backFactory: this.data.backFactory
+    })
     this.setData({
       date: datea,  //日期数据
       dates: myDate //拼接后的日期
     });
-  }
+    pagesize = 0;
+    this.selectBackFactory();
+
+  },
+    dateTime:function(){
+    // 判断月份和日期前面有没有0
+    var that=this;
+    if(that.data.date.month <= 9 && that.data.date.day >= 10) {
+      var shijian = that.data.date.year + "-0" + that.data.date.month + "-" + that.data.date.day
+    }
+  if (that.data.date.month >= 10 && that.data.date.day <= 9) {
+      var shijian = that.data.date.year + "-" + that.data.date.month + "-0" + that.data.date.day
+    }
+  if (that.data.date.month <= 9 && that.data.date.day <= 9) {
+      var shijian = that.data.date.year + "-0" + that.data.date.month + "-0" + that.data.date.day
+    }
+    // console.info("下面是获取时间")
+    // console.info(that.data.date);
+    return shijian;
+  },
+  
+  //返费通知start
+  selectBackFactory:function (that) {
+
+    var that=this;
+    var shijian1=this.dateTime();
+    // console.info("下面是返费工厂入职时间的信息：")
+    // console.info(shijian1);
+    wx.request({
+      url: app.globalData.appUrl + 'WXBackFactory/selectBackFactoryPage',
+      data: {
+        entryTime: shijian1,
+        currentPage: ++pagesize
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded', // 默认值
+        xcxuser_name: "xcxuser_name"
+      },
+      method: 'get',
+      success: function (res) {
+        that.setData({
+          datastart: shijian1
+        })
+        // console.log()
+        // console.info("下面是返费工厂列表的信息：")
+        // console.log(res)
+        if (res.data[0].lists.length > 0) {
+          var backFactory1 = that.data.backFactory;
+          backFactory1 = res.data[0].lists;
+          for (var x = 0; x < backFactory1.length; x++) {
+            backFactory1[x].labels = JSON.parse(backFactory1[x].labels)
+          }
+          that.setData({
+            backFactory: backFactory1,
+            showLoading: true,
+          })
+          console.log(backFactory1)
+        } else {
+          that.setData({
+            //pagesize:page,
+            bottomText: false,
+            showLoading: true,
+          })
+
+        }
+      }
+    })
+  },
+  //返费通知end
+
+  //下拉刷新功能
+  lower() {
+    console.log("下拉刷新")
+    var that = this
+    this.setData({
+      showLoading: false
+    })
+    that.selectBackFactory()
+  },
+
 })

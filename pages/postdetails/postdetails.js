@@ -46,6 +46,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.info(options.CompanyJobId)
     getDate('2018-06-26 14:15:05')
     var that  = this
     // 获取详细信息 start 

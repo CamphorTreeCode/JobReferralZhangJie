@@ -397,7 +397,12 @@ Page({
         if (res.data.length > 0) {
           var goodJob1 = that.data.goodJob;
           for (var i = 0; i < res.data.length; i++) {
-            res.data[i].jobLabels = JSON.parse(res.data[i].jobLabels)
+            res.data[i].jobLabels = JSON.parse(res.data[i].jobLabels);
+            var a = [];
+            for (var j = 0; j < 2; j++) {
+              a.push(res.data[i].jobLabels[j])
+            }
+            res.data[i].jobLabels = a
             goodJob1.push(res.data[i]);
           }
           that.setData({
@@ -510,7 +515,8 @@ Page({
       },
       success: function(res) {
         // console.info("下面是优职推荐数据：")
-        // console.info(res.data.length)
+        // console.info(res.data[0].jobLabels)
+        // console.info(res.data[1].jobLabels)
         that.data.goodJob = [];
         that.setData({
           goodJob: that.data.goodJob
@@ -519,8 +525,14 @@ Page({
           var goodJob1 = that.data.goodJob;
           for (var i = 0; i < res.data.length; i++) {
             res.data[i].jobLabels = JSON.parse(res.data[i].jobLabels)
-            goodJob1.push(res.data[i]);
+            var a=[];
+            for(var j=0;j<2;j++){
+              a.push(res.data[i].jobLabels[j])
+            }
+            res.data[i].jobLabels = a
+            goodJob1.push(res.data[i])
           }
+         
           // console.info(goodJob1)
           // console.info("上面是优职推荐数据：")
           that.setData({

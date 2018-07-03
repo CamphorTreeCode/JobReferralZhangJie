@@ -65,7 +65,7 @@
     <view class='mingpian' wx:for='{{goodJob}}' catchtap='jobDetails' data-id='{{goodJob[index].companyJobId}}'>
       <view>{{item.company.companyName}}</view>
       <view>
-        <text wx:for='{{item.jobLabels}}' wx:for-item="idx">{{idx}}</text>
+        <text wx:for='{{item.jobLabels}}' wx:for-item="idx" wx:if="index<=1">{{idx}}</text>
       </view>
       <view>{{item.jobSalaryMin}}-{{item.jobSalaryMax}}/月</view>
     </view>

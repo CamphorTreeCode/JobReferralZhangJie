@@ -3,13 +3,16 @@
 <my-component>
 </my-component>
 <!--遮罩-->
+<scroll-view scroll-y="true"  style='height:{{scrollHeight}}px' class="scoll-h" bindscrolltolower="lower">
+
 <view class='header'>
-  <picker mode="date" value="{{date}}" start="1978-01-01" end="{{dates}}" bindchange="bindDateChange">
+  <picker mode="date" value="{{date}}" start="1978-01-01" end="{{dateend}}" bindchange="bindDateChange" name="entryTime">
     <text>{{dates}} </text>
     <image bindchange="bindDateChange" src='/img/postdetails/rili.png'></image>
   </picker>
 </view>
 <!--  -->
+
 <view class='fenlei'>
   <view class='leimu'>
     <view>
@@ -23,26 +26,26 @@
     </view>
   </view>
   <!-- 1091 -->
-  <!-- <scroll-view scroll-y="true" style="height: 821rpx">    -->
-  <view class='each' wx:for='{{factory}}'>
+ 
+  <view class='each' wx:for='{{backFactory}}'>
     <view class='leibie'>
       <view>
-        <text>{{item.name}}</text>
+        <text>{{item.company.companyName}}</text>
       </view>
       <view>
-        <text>{{item.date}}</text>
+        <text>{{item.entryTime}}</text>
       </view>
       <view>
-        <text catchtap='chakan'>查看同厂</text>
+        <text catchtap='chakan' data-id="{{item.factoryId}}">查看同厂</text>
       </view>
     </view>
     <view class='bottom'>
       <scroll-view scroll-x="true" style=" white-space: nowrap; display: flex">
-        <text wx:for='{{item.title}}' wx:for-item='idx'>{{idx.name}}</text>
+        <text wx:for='{{item.labels}}' wx:for-item='idx'>{{idx}}</text>
       </scroll-view>
     </view>
   </view>
-  <!-- </scroll-view> -->
+
 </view>
 
 <!-- 底部 -->
@@ -60,3 +63,13 @@
     </view>
   </view>
 </view>
+<!--没有数据暂无数据  -->
+<view class="spinner cl" hidden='{{showLoading}}'>
+  <view class="rect1"></view>
+  <view class="rect2"></view>
+  <view class="rect3"></view>
+  <view class="rect4"></view>
+  <view class="rect5"></view>
+</view>
+  <view class="bottomText" hidden='{{bottomText}}'>已经到底了</view>
+</scroll-view>

@@ -1,4 +1,6 @@
 /* pages/identical/identical.wxss */
+/* 引入富文本 */
+ @import "/wxParse/wxParse.wxss"; 
 .header{
   padding: 30rpx 60rpx;
   font-size: 32rpx;
