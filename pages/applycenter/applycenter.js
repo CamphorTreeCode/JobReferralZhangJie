@@ -6,7 +6,7 @@ function selectApplicant(that) {
   wx.request({
     url: app.globalData.appUrl + 'WXApplicantCompantJob/selectApplicantCompanyJobPage',
     data: {
-      openId: openId,
+      openId: openId, 
       currentPage: ++pagesize
     },
     header: {
