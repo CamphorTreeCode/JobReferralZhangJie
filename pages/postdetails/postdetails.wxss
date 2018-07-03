@@ -98,7 +98,7 @@ swiper-item image {
   height: 38rpx;
   top: 50%;
   margin-top: -17rpx;
-  right: 70rpx;
+  right: 130rpx;
 }
 
 .touxiang {

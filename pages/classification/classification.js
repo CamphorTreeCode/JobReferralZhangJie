@@ -310,9 +310,9 @@ Page({
         xcxuser_name: "xcxuser_name"
       },
       success: function (res) {
-        // console.info("优职推荐开始")
-        // console.info(res)
-        // console.info(res.data[0].jobSwiperImages)
+        console.info("优职推荐开始")
+        console.info(res)
+        console.info(res.data[0].jobSwiperImages)
         if (res.data.length > 0) {
           var goodJob1 = that.data.goodJob;
           for (var i = 0; i < res.data.length; i++) {
@@ -390,7 +390,7 @@ Page({
     console.log(e.currentTarget.dataset.id);
     var companyJobId = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url: '/pages/postdetails/postdetails?companyJobId=' + companyJobId,
+      url: '/pages/postdetails/postdetails?CompanyJobId=' + companyJobId,
     })
   },
 
