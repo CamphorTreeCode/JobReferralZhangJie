@@ -1,5 +1,21 @@
 var QQMapWX = require('qqmap-wx-jssdk');
 
+function wxPromisify(fn) {
+  return function (obj = {}) {
+    return new Promise((resolve, reject) => {
+      obj.success = function (res) {
+        resolve(res)
+      }
+
+      obj.fail = function (res) {
+        reject(res)
+      }
+
+      fn(obj)
+    })
+  }
+}
+
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -45,9 +61,12 @@ function getLocationDetails(that) {
         var city = res.result.address_component.city
         var district = res.result.address_component.district
         console.log( city + district)
+   
+          wx.setStorageSync('companyAddress', city + "," + district );
         that.setData({
           city: city,
           district: district
+       
         });
 
 
@@ -57,11 +76,10 @@ function getLocationDetails(that) {
     });
     }
   })
-  
-  
 }
 
 module.exports = {
   formatTime: formatTime,
-  getLocationDetails: getLocationDetails
+  getLocationDetails: getLocationDetails,
+  wxPromisify: wxPromisify
 }

@@ -20,7 +20,7 @@
 }
  
 .spinner > view {
-background-color:#FE757C;
+background-color:#329EFA;
 height:100%;
 width:4px;
 display:inline-block;
