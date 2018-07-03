@@ -40,7 +40,9 @@ Page({
         { name: "返现最高 " },
         {name: "名企" },
         { name: "口碑爆棚" }
-      ]
+      ],
+      //浏览记录
+      browser:[]
   },
   /**
    * 生命周期函数--监听页面加载
@@ -101,6 +103,10 @@ Page({
       },
       success: function (res) {
         console.log(res)
+        that.setData({
+        browser:res.data
+        })
+
       }
     })
   // 查询用户的浏览数 end

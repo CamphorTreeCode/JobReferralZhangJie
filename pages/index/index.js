@@ -86,6 +86,7 @@ Page({
    */
   data: {
     pricex: "false", //返现金额选择
+    selectsx: -1,//筛选的选择
     juli: -11,
     // 下拉框第一个显示
     diyige: "true",
@@ -1002,7 +1003,7 @@ Page({
 
     }
     //综合排序
-    else if (index = "address") {
+    else if (index == "address") {
       // city + district
       var hezong = that.data.hezong
 
@@ -1068,6 +1069,7 @@ Page({
         return
       }
       var selectsx = that.data.selectsx
+      console.log(selectsx)
       if (selectsx != -1 && selectsx != 0) {
         that.setData({
           jobRecruitsGender: selectsx - 1,
@@ -1254,4 +1256,11 @@ Page({
       })
     }
   },
+  //
+  shopDetails(e){
+   console.log(e,e.currentTarget.dataset.id);
+   wx.navigateTo({
+     url: '/pages/postdetails/postdetails?CompanyJobId=' + e.currentTarget.dataset.id,
+   })
+  }
 })

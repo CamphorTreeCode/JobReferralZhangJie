@@ -1,9 +1,10 @@
 // pages/bendi/bendi.js
 var app =getApp();
 var util = require('../../utils/util')
+var authorizationCheck = require('../../utils/authorizationCheck');
 var pagesize = 0;
 function selectTypePage(that) {
-console.log("21")
+  console.log("21",wx.getStorageSync('companyAddress'))
   wx.request({
     url: app.globalData.appUrl + 'WXCompanyJob/selectCompanyJobPage',
     data: {     
@@ -25,18 +26,13 @@ console.log("21")
     },
     method: 'POST',
     success: function (res) {
-
       console.log(res)
-
       if (res.data[0].lists.length > 0) {
-
         var shopList = that.data.shopList
         for (var i = 0; i < res.data[0].lists.length; i++) {
           res.data[0].lists[i].jobLabels = JSON.parse(res.data[0].lists[i].jobLabels)
           shopList.push(res.data[0].lists[i])
         }
-
-
         console.info(res.data[0].lists, shopList)
         that.setData({
           shopList,
@@ -188,31 +184,38 @@ Page({
     companyName: null,
     //功能查询
     key:null
-
-
-
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //接收首页参数  start
-    var key =options.key
-    console.log(key)
-    //接收首页参数  end
+    var that = this
+    //获取所有分类的方法 start
+
+    wx.request({
+      url: app.globalData.appUrl + 'WXJobCategory/selectJobCategoryType',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded', // 默认值
+        xcxuser_name: "xcxuser_name"
+      },
+      success: function (res) {
+        console.info(res);
+        that.setData({
+          leixing: res.data
+        })
+
+      }
+    })
+    //获取所有分类的方法 end
+    //设置样式属性  start
     let scrollHeight = wx.getSystemInfoSync().windowHeight;
     this.setData({
       scrollHeight: scrollHeight,
-      key:key
+      key: key
     });
-    var that = this
-    wx.setNavigationBarTitle({
-      title: options.key,
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
-    })
+
+
     var ss = 0;
     wx.getSystemInfo({
       success: function (res) {
@@ -222,27 +225,71 @@ Page({
     this.setData({
       clientY: ss
     })
+    //设置样式属性  end
+
+    //接收首页参数  start
+    var key =options.key
+    console.log(key)
+    if (key=="gfl"){
+     var hezong = this.data.hezong
+             hezong[0].state=0
+      this.setData({
+        hezong: hezong,
+        createTimes:null,
+        key:key
+      })
+      wx.setNavigationBarTitle({
+        title: "高返利",
+        success: function (res) { }
+
+      })
+    }
+    else if (key == "jrzx"){
+   this.setData({
+     key: key
+   })
+   wx.setNavigationBarTitle({
+     title: "今日最新",
+     success: function (res) { }
+   })
+    }else if(key=="bdzp"){
+      //获取地理位置
+      wx.setNavigationBarTitle({
+        title: "本地招聘",
+        success: function (res) { }
+      })
+      console.log()
+
+      var hezong = this.data.hezong
+      hezong[1].state =1
+      this.setData({
+        hezong: hezong,
+        key: key
+      })
+      authorizationCheck.getLocationCheck(this).then(function (result) {
+        console.log(result)
+        that.setData({
+          companyAddress: result,
+        })
+        pagesize = 0;
+        selectTypePage(that)
+      })
+      return;
+    } else if (key == "mqzp"){
+      wx.setNavigationBarTitle({
+        title: "名企招聘",
+        success: function (res) { }
+      })
+      this.setData({
+        key: key
+      })
+    }
+    //接收首页参数  end
     //获取商品数据 start 
     pagesize = 0;
     selectTypePage(that)
     //获取商品数据 end
-    //获取所有分类的方法 start
 
-    wx.request({
-      url: app.globalData.appUrl + 'WXJobCategory/selectJobCategoryType',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded', // 默认值
-        xcxuser_name: "xcxuser_name"
-      },
-    success: function (res) {
-    console.info(res);
-    that.setData({
-      leixing:res.data
-    })     
-        
-      }
-    })
-    //获取所有分类的方法 end
   },
 
   /**
@@ -439,7 +486,6 @@ Page({
     var that = this;
     var gaodu = 0;
     if (this.data.curren == 3 && this.data.disi == "true") {
-
       var ss = setInterval(function () {
         // console.log(gaodu)
         gaodu += 40;
@@ -557,7 +603,7 @@ else{
   
     }
     //综合排序
-    else if (index="address"){
+    else if (index=="address"){
       // city + district
       var hezong = that.data.hezong
    
@@ -789,4 +835,11 @@ else{
     /*登陆的位置 */
     check.getLocationCheck(this)
   },
+  //商品的图片地址
+  shopDetails(e) {
+    console.log(e, e.currentTarget.dataset.id);
+    wx.navigateTo({
+      url: '/pages/postdetails/postdetails?CompanyJobId=' + e.currentTarget.dataset.id,
+    })
+  }
 })

@@ -99,12 +99,7 @@
   <!-- 感兴趣用户头像 -->
   <view class='touxiang'>
     <view class='t_top'>
-        <image mode='aspectFill' src='/img/postdetails/shuai.jpg'></image>
-        <image mode='aspectFill' src='/img/postdetails/shuai.jpg'></image>
-        <image mode='aspectFill' src='/img/postdetails/shuai.jpg'></image>
-        <image mode='aspectFill' src='/img/postdetails/shuai.jpg'></image>
-        <image mode='aspectFill' src='/img/postdetails/shuai.jpg'></image>
-        <image mode='aspectFill' src='/img/postdetails/shuai.jpg'></image>
+        <image mode='aspectFill' wx:for="{{browser}}" src='{{item.user.avatarUrl}}'></image>
     </view>
     <image class='last' mode='aspectFill' src='/img/postdetails/shenglue.png'></image>
   </view>
