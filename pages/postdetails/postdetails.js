@@ -24,7 +24,7 @@ Page({
       gao : 0,
       hidden:true,
       xianshi:3,
-      xinxi:3, //初始显示的是去报名的弹窗  
+      xinxi:4, //初始显示的是去报名的弹窗  
       // 收藏图片的地址
   shouimg:"/img/postdetails/weishoucang.png",
       // 轮播图片
@@ -183,6 +183,7 @@ Page({
       })
     },1000)
   },
+
   baoming:function(){
     
     // 判断条件自己给   判断是去报名还是去 填写信息
@@ -192,14 +193,7 @@ Page({
     if (this.data.xinxi == 4) {
       this.data.xinxi = 1;    // 值为 0  为去报名弹窗     
     }
-
-    //这个IF 语句是 可以看到   报名  ， 和完善信息的调试
-    if(this.data.xinxi==0){
-      this.data.xinxi=1;
-    } else if (this.data.xinxi == 1) {
-      this.data.xinxi = 0;
-    }
-
+    
     this.setData({
       xinxi:this.data.xinxi,
       gao : 1
