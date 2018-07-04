@@ -115,9 +115,12 @@
   <view class='dianhua' catchtap='shoucan' data-id="{{companyJob[0].companyJobId}}">
     <image mode='aspectFill' src='{{shouimg}}'></image>
   </view>
-  <view class='baoming' catchtap='baoming' >
+   <view class='baoming' catchtap='baoming'  wx:if="{{isApplicant==false}}">
     <image mode='aspectFill' src='/img/postdetails/baoming.png'></image>
     <text>报名</text>
+  </view> 
+   <view class='baoming baoming2' wx:if="{{isApplicant==true}}">
+    已报名
   </view>
   <view class='baoming'>
     <image mode='aspectFill' src='/img/postdetails/zhuanfa.png'></image>
@@ -132,7 +135,7 @@
   <!-- 未收藏显示 -->
   <view class='show' wx:if='{{xianshi==0}}'>
     <image mode='aspectFill' src='/img/postdetails/quxiaoshoucang.png'></image>
-    <text>取消收藏</text>
+    <text>取消收藏</text> 
   </view>
 
   <!-- 去报名 -->
@@ -142,7 +145,7 @@
     <view class='dibu1' catchtap='Bquxiao'>
       <text>取消</text>
     </view>
-    <view class='dibu2' catchtap='Bqueren'>
+    <view class='dibu2' catchtap='Bqueren' data-id='{{companyJob[0].companyJobId}}'>
       <text>确认</text>
     </view>
   </view>

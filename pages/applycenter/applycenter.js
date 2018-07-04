@@ -146,7 +146,7 @@ Page({
     console.log(e.currentTarget.dataset.id);
     var companyJobId = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url: '/pages/postdetails/postdetails?companyJobId=' + companyJobId,
+      url: '/pages/postdetails/postdetails?CompanyJobId=' + companyJobId,
     })
   }
 })
