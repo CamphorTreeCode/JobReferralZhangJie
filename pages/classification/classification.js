@@ -59,7 +59,7 @@ Page({
    * 页面的初始数据  
    */
   data: {
-    pricex: "false", //返现金额选择
+    pricex: -1, //返现金额选择
     selectsx: -1,//筛选的选择
     // 下拉框第一个显示
     diyige: "true",

@@ -5,7 +5,7 @@
 <form bindsubmit="formSubmit">
   <view class='section xingming'>
     <image src='/image/xingming.png'></image>
-    <text>姓名</text>
+    <text>姓名</text>+
     <input type='text' placeholder='填写你的姓名(必填)' name='applicantName' value='{{applicantList.applicantName}}'></input>
   </view>
   <view class='section dianhua'>

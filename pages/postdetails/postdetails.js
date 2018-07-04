@@ -162,26 +162,51 @@ Page({
   
   },
   //收藏变换图片
-  shoucan:function(){
-    if (this.data.shouimg =="/img/postdetails/weishoucang.png"){
-      this.data.shouimg = "/img/postdetails/shoucang.png";
-      this.data.xianshi=1; 
-    } else if(this.data.shouimg == "/img/postdetails/shoucang.png") {
-      // console.log(2)
-      this.data.shouimg = "/img/postdetails/weishoucang.png";
-      this.data.xianshi = 0;
-    }
-    var that=this;
-    this.setData({
-      shouimg: this.data.shouimg,
-      xianshi: this.data.xianshi
-    })
+  shoucan:function(e){
+    var that = this;
+    console.log(e)
+     //请求属性
+    var companyJobId = e.currentTarget.dataset.id
+    var openid = wx.getStorageSync('openid')
+    var companyJob =  that.data.companyJob
+    var CompanyJob = JSON.stringify(companyJob)
+    //请求收藏接口 start
+    wx.request({
+      url: app.globalData.appUrl + 'WXCollection/addCollection',
+      data:{
+        companyJobId: companyJobId,
+        openId: openid,
+        CompanyJob: CompanyJob
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded', // 默认值
+        xcxuser_name: "xcxuser_name"
+      },
+      success: function (res) {
+        console.info(res, res.data.resultNum == 1);
+        if (res.data.resultNum == 1 || res.data.resultNum==1){
+          that.data.shouimg = "/img/postdetails/shoucang.png";
+          that.data.xianshi = 1; 
+          that.setData({
+            shouimg: that.data.shouimg,
+            xianshi: that.data.xianshi
+          })
 
-    setTimeout(function(){
-      that.setData({
-        xianshi: 3
-      })
-    },1000)
+          setTimeout(function () {
+            that.setData({
+              xianshi: 3
+            })
+          }, 1000)
+        }else{
+          this.data.shouimg = "/img/postdetails/weishoucang.png";
+          this.data.xianshi = 0;
+        }
+      }
+    })
+    //请求收藏接口 end
+
+
+
   },
   baoming:function(){
     

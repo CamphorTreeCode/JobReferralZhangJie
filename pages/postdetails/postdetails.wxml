@@ -100,7 +100,7 @@
   <view class='touxiang'>
     <view class='t_top'>
         <image mode='aspectFill' wx:for="{{browser}}" src='{{item.user.avatarUrl}}'></image>
-    </view>
+    </view>  
     <image class='last' mode='aspectFill' src='/img/postdetails/shenglue.png'></image>
   </view>
 
@@ -112,10 +112,10 @@
   <view class='dianhua'>
     <image mode='aspectFill' src='/img/postdetails/shouhou.png'></image>
   </view>
-  <view class='dianhua' catchtap='shoucan'>
+  <view class='dianhua' catchtap='shoucan' data-id="{{companyJob[0].companyJobId}}">
     <image mode='aspectFill' src='{{shouimg}}'></image>
   </view>
-  <view class='baoming' catchtap='baoming'>
+  <view class='baoming' catchtap='baoming' >
     <image mode='aspectFill' src='/img/postdetails/baoming.png'></image>
     <text>报名</text>
   </view>
