@@ -42,7 +42,8 @@ Page({
         { name: "口碑爆棚" }
       ],
       //浏览记录
-      browser:[]
+      browser:[],
+      isApplicant:'',
   },
   /**
    * 生命周期函数--监听页面加载
@@ -50,6 +51,27 @@ Page({
   onLoad: function (options) {
     getDate('2018-06-26 14:15:05')
     var that  = this
+
+    //查询用户报名该岗位的状态start
+    wx.request({
+      url: app.globalData.appUrl + 'WXApplicantCompantJob/selectIsApplicant', //仅为示例，并非真实的接口地址
+      data: { companyJobId: options.CompanyJobId, openId: app.returnOpenId()},
+      method: "get",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',// 默认值
+        //'content-type': 'application/json', // 默认值
+        xcxuser_name: "xcxuser_name"
+      },
+      success: function (res) {
+        console.info("下面是该用户报名该岗位的状态：true:已报名  false:未报名")
+        console.log(res.data.IsApplicant)
+        that.setData({
+          isApplicant:res.data.IsApplicant
+        })
+      }
+    })
+    //查询用户报名该岗位的状态end
+
     // 获取详细信息 start 
     wx.request({
       url: app.globalData.appUrl + 'WXCompanyJob/selectCompanyJob', //仅为示例，并非真实的接口地址
@@ -185,14 +207,17 @@ Page({
   },
 
   baoming:function(){
-    
-    // 判断条件自己给   判断是去报名还是去 填写信息
-    if(this.data.xinxi==3){
-      this.data.xinxi=0;      // 值为 0  为去完善信息弹窗     
+    //判断用户是否有报名表start
+    if (app.globalData.applicantUser == true) {
+      console.info("用户已经填写报名信息")
+      console.info(app.globalData.applicantUser)
+        this.data.xinxi = 1;    // 值为 1  为去报名弹窗
+    } else {
+      console.info("用户已经填写报名信息")
+      console.info(app.globalData.applicantUser)
+        this.data.xinxi = 0;      // 值为 0  为去完善信息弹窗 
     }
-    if (this.data.xinxi == 4) {
-      this.data.xinxi = 1;    // 值为 0  为去报名弹窗     
-    }
+    //判断用户是否有报名表end
     
     this.setData({
       xinxi:this.data.xinxi,
@@ -207,7 +232,28 @@ Page({
     })
   },
    // 去报名 确认按钮
-  Bqueren: function () {
+  Bqueren: function (e) {
+    //用户报名岗位
+    console.info(e)
+    var companyJobId = e.currentTarget.dataset.id;
+    console.info("下面是用户报名的岗位id")
+    console.info(companyJobId)
+    var openId = app.returnOpenId()
+    console.info(openId)
+    //var applicantContent = 
+    wx.request({
+      url: app.globalData.appUrl + 'WXApplicantCompantJob/addApplicantCompanyJob', //仅为示例，并非真实的接口地址
+      data: { companyJobId: e.currentTarget.dataset.id, openId: openId },
+      method: "get",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',// 默认值
+        xcxuser_name: "xcxuser_name"
+      },
+      success: function (res) {
+
+      }
+    })
+
     if (this.data.hidden == true) {
       this.data.hidden = false;
     }
@@ -223,6 +269,7 @@ Page({
       })
     }, 500)
   },
+
   //去完善信息 取消按钮
   Wquxiao:function(){
     this.setData({
@@ -230,6 +277,7 @@ Page({
       gao:0
     })
   },
+
   //去完善信息 确认按钮
   Wqueren:function(){
     this.setData({

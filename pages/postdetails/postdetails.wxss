@@ -18,6 +18,7 @@ swiper-item image {
   height: 100%;
 }
 
+
 /* 类别信息 */
 
 .leixing .lei {
@@ -276,4 +277,9 @@ swiper-item image {
   position: absolute;
   top: 70%;
   left: 0;
+}
+.baoming2{
+  color: white;
+  line-height: 100rpx;
+  text-align: center;
 }

@@ -77,6 +77,15 @@ color:#FFBE36;
   top: 52%;
    color: #359DFF;
 }
+.content .shixiao {
+  position: absolute;
+  width: 110rpx;
+  height: 55rpx;
+  right: 6%;
+  top: 50%;
+  margin-top: -22.5rpx;
+  color: #999;
+}
 
 
 
