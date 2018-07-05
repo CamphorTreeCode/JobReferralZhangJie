@@ -162,6 +162,7 @@ swiper-item image {
     background: #33A1FF;
     overflow: hidden;
 }
+
 .foter .baoming image{
   width: 40rpx;
   height: 40rpx;
@@ -169,12 +170,22 @@ swiper-item image {
   top: 50%;
   margin-top: -20rpx;
   left: 18%;
+  z-index: 999;
 }
 .foter .baoming text{
   display: inline-block;
   line-height: 100rpx;
   margin-left: 50%;
   color: white;
+  font-size: 37rpx;
+}
+.foter .baoming button {
+  color: #fff;
+  background-color: #33A1FF;
+  text-align: right;
+  line-height: 100rpx;
+  font-size: 37.4rpx;
+  
 }
 .show{
   background: white;

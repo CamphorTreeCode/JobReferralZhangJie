@@ -127,7 +127,7 @@
   </view>
   <view class='baoming'>
     <image mode='aspectFill' src='/img/postdetails/zhuanfa.png'></image>
-    <text>转发</text>
+    <button>转发</button>
   </view>
 
   <!-- 已收藏显示 -->
