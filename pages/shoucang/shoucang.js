@@ -178,8 +178,40 @@ Page({
     })
   },
   // 取消收藏
-  quxiao: function(){
-    console.log("取消收藏");
+  quxiao: function(e){
+    console.log("取消收藏", e, e.currentTarget.dataset.collectionid);
+    console.log("index",e.currentTarget.dataset.index)
+    var collectionId = e.currentTarget.dataset.collectionid
+    var index = e.currentTarget.dataset.index
+    var that = this
+    wx.request({
+      url: app.globalData.appUrl + 'WXCollection/cancelCollection',
+      data: {
+        collectionId: collectionId
+      }, 
+      header: {
+        'content-type': 'application/x-www-form-urlencoded', // 默认值
+        xcxuser_name: "xcxuser_name"
+      },
+      success: function (res) {
+        console.info(res, );
+        if (res.data[0] == 1) {
+          wx.showToast({
+            title: '取消成功！',
+            icon: 'success',
+            duration: 2000
+          })
+          var collectionList = that.data.collectionList
+          collectionList.splice(index,1)
+          that.setData({
+            collectionList: collectionList
+          })
+        } else {
+
+        }
+      }
+    })
+    
   },
 
   //下拉刷新功能
@@ -193,10 +225,15 @@ Page({
 
   //岗位详情
   companyJobDetails: function (e) {
+    var that = this
+    console.log(e,e.currentTarget.dataset.index)
     console.log(e.currentTarget.dataset.id);
     var companyJobId = e.currentTarget.dataset.id;
+    var collectionList = that.data.collectionList
+    var index = e.currentTarget.dataset.index
+    var collectionContent=collectionList[index].collectionContent
     wx.navigateTo({
-      url: '/pages/postdetails/postdetails?CompanyJobId=' + companyJobId,
+      url: '/pages/postdetails/postdetails?CompanyJobId=' + companyJobId + '&CompanyJob=' + collectionContent,
     })
   }
 })

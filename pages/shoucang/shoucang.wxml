@@ -16,7 +16,7 @@
     <view class='four'>{{item.companyJob[0].jobSalaryMin}}-{{item.companyJob[0].jobSalaryMax}}/月</view>
     <button bindtap="baoming">去报名</button>
   </view>
-  <view class='yincang' catchtap='quxiao' data-index="{{index}}">
+  <view class='yincang' catchtap='quxiao' data-index="{{index}}" data-collectionId="{{item.collectionId}}">
       取消收藏
   </view>
 </view>
