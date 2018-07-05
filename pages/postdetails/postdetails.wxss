@@ -1,5 +1,6 @@
 /* pages/postdetails/postdetails.wxss */
-
+/* 引入富文本 */
+ @import "/wxParse/wxParse.wxss"; 
 .waw{
   position: fixed;
   width: 100%;

@@ -10,7 +10,7 @@
 
 
 <scroll-view scroll-y="true"  style='height:{{scrollHeight}}px' class="scoll-h"   bindscrolltolower="lower">
-<view class='content'  wx:for='{{applicantList}}' catchtap='companyJobDetails' data-id="{{applicantList[index].companyJobId}}" >
+<view class='content'  wx:for='{{applicantList}}' catchtap='companyJobDetails' data-id="{{applicantList[index].companyJobId}}" data-index='{{index}}' >
     <view wx:if='{{item.isInvalid==1}}'>
       <image class='aw' src='/img/center/bmcg.png'></image>
       <text class='tat'>报名成功</text>

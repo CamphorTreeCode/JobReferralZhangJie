@@ -3,6 +3,9 @@
 <my-component>
 </my-component>
 <!--遮罩-->
+<!-- 引入富文本 -->
+<import src="/wxParse/wxParse.wxml" />
+
   <!-- 阴影遮罩层 -->
     <view class='waw' wx:if='{{gao!=0}}' >
    </view> 
@@ -67,7 +70,7 @@
       <text>职位描述</text>
     </view>
     <view class='wenzi'>
-    {{companyJob[0].jobDescription}}
+    <template is="wxParse" data="{{wxParseData:article.nodes}}" />
       <!-- 《合肥格力空调》男女不限年龄16-45岁，车费150元，不用体检费，出名单需在职，当天安排宿舍，纹身烟疤临时身份证无磁都可以搞定 -->
     </view>
   </view>
@@ -78,7 +81,7 @@
       <text>温馨提示</text>
     </view>
     <view class='wenzi'>
-        {{companyJob[0].jobNotes}}
+        <template is="wxParse" data="{{wxParseData:article1.nodes}}" />
       <!-- 《合肥格力空调》男女不限年龄16-45岁，车费150元，不用体检费，出名单需在职，当天安排宿舍，纹身烟疤临时身份证无磁都可以搞定 -->
       <!-- （张杰职介只在门面或电话报名，广场，地铁站 公交车站没有接站点，忘大家不要被骗！)车费150自理免体检费。当天安排宿舍 -->
     </view>
@@ -109,8 +112,8 @@
 
 <!-- 底部信息 -->
 <view class='foter'>
-  <view class='dianhua'>
-    <image mode='aspectFill' src='/img/postdetails/shouhou.png'></image>
+  <view class='dianhua' catchtap='shouye'>
+    <image mode='aspectFill' src='/img/postdetails/shouye.png'></image>
   </view>
   <view class='dianhua' catchtap='shoucan' data-id="{{companyJob[0].companyJobId}}" data-collectionId="{{collectionId}}">
     <image mode='aspectFill' src='{{shouimg}}'></image>

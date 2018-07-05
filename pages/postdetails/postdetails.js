@@ -1,4 +1,7 @@
 // pages/postdetails/postdetails.js
+
+//引入富文本
+var WxParse = require('../../wxParse/wxParse.js');
 var app = getApp()
 function getDate(str){
   var date = new Date(str);
@@ -113,11 +116,17 @@ Page({
         xcxuser_name: "xcxuser_name"
       },
       success: function (res) {
+        console.info("下面是原始数据的信息")
         console.log(res)
         res.data[0].company.companyAddress = res.data[0].company.companyAddress.replace(/,/g, '');
         res.data[0].createTime = getDate(res.data[0].createTime)
         res.data[0].jobLabels = JSON.parse(res.data[0].jobLabels)
         res.data[0].jobSwiperImages = JSON.parse(res.data[0].jobSwiperImages)
+        //富文本解析
+        var article = res.data[0].jobDescription;
+        WxParse.wxParse('article', 'html', article, that, 5);
+        var article1 = res.data[0].jobNotes;
+        WxParse.wxParse('article1', 'html', article1, that, 5);
         that.setData({
           companyJob:res.data
         })    
@@ -407,6 +416,13 @@ else{
     })
     wx.navigateTo({
       url: '/pages/businessdetails/businessdetails?companyId=' + companyId
+    })
+  },
+
+  //跳转到首页
+  shouye(){
+    wx.reLaunch({
+      url: '/pages/index/index'
     })
   }
 

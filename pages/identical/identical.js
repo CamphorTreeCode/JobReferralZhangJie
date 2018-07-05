@@ -43,7 +43,6 @@ Page({
         //console.info(res.data[0].content);
         //富文本解析
         var article = res.data[0].content;
-        //console.info(article)
         WxParse.wxParse('article', 'html', article, that, 5);
         that.setData({
           fanfei: res.data[0] 

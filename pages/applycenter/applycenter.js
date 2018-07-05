@@ -144,10 +144,17 @@ Page({
   },
   //岗位详情
   companyJobDetails:function(e){
+    var that = this
     console.log(e.currentTarget.dataset.id);
     var companyJobId = e.currentTarget.dataset.id;
+    //判断岗位是否生效
+    console.info("##################################")
+    var isInvalid = that.data.applicantList;
+    var applicantList = that.data.applicantList
+    var index = e.currentTarget.dataset.index
+    var applicantContent = applicantList[index].applicantContent
     wx.navigateTo({
-      url: '/pages/postdetails/postdetails?CompanyJobId=' + companyJobId,
+      url: '/pages/postdetails/postdetails?CompanyJobId=' + companyJobId + '&CompanyJob=' + applicantContent, 
     })
   }
 })
