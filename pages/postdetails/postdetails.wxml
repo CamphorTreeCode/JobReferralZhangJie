@@ -34,7 +34,7 @@
   <view class='lei'>
     <image src='/img/postdetails/ren.png'></image>
     <text>招聘人数</text>
-    <text>{{companyJob[0].jobRecruitsCount}}</text>
+    <text>{{companyJob[0].jobRecruitsCount==-1?"不限":companyJob[0].jobRecruitsCount}}</text>
   </view>
   <view class='lei'>
     <image src='/img/postdetails/dizhi.png'></image>

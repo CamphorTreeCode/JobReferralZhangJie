@@ -9,7 +9,7 @@ function getDate(str){
     month = "0" + month;
   }
   if (day < 10) {
-    day = "0" + day;
+    day = "0" + day; 
   }
   var nowDate = year + "年" + month + "月" + day + '日';
   return nowDate 
@@ -258,24 +258,34 @@ Page({
   },
    // 去报名 确认按钮
   Bqueren: function (e) {
+    var that= this;
     //用户报名岗位
     console.info(e)
     var companyJobId = e.currentTarget.dataset.id;
-    console.info("下面是用户报名的岗位id")
-    console.info(companyJobId)
-    var openId = app.returnOpenId()
-    console.info(openId)
-    //var applicantContent = 
+    console.info("下面是用户报名的岗位id");
+    console.info(companyJobId);
+    var openId = app.returnOpenId();
+    console.info(openId);
+    var ApplicantContent = that.data.companyJob;
+    var applicantContent = JSON.stringify(ApplicantContent)
     wx.request({
       url: app.globalData.appUrl + 'WXApplicantCompantJob/addApplicantCompanyJob', //仅为示例，并非真实的接口地址
-      data: { companyJobId: e.currentTarget.dataset.id, openId: openId },
+      data: { 
+        companyJobId: e.currentTarget.dataset.id, 
+        openId: openId,
+        applicantContent: applicantContent
+        },
       method: "get",
       header: {
         'content-type': 'application/x-www-form-urlencoded',// 默认值
         xcxuser_name: "xcxuser_name"
       },
       success: function (res) {
-
+        setTimeout(function () {
+          that.setData({
+            isApplicant: true
+          })
+        }, 200)
       }
     })
 
@@ -292,7 +302,7 @@ Page({
       that.setData({
         hidden: true
       })
-    }, 500)
+    }, 1000)
   },
 
   //去完善信息 取消按钮
