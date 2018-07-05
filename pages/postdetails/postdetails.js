@@ -44,13 +44,40 @@ Page({
       //浏览记录
       browser:[],
       isApplicant:'',
+      //收藏记录id
+      collectionId:null
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     getDate('2018-06-26 14:15:05')
     var that  = this
+    //查询用户是否收藏start
+    wx.request({
+      url: app.globalData.appUrl + 'WXCollection/selectOneCollection', //仅为示例，并非真实的接口地址
+      data: { companyJobId: options.CompanyJobId, openId: app.returnOpenId() },
+      method: "get",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',// 默认值
+        //'content-type': 'application/json', // 默认值
+        xcxuser_name: "xcxuser_name"
+      },
+      success: function (res) {
+        console.info("下面是该用户收藏状态：1:已收藏  0:未收藏")
+        console.log(res.data, res.data[0]!=null)
+        if (res.data[0]!=null){
+          console.log("已经收藏")
+          that.data.shouimg = "/img/postdetails/shoucang.png";      
+          that.setData({
+            shouimg: that.data.shouimg,
+            collectionId: res.data[0].collectionId
+          })
+        }
+      }
+    })
+ //查询用户是否收藏end
 
     //查询用户报名该岗位的状态start
     wx.request({
@@ -73,6 +100,9 @@ Page({
     //查询用户报名该岗位的状态end
 
     // 获取详细信息 start 
+        //
+    if (!options.CompanyJob){
+      console.log("項目")
     wx.request({
       url: app.globalData.appUrl + 'WXCompanyJob/selectCompanyJob', //仅为示例，并非真实的接口地址
       data: { CompanyJobId: options.CompanyJobId },
@@ -93,10 +123,19 @@ Page({
         })    
       }
     })
+    }else{
+console.log("有值")
+      console.log()
+      that.setData({
+        companyJob: JSON.parse(options.CompanyJob)
+      })    
+    }
    // 获取详细信息 end
   // 增加商品浏览量  增加用户浏览 start
+  
     var openId = app.returnOpenId();
     console.log(openId)
+
     wx.request({
       url: app.globalData.appUrl + 'WXCompanyJob/addCompanyJobJobBrowser', //仅为示例，并非真实的接口地址
       data: { CompanyJobId: options.CompanyJobId,openId: openId},
@@ -186,12 +225,14 @@ Page({
   //收藏变换图片
   shoucan:function(e){
     var that = this;
-    console.log(e)
+    console.log("...",e, e.currentTarget.dataset.collectionid)
+    var collectionId = e.currentTarget.dataset.collectionid
      //请求属性
     var companyJobId = e.currentTarget.dataset.id
     var openid = wx.getStorageSync('openid')
     var companyJob =  that.data.companyJob
     var CompanyJob = JSON.stringify(companyJob)
+    if (that.data.shouimg =="/img/postdetails/weishoucang.png"){
     //请求收藏接口 start
     wx.request({
       url: app.globalData.appUrl + 'WXCollection/addCollection',
@@ -206,12 +247,13 @@ Page({
       },
       success: function (res) {
         console.info(res, res.data.resultNum == 1);
-        if (res.data.resultNum == 1 || res.data.resultNum==1){
+        if (res.data.resultNum == 1 || res.data.state==1){
           that.data.shouimg = "/img/postdetails/shoucang.png";
           that.data.xianshi = 1; 
           that.setData({
             shouimg: that.data.shouimg,
-            xianshi: that.data.xianshi
+            xianshi: that.data.xianshi,
+            collectionId: res.data.collectionId
           })
 
           setTimeout(function () {
@@ -220,13 +262,45 @@ Page({
             })
           }, 1000)
         }else{
-          this.data.shouimg = "/img/postdetails/weishoucang.png";
-          this.data.xianshi = 0;
+
         }
       }
     })
+    }
     //请求收藏接口 end
+    //取消收藏接口 start
+else{
+      wx.request({
+        url: app.globalData.appUrl + 'WXCollection/cancelCollection',
+        data: {
+          collectionId: collectionId
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded', // 默认值
+          xcxuser_name: "xcxuser_name"
+        },
+        success: function (res) {
+          console.info(res, );
+          if (res.data[0] == 1) {
+            that.data.shouimg = "/img/postdetails/weishoucang.png";
+            that.data.xianshi = 0;
+            that.setData({
+              shouimg: that.data.shouimg,
+              xianshi: that.data.xianshi
+            })
 
+            setTimeout(function () {
+              that.setData({
+                xianshi: 3
+              })
+            }, 1000)
+          } else {
+
+          }
+        }
+      })
+}
+ //取消收藏接口 end
 
 
   },

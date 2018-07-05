@@ -112,7 +112,7 @@
   <view class='dianhua'>
     <image mode='aspectFill' src='/img/postdetails/shouhou.png'></image>
   </view>
-  <view class='dianhua' catchtap='shoucan' data-id="{{companyJob[0].companyJobId}}">
+  <view class='dianhua' catchtap='shoucan' data-id="{{companyJob[0].companyJobId}}" data-collectionId="{{collectionId}}">
     <image mode='aspectFill' src='{{shouimg}}'></image>
   </view>
    <view class='baoming' catchtap='baoming'  wx:if="{{isApplicant==false}}">
