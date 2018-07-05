@@ -251,7 +251,7 @@ Page({
         var myDate = datea.year + '-' + (datea.month) + '-' + datea.day;
       }
     }
-    this.data.backFactory="";
+    this.data.backFactory=[];
     this.setData({
       backFactory: this.data.backFactory
     })
@@ -325,7 +325,7 @@ Page({
       }
     }
 
-    this.data.backFactory = "";
+    this.data.backFactory = [];
     this.setData({
       backFactory: this.data.backFactory
     })
@@ -380,16 +380,17 @@ Page({
         // console.info("下面是返费工厂列表的信息：")
         // console.log(res)
         if (res.data[0].lists.length > 0) {
-          var backFactory1 = that.data.backFactory;
-          backFactory1 = res.data[0].lists;
+          var backFactory = that.data.backFactory;
+         var  backFactory1 = res.data[0].lists;
           for (var x = 0; x < backFactory1.length; x++) {
             backFactory1[x].labels = JSON.parse(backFactory1[x].labels)
+            backFactory.push(backFactory1[x])
           }
           that.setData({
-            backFactory: backFactory1,
+            backFactory: backFactory,
             showLoading: true,
           })
-          console.log(backFactory1)
+          console.log(backFactory)
         } else {
           that.setData({
             //pagesize:page,
@@ -410,7 +411,7 @@ Page({
     this.setData({
       showLoading: false
     })
-    that.selectBackFactory()
+    that.selectBackFactory(that)
   },
 
 })
