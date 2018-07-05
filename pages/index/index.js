@@ -181,7 +181,7 @@ Page({
     ],
     hezong: [{
         name: "最新发布",
-        state: 0
+        state: 1
       },
       {
         name: "离我最近",
