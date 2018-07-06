@@ -16,14 +16,11 @@ function getHomeSwiper(that) {
 
       that.setData({
         HomeSwiper: res.data
-
       })
-
     }
-
   })
 }
-
+ 
 var util = require('../../utils/util')
 var pagesize = 0;
 
