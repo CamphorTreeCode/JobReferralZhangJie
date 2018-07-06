@@ -162,6 +162,17 @@ swiper-item image {
     background: #33A1FF;
     overflow: hidden;
 }
+.foter .shixiao {
+  width: 75%;
+  height: 100rpx;
+  color: #fff;
+  line-height: 100rpx;
+  text-align: center;
+  float: right;
+  border-radius: 15rpx;
+  background-color: #999;
+  
+}
 
 .foter .baoming image{
   width: 40rpx;

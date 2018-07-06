@@ -115,20 +115,21 @@
   <view class='dianhua' catchtap='shouye'>
     <image mode='aspectFill' src='/img/postdetails/shouye.png'></image>
   </view>
-  <view class='dianhua' catchtap='shoucan' data-id="{{companyJob[0].companyJobId}}" data-collectionId="{{collectionId}}">
+  <view class='dianhua' catchtap='shoucan' data-id="{{companyJob[0].companyJobId}}" data-collectionId="{{collectionId}}" wx:if="{{isInvalid==1}}">
     <image mode='aspectFill' src='{{shouimg}}'></image>
   </view>
-   <view class='baoming' catchtap='baoming'  wx:if="{{isApplicant==false}}">
+   <view class='baoming' catchtap='baoming'  wx:if="{{isApplicant==false && isInvalid==1}}" >
     <image mode='aspectFill' src='/img/postdetails/baoming.png'></image>
     <text>报名</text>
   </view> 
-   <view class='baoming baoming2' wx:if="{{isApplicant==true}}">
+   <view class='baoming baoming2' wx:if="{{isApplicant==true && isInvalid==1}}">
     已报名
   </view>
-  <view class='baoming'>
+  <view class='baoming' wx:if="{{isInvalid==1}}">
     <image mode='aspectFill' src='/img/postdetails/zhuanfa.png'></image>
-    <button>转发</button>
+    <button open-type="share">转发</button>
   </view>
+  <view class='shixiao' wx:if="{{isInvalid==0}}">已失效</view>
 
   <!-- 已收藏显示 -->
   <view class='show' wx:if='{{xianshi==1}}'>

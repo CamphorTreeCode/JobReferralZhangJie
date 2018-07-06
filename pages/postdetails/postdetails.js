@@ -29,7 +29,7 @@ Page({
       xianshi:3,
       xinxi:4, //初始显示的是去报名的弹窗  
       // 收藏图片的地址
-  shouimg:"/img/postdetails/weishoucang.png",
+      shouimg:"/img/postdetails/weishoucang.png",
       // 轮播图片
       slider: [
         { picUrl: "https://www.chuanshoucs.com/ServerImg/2018-05-28/4d62d4f4-3c71-4b72-9c64-a505e2e6f3ca.jpg" },
@@ -48,13 +48,15 @@ Page({
       browser:[],
       isApplicant:'',
       //收藏记录id
-      collectionId:null
+      collectionId:null,
+      isInvalid:1,
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     console.log(options)
+    //console.info();
     getDate('2018-06-26 14:15:05')
     var that  = this
     //查询用户是否收藏start
@@ -133,10 +135,12 @@ Page({
       }
     })
     }else{
-console.log("有值")
-      console.log()
+    console.log("有值")
+    //console.log(options.isInvalid)
       that.setData({
-        companyJob: JSON.parse(options.CompanyJob)
+        companyJob: JSON.parse(options.CompanyJob),
+        isInvalid: options.isInvalid
+
       })    
     }
    // 获取详细信息 end
@@ -228,7 +232,19 @@ console.log("有值")
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function (options) {
+
+    console.log(options)
+    console.info(this.data.companyJob[0].company.companyName)
+    var companyName = this.data.companyJob[0].company.companyName;
+    if (options.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(options.target)
+    }
+    return {
+      title: companyName,
+      //path: '/page/user?id=123'
+    }
   
   },
   //收藏变换图片

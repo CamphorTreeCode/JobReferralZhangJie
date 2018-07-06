@@ -26,6 +26,7 @@ function selectApplicant(that) {
            applicantList.push(res.data[0].lists[i])
          }
          console.info(res.data[0].lists, applicantList)
+         
         that.setData({
           applicantList,
           showLoading: true,
@@ -82,7 +83,6 @@ Page({
     this.setData({
       applicantList: this.data.applicantList
     })
-
     pagesize = 0;
     selectApplicant(this)
   },
@@ -147,14 +147,13 @@ Page({
     var that = this
     console.log(e.currentTarget.dataset.id);
     var companyJobId = e.currentTarget.dataset.id;
-    //判断岗位是否生效
-    console.info("##################################")
-    var isInvalid = that.data.applicantList;
-    var applicantList = that.data.applicantList
     var index = e.currentTarget.dataset.index
+     //判断岗位是否生效
+    var isInvalid = that.data.applicantList[index].isInvalid;
+    var applicantList = that.data.applicantList
     var applicantContent = applicantList[index].applicantContent
     wx.navigateTo({
-      url: '/pages/postdetails/postdetails?CompanyJobId=' + companyJobId + '&CompanyJob=' + applicantContent, 
+      url: '/pages/postdetails/postdetails?CompanyJobId=' + companyJobId + '&CompanyJob=' + applicantContent + '&isInvalid=' + isInvalid, 
     })
   }
 })

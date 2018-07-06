@@ -317,13 +317,17 @@ Page({
           var goodJob1 = that.data.goodJob;
           for (var i = 0; i < res.data.length; i++) {
             res.data[i].jobLabels = JSON.parse(res.data[i].jobLabels)
-            var a = [];
-            for (var j = 0; j < 2; j++) {
-              a.push(res.data[i].jobLabels[j])
-            }
-            res.data[i].jobLabels = a
             res.data[i].jobSwiperImages = JSON.parse(res.data[i].jobSwiperImages)
-            goodJob1.push(res.data[i]);
+            if ((res.data[i].jobLabels).length <= 0) {
+              goodJob1.push(res.data[i]);
+            } else {
+              var a = [];
+              for (var j = 0; j < 2; j++) {
+                a.push(res.data[i].jobLabels[j])
+              }
+              res.data[i].jobLabels = a;
+              goodJob1.push(res.data[i]);
+            }
           }
           console.info(goodJob1)
           // console.info(res.data[0].jobSwiperImages[0])
@@ -408,7 +412,7 @@ Page({
       },
       success: function (res) {
         // console.info("下面是优职推荐数据：")
-        // console.info(res.data.length)
+        //console.info(res.data.length)
         that.data.goodJob = [];
         that.setData({
           goodJob: that.data.goodJob
@@ -418,12 +422,16 @@ Page({
           for (var i = 0; i < res.data.length; i++) {
             res.data[i].jobSwiperImages = JSON.parse(res.data[i].jobSwiperImages)
             res.data[i].jobLabels = JSON.parse(res.data[i].jobLabels)
-            var a = [];
-            for (var j = 0; j < 2; j++) {
-              a.push(res.data[i].jobLabels[j])
-            }
-            res.data[i].jobLabels = a;
-            goodJob1.push(res.data[i]);
+            if ((res.data[i].jobLabels).length<=0){
+                goodJob1.push(res.data[i]);
+            }else{
+              var a = [];
+              for (var j = 0; j < 2; j++) {
+                a.push(res.data[i].jobLabels[j])
+              }
+              res.data[i].jobLabels = a;
+              goodJob1.push(res.data[i]);
+              }
           }
           // console.info(goodJob1)
           // console.info("上面是优职推荐数据：")
