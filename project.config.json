@@ -94,6 +94,12 @@
 					"name": "申请中心",
 					"pathName": "pages/applycenter/applycenter",
 					"query": ""
+				},
+				{
+					"id": 10,
+					"name": "岗位详情",
+					"pathName": "pages/postdetails/postdetails",
+					"query": ""
 				}
 			]
 		}

@@ -18,10 +18,6 @@ function selectApplicant(that) {
     success: function (res) {
       console.info("下面是用户申请职位的信息：")
       console.log(res.data[0])
-      // console.info(res.data[0].lists[0].companyJob[0].jobLabels)
-      // console.info(JSON.parse(res.data[0].lists[0].companyJob[0].jobLabels))
-      //console.info(res.data[0].lists[0].companyJob[0].company.companyAddress.split(",")[2])
-      //console.info(res.data[0].lists[0].companyJob[0].companyJobId)
       if (res.data[0].lists.length > 0) {
         var applicantList = that.data.applicantList;
          for (var i = 0; i < res.data[0].lists.length; i++) {
@@ -30,6 +26,7 @@ function selectApplicant(that) {
            applicantList.push(res.data[0].lists[i])
          }
          console.info(res.data[0].lists, applicantList)
+         
         that.setData({
           applicantList,
           showLoading: true,
@@ -68,8 +65,6 @@ Page({
       scrollHeight: scrollHeight
     });
 
-    pagesize = 0;
-    selectApplicant(this)
   },
 
   /**
@@ -83,7 +78,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
+    this.data.applicantList=[];
+    this.setData({
+      applicantList: this.data.applicantList
+    })
+    pagesize = 0;
+    selectApplicant(this)
   },
 
   /**
@@ -143,10 +144,16 @@ Page({
   },
   //岗位详情
   companyJobDetails:function(e){
+    var that = this
     console.log(e.currentTarget.dataset.id);
     var companyJobId = e.currentTarget.dataset.id;
+    var index = e.currentTarget.dataset.index
+     //判断岗位是否生效
+    var isInvalid = that.data.applicantList[index].isInvalid;
+    var applicantList = that.data.applicantList
+    var applicantContent = applicantList[index].applicantContent
     wx.navigateTo({
-      url: '/pages/postdetails/postdetails?CompanyJobId=' + companyJobId,
+      url: '/pages/postdetails/postdetails?CompanyJobId=' + companyJobId + '&CompanyJob=' + applicantContent + '&isInvalid=' + isInvalid, 
     })
   }
 })

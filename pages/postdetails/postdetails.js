@@ -1,4 +1,7 @@
 // pages/postdetails/postdetails.js
+
+//引入富文本
+var WxParse = require('../../wxParse/wxParse.js');
 var app = getApp()
 function getDate(str){
   var date = new Date(str);
@@ -9,7 +12,7 @@ function getDate(str){
     month = "0" + month;
   }
   if (day < 10) {
-    day = "0" + day;
+    day = "0" + day; 
   }
   var nowDate = year + "年" + month + "月" + day + '日';
   return nowDate 
@@ -26,7 +29,7 @@ Page({
       xianshi:3,
       xinxi:4, //初始显示的是去报名的弹窗  
       // 收藏图片的地址
-  shouimg:"/img/postdetails/weishoucang.png",
+      shouimg:"/img/postdetails/weishoucang.png",
       // 轮播图片
       slider: [
         { picUrl: "https://www.chuanshoucs.com/ServerImg/2018-05-28/4d62d4f4-3c71-4b72-9c64-a505e2e6f3ca.jpg" },
@@ -45,13 +48,15 @@ Page({
       browser:[],
       isApplicant:'',
       //收藏记录id
-      collectionId:null
+      collectionId:null,
+      isInvalid:1,
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     console.log(options)
+    //console.info();
     getDate('2018-06-26 14:15:05')
     var that  = this
     //查询用户是否收藏start
@@ -113,21 +118,29 @@ Page({
         xcxuser_name: "xcxuser_name"
       },
       success: function (res) {
+        console.info("下面是原始数据的信息")
         console.log(res)
         res.data[0].company.companyAddress = res.data[0].company.companyAddress.replace(/,/g, '');
         res.data[0].createTime = getDate(res.data[0].createTime)
         res.data[0].jobLabels = JSON.parse(res.data[0].jobLabels)
         res.data[0].jobSwiperImages = JSON.parse(res.data[0].jobSwiperImages)
+        //富文本解析
+        var article = res.data[0].jobDescription;
+        WxParse.wxParse('article', 'html', article, that, 5);
+        var article1 = res.data[0].jobNotes;
+        WxParse.wxParse('article1', 'html', article1, that, 5);
         that.setData({
           companyJob:res.data
         })    
       }
     })
     }else{
-console.log("有值")
-      console.log()
+    console.log("有值")
+    //console.log(options.isInvalid)
       that.setData({
-        companyJob: JSON.parse(options.CompanyJob)
+        companyJob: JSON.parse(options.CompanyJob),
+        isInvalid: options.isInvalid
+
       })    
     }
    // 获取详细信息 end
@@ -219,7 +232,19 @@ console.log("有值")
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function (options) {
+
+    console.log(options)
+    console.info(this.data.companyJob[0].company.companyName)
+    var companyName = this.data.companyJob[0].company.companyName;
+    if (options.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(options.target)
+    }
+    return {
+      title: companyName,
+      //path: '/page/user?id=123'
+    }
   
   },
   //收藏变换图片
@@ -332,24 +357,34 @@ else{
   },
    // 去报名 确认按钮
   Bqueren: function (e) {
+    var that= this;
     //用户报名岗位
     console.info(e)
     var companyJobId = e.currentTarget.dataset.id;
-    console.info("下面是用户报名的岗位id")
-    console.info(companyJobId)
-    var openId = app.returnOpenId()
-    console.info(openId)
-    //var applicantContent = 
+    console.info("下面是用户报名的岗位id");
+    console.info(companyJobId);
+    var openId = app.returnOpenId();
+    console.info(openId);
+    var ApplicantContent = that.data.companyJob;
+    var applicantContent = JSON.stringify(ApplicantContent)
     wx.request({
       url: app.globalData.appUrl + 'WXApplicantCompantJob/addApplicantCompanyJob', //仅为示例，并非真实的接口地址
-      data: { companyJobId: e.currentTarget.dataset.id, openId: openId },
+      data: { 
+        companyJobId: e.currentTarget.dataset.id, 
+        openId: openId,
+        applicantContent: applicantContent
+        },
       method: "get",
       header: {
         'content-type': 'application/x-www-form-urlencoded',// 默认值
         xcxuser_name: "xcxuser_name"
       },
       success: function (res) {
-
+        setTimeout(function () {
+          that.setData({
+            isApplicant: true
+          })
+        }, 200)
       }
     })
 
@@ -366,7 +401,7 @@ else{
       that.setData({
         hidden: true
       })
-    }, 500)
+    }, 1000)
   },
 
   //去完善信息 取消按钮
@@ -397,6 +432,13 @@ else{
     })
     wx.navigateTo({
       url: '/pages/businessdetails/businessdetails?companyId=' + companyId
+    })
+  },
+
+  //跳转到首页
+  shouye(){
+    wx.reLaunch({
+      url: '/pages/index/index'
     })
   }
 

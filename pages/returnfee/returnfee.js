@@ -96,7 +96,7 @@ Page({
     });
 
     //获取系统高度
-    let scrollHeight = wx.getSystemInfoSync().windowHeight-66;
+    let scrollHeight = wx.getSystemInfoSync().windowHeight;
     // console.info("下面是系统高度")
     // console.info(scrollHeight)
     this.setData({
@@ -361,6 +361,7 @@ Page({
     var shijian1=this.dateTime();
     // console.info("下面是返费工厂入职时间的信息：")
     // console.info(shijian1);
+    console.info(pagesize)
     wx.request({
       url: app.globalData.appUrl + 'WXBackFactory/selectBackFactoryPage',
       data: {
@@ -377,8 +378,9 @@ Page({
           datastart: shijian1
         })
         // console.log()
-        // console.info("下面是返费工厂列表的信息：")
-        // console.log(res)
+        console.info("下面是返费工厂列表的信息：")
+        console.log(res)
+        console.info(pagesize)
         if (res.data[0].lists.length > 0) {
           var backFactory = that.data.backFactory;
          var  backFactory1 = res.data[0].lists;

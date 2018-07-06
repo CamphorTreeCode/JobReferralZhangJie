@@ -396,12 +396,16 @@ Page({
           var goodJob1 = that.data.goodJob;
           for (var i = 0; i < res.data.length; i++) {
             res.data[i].jobLabels = JSON.parse(res.data[i].jobLabels);
-            var a = [];
-            for (var j = 0; j < 2; j++) {
-              a.push(res.data[i].jobLabels[j])
+            if ((res.data[i].jobLabels).length <= 0) {
+              goodJob1.push(res.data[i]);
+            } else {
+              var a = [];
+              for (var j = 0; j < 2; j++) {
+                a.push(res.data[i].jobLabels[j])
+              }
+              res.data[i].jobLabels = a;
+              goodJob1.push(res.data[i]);
             }
-            res.data[i].jobLabels = a
-            goodJob1.push(res.data[i]);
           }
           that.setData({
             goodJob: goodJob1
@@ -521,12 +525,16 @@ Page({
           var goodJob1 = that.data.goodJob;
           for (var i = 0; i < res.data.length; i++) {
             res.data[i].jobLabels = JSON.parse(res.data[i].jobLabels)
-            var a=[];
-            for(var j=0;j<2;j++){
-              a.push(res.data[i].jobLabels[j])
+            if ((res.data[i].jobLabels).length <= 0) {
+              goodJob1.push(res.data[i]);
+            } else {
+              var a = [];
+              for (var j = 0; j < 2; j++) {
+                a.push(res.data[i].jobLabels[j])
+              }
+              res.data[i].jobLabels = a;
+              goodJob1.push(res.data[i]);
             }
-            res.data[i].jobLabels = a
-            goodJob1.push(res.data[i])
           }
          
           // console.info(goodJob1)

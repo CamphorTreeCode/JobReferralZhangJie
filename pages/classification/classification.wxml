@@ -88,7 +88,7 @@
     </view>
     <view class='top'>
       <text catchtap='changeJob'>换一批</text>
-      <image src='/img/index/huanyipi.png'></image>
+      <image src='/img/index/huanyipi.png' catchtap='changeJob'></image>
     </view>
     <!-- 优职推荐end -->
 

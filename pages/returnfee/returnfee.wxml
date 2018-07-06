@@ -53,13 +53,13 @@
   <view class='left' bindtap='pageon'>
     <view>
       <image src='/img/postdetails/xiayiye.png'> </image>
-      <text>上一页</text>
+      <text>上一天</text>
     </view>
   </view>
   <view class='right' bindtap='pageup'>
     <view>
       <image src='/img/postdetails/xiayiye2.png'> </image>
-      <text>下一页</text>
+      <text>下一天</text>
     </view>
   </view>
 </view>
