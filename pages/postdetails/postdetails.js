@@ -50,11 +50,19 @@ Page({
       //收藏记录id
       collectionId:null,
       isInvalid:1,
+      //转发按钮
+      zhuanfa:true,
+      shade:'none',
+      //海报事件
+      haibao:true,
+      width:'',
+      height:''
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.info("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
     console.log(options)
     //console.info();
     getDate('2018-06-26 14:15:05')
@@ -247,6 +255,108 @@ Page({
     }
   
   },
+
+  //转发按钮事件
+  zhuanfa:function() {
+    var that = this;
+    console.info("转发事件触发")
+    that.setData({
+      zhuanfa: false,
+      shade:'block'
+    })
+  },
+  //转发页面关闭按钮
+  shareModalClose:function(){
+    var that = this;
+    console.info("关闭页面事件触发")
+    that.setData({
+      zhuanfa: true,
+      shade: 'none'
+    })
+  },
+
+  //生成海报事件
+  getGoodsQrcode:function(){
+    var that = this;
+    console.info("生成海报事件触发")
+    let scrollHeight = wx.getSystemInfoSync().windowHeight*0.9;
+    let scrollWidth = wx.getSystemInfoSync().windowWidth*0.9;
+    that.setData({
+      haibao:false,
+      zhuanfa: true,
+      shade: 'block',
+      height: scrollHeight,
+      width: scrollWidth
+    })
+    const ctx = wx.createCanvasContext('shareCanvas');
+    ctx.clearRect(0, 0, 300, 450);
+    ctx.drawImage("/img/postdetails/ren.png", 12.5, 12.5, 20, 20);
+    ctx.setFontSize(12)
+    ctx.font = '宋体';
+    ctx.fillStyle = 'blue';
+    ctx.fillText('用户昵...',45,26)
+    ctx.fillStyle = '#333';
+    ctx.fillText('分享给你一条消息', 93, 26)
+    ctx.drawImage("/img/postdetails/1.jpg ", 40, 35, scrollWidth * 0.9 - 80, scrollWidth * 0.9 - 80);
+    ctx.fillText('天下第一驿站', 12.5, scrollWidth * 0.9 - 25)
+    ctx.fillStyle = '#999';
+    ctx.setFontSize(16)
+    ctx.fillText('长按识别小程序码访问', 25, scrollHeight*0.9*0.7)
+    // //设置填充色。
+    // ctx.setFillStyle('yellow')
+    // ctx.fillRect(40, 80,4000,7000)
+    // // //设置边框颜色
+    // ctx.setStrokeStyle('#ccc')
+    // ctx.strokeRect(40, 80, 300, 450)
+
+    // ctx.setFontSize(50)
+    // ctx.fillText('Hello', 10, 20)
+    // ctx.fillText('MINA', 20, 30)
+     ctx.draw()
+
+
+
+  //在给定的矩形区域内，清除画布上的像素
+  // ctx.clearRect(0, 0, 305, 900);
+  // ctx.drawImage("/img/postdetails/ren.png", 0, 0, 646, 966);
+  // // ctx.drawImage("/img/postdetails/ren.png", 0, -60, 646, 966);
+  // // ctx.drawImage("/img/postdetails/ren.png" + this.data.tipsImgId + ".png", 79, 291 - 60, 492, 244);
+  // // ctx.drawImage("/img/postdetails/ren.png", 90, 780 - 60, 135, 135);
+  //   ctx.setFillStyle("#02446e");
+  //   ctx.setFontSize(26);
+  //   ctx.fillText("亲爱的" + this.data.testName + this.data.testId, 100, 610 - 60);
+  //   ctx.setTextAlign("center");
+  //   ctx.fillText("你的有入扔有人不迷", 435, 790 - 60);
+ 
+  //   ctx.setTextAlign("left");
+  //   ctx.setFillStyle("black");
+  //   ctx.setFontSize(18);
+  //   ctx.fillText("我等你", 330, 825 - 60);
+  //   ctx.setFontSize(22);
+ 
+  //   ctx.drawImage("/img/postdetails/ren.png", 0, 936 - 60, 646, 30);
+  //   var self = this;
+ 
+  //   ctx.draw(true, setTimeout(function () {     //为什么要延迟100毫秒？大家测试一下
+  //       wx.canvasToTempFilePath({
+  //           x: 0,
+  //           y: 0,
+  //           width: 305,
+  //           height: 900,
+  //           destWidth: 646,
+  //           destHeight: 966,
+  //           canvasId: 'shareCanvas',
+  //           success: function (res) {
+  //             self.data.savedImgUrl = res.tempFilePath;
+  //             self.saveImageToPhoto();
+  //           }
+  //       })
+  //   }, 100))
+
+    
+  },
+
+
   //收藏变换图片
   shoucan:function(e){
     var that = this;
@@ -440,6 +550,8 @@ else{
     wx.reLaunch({
       url: '/pages/index/index'
     })
-  }
+  },
+  
+  
 
 })
