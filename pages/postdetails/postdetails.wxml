@@ -125,10 +125,11 @@
   <view class='baoming baoming2' wx:if="{{isApplicant==true && isInvalid==1}}">
     已报名
   </view>
-  <view class='baoming' wx:if="{{isInvalid==1}}" catchtap='zhuanfa'>
+  <view class='baoming' wx:if="{{isInvalid==1}}">
+  <!-- <view class='baoming' wx:if="{{isInvalid==1}}" catchtap='zhuanfa'> -->
     <image mode='aspectFill' src='/img/postdetails/zhuanfa.png'></image>
-    <!-- <button open-type="share">转发</button> -->
-    <text>转发</text>
+     <button open-type="share">转发</button> 
+    <!-- <text>转发</text> -->
   </view>
   <view class='shixiao' wx:if="{{isInvalid==0}}">已失效</view>
 
@@ -140,8 +141,8 @@
         <view>分享给朋友</view>
       </button>
        <button bindtap="getGoodsQrcode" class='hen'>
-        <image mode='aspectFill' src="/img/postdetails/erweima.png"></image>
-        <view>生成商品海报</view>
+        <image mode='aspectFill' src="/img/postdetails/erweima.png" ></image>
+        <view>生成职位海报</view>
       </button>
       <!-- <view bindtap="getGoodsQrcode" class='hen'>
         <image mode='aspectFill' src="/img/postdetails/erweima.png"></image>
@@ -152,7 +153,7 @@
 </view> 
 <!--转发&生成海报end-->
 <view wx:if="{{haibao==false}}" class="canvas" style='width:{{width}}px;height:{{height}}px'>
-  <image mode='aspectFill' src="/img/postdetails/cha.png"></image>
+  <image mode='aspectFill' src="/img/postdetails/cha.png" catchtap='closeHaiBao'></image>
   <canvas canvas-id="shareCanvas" disable-scroll="true" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd"></canvas>
 </view>
 

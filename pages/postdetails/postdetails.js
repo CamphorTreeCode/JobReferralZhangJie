@@ -62,6 +62,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    var scene = decodeURIComponent(options.scene)
+    console.log("Path: " + scene)
     console.info("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
     console.log(options)
     //console.info();
@@ -189,6 +192,9 @@ Page({
         })
 
       }
+
+
+      
     })
   // 查询用户的浏览数 end
   },
@@ -200,13 +206,13 @@ Page({
    * /
   onReady: function () {
       
-  },
+  },   
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  
+  onShow: function (options) {
+   
   },
 
   /**
@@ -278,6 +284,25 @@ Page({
   //生成海报事件
   getGoodsQrcode:function(){
     var that = this;
+    
+    //获取Access_Token
+    wx.request({
+      url: app.globalData.appUrl + 'GetQR_CodeController/getewm', //仅为示例，并非真实的接口地址
+      method: "get",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',// 默认值
+        //'content-type': 'application/json', // 默认值
+        xcxuser_name: "xcxuser_name"
+      },
+      success: function (res) {
+        console.info("返回的Tocken为：")
+        console.log(res)
+        
+      }
+
+
+
+    })
     console.info("生成海报事件触发")
     let scrollHeight = wx.getSystemInfoSync().windowHeight*0.9;
     let scrollWidth = wx.getSystemInfoSync().windowWidth*0.9;
@@ -316,44 +341,19 @@ Page({
 
 
 
-  //在给定的矩形区域内，清除画布上的像素
-  // ctx.clearRect(0, 0, 305, 900);
-  // ctx.drawImage("/img/postdetails/ren.png", 0, 0, 646, 966);
-  // // ctx.drawImage("/img/postdetails/ren.png", 0, -60, 646, 966);
-  // // ctx.drawImage("/img/postdetails/ren.png" + this.data.tipsImgId + ".png", 79, 291 - 60, 492, 244);
-  // // ctx.drawImage("/img/postdetails/ren.png", 90, 780 - 60, 135, 135);
-  //   ctx.setFillStyle("#02446e");
-  //   ctx.setFontSize(26);
-  //   ctx.fillText("亲爱的" + this.data.testName + this.data.testId, 100, 610 - 60);
-  //   ctx.setTextAlign("center");
-  //   ctx.fillText("你的有入扔有人不迷", 435, 790 - 60);
- 
-  //   ctx.setTextAlign("left");
-  //   ctx.setFillStyle("black");
-  //   ctx.setFontSize(18);
-  //   ctx.fillText("我等你", 330, 825 - 60);
-  //   ctx.setFontSize(22);
- 
-  //   ctx.drawImage("/img/postdetails/ren.png", 0, 936 - 60, 646, 30);
-  //   var self = this;
- 
-  //   ctx.draw(true, setTimeout(function () {     //为什么要延迟100毫秒？大家测试一下
-  //       wx.canvasToTempFilePath({
-  //           x: 0,
-  //           y: 0,
-  //           width: 305,
-  //           height: 900,
-  //           destWidth: 646,
-  //           destHeight: 966,
-  //           canvasId: 'shareCanvas',
-  //           success: function (res) {
-  //             self.data.savedImgUrl = res.tempFilePath;
-  //             self.saveImageToPhoto();
-  //           }
-  //       })
-  //   }, 100))
 
     
+  },
+
+  //关闭海报
+  closeHaiBao:function(){
+    var that = this;
+    console.info("关闭海报事件触发")
+    that.setData({
+      zhuanfa: true,
+      shade: 'none',
+      haibao:true,
+    })
   },
 
 
