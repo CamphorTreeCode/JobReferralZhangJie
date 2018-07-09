@@ -65,8 +65,7 @@ function getLocationDetails(that) {
           wx.setStorageSync('companyAddress', city + "," + district );
         that.setData({
           city: city,
-          district: district
-       
+          district: district      
         });
 
 

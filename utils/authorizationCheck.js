@@ -24,19 +24,21 @@ function getLocationCheck(that) {
       authorize({
         scope: 'scope.userLocation',
       }).then(function (res) {
-        console.log("//", res)
-
-    
+        wx.setStorageSync('isShow', true); 
+        console.log("//", res)   
         getLocationDetails(that,resolve)
-
       }).catch(function (res) {
-
-        locationModel(that, resolve)
-    
+        //沒有授权true
+      //  locationModel(that, resolve)   
+      
+        wx.setStorageSync('isShow', false); 
+        console.log("catch", res)   
+        resolve()
       })
     } else {
+      wx.setStorageSync('isShow', true); 
       getLocationDetails(that, resolve)
-    
+      console.log("else", res)     
     }
 
   })
@@ -51,7 +53,7 @@ function locationModel(that, resolve) {
   // 显示提示弹窗
   return showModal({
     title: '提示',
-    content: '需要获取您的"地理位置"授权才能正常使用',
+    content: '需要获取你的"地理位置"授权才能正常使用',
   }).then(function (res) {
 
     if (res.confirm) {

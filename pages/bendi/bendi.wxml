@@ -1,8 +1,12 @@
 <!--pages/bendi/bendi.wxml-->
 <!--遮罩-->
-<my-component>
+<my-component >
 </my-component>
 <!--遮罩-->
+<!--地理位置遮罩-->
+<my-components isShow="{{isShow}}">
+</my-components>
+<!--地理位置遮罩-->
 <view class='foter' >
 <!-- style='height:{{clientY}}px' -->
   <view class='waw' wx:if='{{gao!=0}}' >

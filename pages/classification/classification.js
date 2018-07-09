@@ -2,6 +2,7 @@
 var app = getApp()
 var pagesize = 0;
 
+var util = require('../../utils/util')
 function selectTypePage(that) {
   console.log("21")
   wx.request({

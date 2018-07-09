@@ -7,7 +7,7 @@
 <scroll-view scroll-y="false" style='height:100%' bindscroll='bindscro' scroll-top='{{abba}}' bindscrolltolower="lower">
   <view class='header'>
     <input id="search" placeholder='在此输入企业名称以搜索' bindinput="inputTyping"></input>
-    <button>搜索</button>
+    <button data-in='search'  catchtap='btn'>搜索</button>
   </view>
 <!-- 底部分类 -->
 <view class='foter' >

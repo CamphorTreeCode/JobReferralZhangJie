@@ -183,7 +183,9 @@ Page({
     //根据企业名称查询
     companyName: null,
     //功能查询
-    key:null
+    key:null,
+    //地理位置授权
+    isShow:'true'
   },
 
   /**
@@ -258,7 +260,7 @@ Page({
         title: "本地招聘",
         success: function (res) { }
       })
-      console.log()
+      console.log(key)
 
       var hezong = this.data.hezong
       hezong[1].state =1
@@ -266,11 +268,21 @@ Page({
         hezong: hezong,
         key: key
       })
+      //初始化显示
+      // var isShow = wx.getStorageSync('isShow');
+      // that.setData({
+      //   isShow: isShow != null || isShow != '' ? "trues" : ""
+      // })
+      //获取地理位置
       authorizationCheck.getLocationCheck(this).then(function (result) {
         console.log(result)
+        var isShow = wx.getStorageSync('isShow');
         that.setData({
           companyAddress: result,
+          isShow: isShow != false?"true":""
         })
+   
+        console.log(isShow,"显示还是不显示")
         pagesize = 0;
         selectTypePage(that)
       })
@@ -303,14 +315,30 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+ console.log("文件")
+ var that = this
+ if (that.data.key == 'bdzp' && that.data.isShow==""){
+   authorizationCheck.getLocationCheck(that).then(function (result) {
+     console.log(result)
+     var isShow = wx.getStorageSync('isShow');
+     that.setData({
+       companyAddress: result,
+       isShow: isShow != false ? "true" : "",
+       shopList:[]
+     })
+
+     console.log(isShow, "显示还是不显示")
+     pagesize = 0;
+     selectTypePage(that)
+   })
+ }
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+   
   },
 
   /**
