@@ -77,10 +77,10 @@ Page({
     }
 
 
-    console.log(options)
-    this.setData({
-      CompanyJobId: options.CompanyJobId
-    })
+    // console.log(options)
+    // this.setData({
+    //   CompanyJobId: options.CompanyJobId
+    // })
     getDate('2018-06-26 14:15:05')
     var that  = this
     //查询用户是否收藏start
@@ -345,36 +345,6 @@ Page({
       }
     })
 
-    // let scrollHeight = wx.getSystemInfoSync().windowHeight*0.9;
-    // let scrollWidth = wx.getSystemInfoSync().windowWidth*0.9;
-    // that.setData({
-    //   haibao:false,
-    //   zhuanfa: true,
-    //   shade: 'block',
-    //   height: scrollHeight,
-    //   width: scrollWidth
-    // })
-    // const ctx = wx.createCanvasContext('shareCanvas');
-    // ctx.clearRect(0, 0, 300, 450);
-    // ctx.drawImage("/img/postdetails/ren.png", 12.5, 12.5, 20, 20);
-    // ctx.setFontSize(12)
-    // ctx.font = '宋体';
-    // ctx.fillStyle = 'blue';
-    // ctx.fillText('用户昵...',45,26)
-    // ctx.fillStyle = '#333';
-    // ctx.fillText('分享给你一条消息', 93, 26)
-    // ctx.drawImage("/img/postdetails/1.jpg ", 40, 35, scrollWidth * 0.9 - 80, scrollWidth * 0.9 - 80);
-    // ctx.fillText('天下第一驿站', 12.5, scrollWidth * 0.9 - 25)
-    // ctx.fillStyle = '#999';
-    // ctx.setFontSize(14)
-    // ctx.fillText('长按识别小程序码访问', 25, scrollHeight*0.9*0.7)
-    // ctx.drawImage(that.data.img_url, 40, 35, scrollWidth * 0.9 - 80, scrollWidth * 0.9 - 80);
-    //  ctx.draw()
-
-
-
-
-    
   },
 
   //关闭海报
@@ -396,6 +366,7 @@ Page({
     var collectionId = e.currentTarget.dataset.collectionid
      //请求属性
     var companyJobId = e.currentTarget.dataset.id
+    
     var openid = wx.getStorageSync('openid')
     var companyJob =  that.data.companyJob
     var CompanyJob = JSON.stringify(companyJob)
@@ -525,21 +496,20 @@ else{
       success: function (res) {
         setTimeout(function () {
           that.setData({
-            isApplicant: true
+            isApplicant: true,
           })
-        }, 200)
+        }, 1000)
       }
     })
-
-    if (this.data.hidden == true) {
-      this.data.hidden = false;
+    
+    if (that.data.hidden == true) {
+      that.data.hidden = false;
     }
-    this.setData({
-      hidden: this.data.hidden,
+    that.setData({
+      hidden: that.data.hidden,
       xinxi: 3,
       gao : 0
     })
-    var that = this;
     setTimeout(function () {
       that.setData({
         hidden: true
