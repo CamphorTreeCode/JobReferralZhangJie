@@ -93,7 +93,7 @@
     <!-- 优职推荐end -->
 
     <view class='bottom'>
-      <view class="mingpian {{item.jobStick==1?'zhiding':''}}" wx:for='{{shopList}}' data-id="{{item.companyJobId}}">
+      <view class="mingpian {{item.jobStick==1?'zhiding':''}}" wx:for='{{shopList}}' data-id="{{item.companyJobId}}" catchtap='shopDetails'>
         <view class='left'>
           <image mode='aspectFill' src='/img/index/banner.jpg'></image>
         </view>

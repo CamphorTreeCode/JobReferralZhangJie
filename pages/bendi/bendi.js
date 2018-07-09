@@ -317,7 +317,7 @@ Page({
   onShow: function () {
  console.log("文件")
  var that = this
- if (that.data.key == 'bdzp' && that.data.isShow==""){
+ if (that.data.key == 'bdzp' || that.data.hezong[1].state==1&& that.data.isShow==""){
    authorizationCheck.getLocationCheck(that).then(function (result) {
      console.log(result)
      var isShow = wx.getStorageSync('isShow');
@@ -810,12 +810,15 @@ else{
     // })
   },
   textdianb: function (e) {
+    var that = this
     console.log("离我最进")
     var index = e.currentTarget.dataset.ib;
      console.log(index)
     console.log(this.data.hezong[index].state)
     if (index==1){
-      util.getLocationDetails(this)
+     //点击获取地理位置
+     // util.getLocationDetails(this)
+
     }
     if (this.data.hezong[index].state == 1) {
       this.data.hezong[index].state = 0;
@@ -824,6 +827,18 @@ else{
     else if (this.data.hezong[index].state == 0) {
       this.data.hezong[index].state = 1;
       // console.log(0)
+      authorizationCheck.getLocationCheck(that).then(function (result) {
+        console.log(result)
+        var isShow = wx.getStorageSync('isShow');
+        that.setData({
+          companyAddress: result,
+          isShow: isShow != false ? "true" : "",
+
+        })
+
+        console.log(isShow, "显示还是不显示")
+
+      })
     }
     this.setData({
       hezong: this.data.hezong

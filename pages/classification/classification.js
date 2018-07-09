@@ -934,6 +934,12 @@ Page({
       juli: '0'
     })
   },
+  shopDetails(e) {
+    console.log(e, e.currentTarget.dataset.id);
+    wx.navigateTo({
+      url: '/pages/postdetails/postdetails?CompanyJobId=' + e.currentTarget.dataset.id,
+    })
+  },
   bindscro: function(e) {
     if (e.detail.scrollTop >= 74) {
       this.setData({
