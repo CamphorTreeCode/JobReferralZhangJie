@@ -11,11 +11,11 @@
 </view>
 
 <view class='content'>
-  <!-- <view class='fenlei'>
+  <view class='fenlei'>
     <view>姓名</view>
     <view>返费金额</view>
     <view>返费日期</view>
-  </view>  -->
+  </view> 
     <view class='fenlei lei'>
     <template is="wxParse" data="{{wxParseData:article.nodes}}" />
   </view>

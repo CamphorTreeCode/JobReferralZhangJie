@@ -3,6 +3,7 @@
 <my-component>
 </my-component>
 <!--遮罩-->
+
 <!-- 头部轮播 -->
  <scroll-view scroll-y="false" style='height:100%' bindscroll='bindscro' scroll-top='{{abba}}'  bindscrolltolower="lower">  
 <view class="swiper-container">
