@@ -317,9 +317,9 @@ Page({
   onShow: function () {
  console.log("文件")
  var that = this
- if (that.data.key == 'bdzp' || that.data.hezong[1].state==1&& that.data.isShow==""){
+ if (that.data.key == 'bdzp' && that.data.isShow==""){
    authorizationCheck.getLocationCheck(that).then(function (result) {
-     console.log(result)
+     console.log(result,"///")
      var isShow = wx.getStorageSync('isShow');
      that.setData({
        companyAddress: result,
@@ -331,6 +331,22 @@ Page({
      pagesize = 0;
      selectTypePage(that)
    })
+   return;
+ } else if (that.data.hezong[1].state == 1 && that.data.isShow == ""){
+   authorizationCheck.getLocationCheck(that).then(function (result) {
+     console.log(result, "///")
+     var isShow = wx.getStorageSync('isShow');
+     that.setData({
+       companyAddress: result,
+       isShow: isShow != false ? "true" : "",
+       shopList: []
+     })
+
+     console.log(isShow, "显示还是不显示")
+     pagesize = 0;
+     selectTypePage(that)
+   })
+   return;
  }
   },
 
@@ -650,7 +666,6 @@ else{
     
           
           that.setData({
-            companyAddress: that.data.city + "," + that.data.district,
             shopList:[],
             city:null,
             district:null
@@ -828,7 +843,7 @@ else{
       this.data.hezong[index].state = 1;
       // console.log(0)
       authorizationCheck.getLocationCheck(that).then(function (result) {
-        console.log(result)
+        console.log(result,"cc")
         var isShow = wx.getStorageSync('isShow');
         that.setData({
           companyAddress: result,

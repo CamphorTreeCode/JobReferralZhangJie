@@ -56,7 +56,8 @@ Page({
       //海报事件
       haibao:true,
       width:'',
-      height:''
+      height:'',
+      CompanyJobId:'',
   },
   /**
    * 生命周期函数--监听页面加载
@@ -66,14 +67,26 @@ Page({
     var scene = decodeURIComponent(options.scene)
     console.log("Path: " + scene)
     console.info("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+    console.info(options.CompanyJobId);
+    
+    if (options.CompanyJobId) {
+      this.setData({ CompanyJobId: options.CompanyJobId });
+    } else {
+      this.setData({ CompanyJobId: decodeURIComponent(options.scene) });
+      console.log("Path: " + scene)
+    }
+
+
     console.log(options)
-    //console.info();
+    this.setData({
+      CompanyJobId: options.CompanyJobId
+    })
     getDate('2018-06-26 14:15:05')
     var that  = this
     //查询用户是否收藏start
     wx.request({
       url: app.globalData.appUrl + 'WXCollection/selectOneCollection', //仅为示例，并非真实的接口地址
-      data: { companyJobId: options.CompanyJobId, openId: app.returnOpenId() },
+      data: { companyJobId: that.data.CompanyJobId, openId: app.returnOpenId() },
       method: "get",
       header: {
         'content-type': 'application/x-www-form-urlencoded',// 默认值
@@ -98,7 +111,7 @@ Page({
     //查询用户报名该岗位的状态start
     wx.request({
       url: app.globalData.appUrl + 'WXApplicantCompantJob/selectIsApplicant', //仅为示例，并非真实的接口地址
-      data: { companyJobId: options.CompanyJobId, openId: app.returnOpenId()},
+      data: { companyJobId: that.data.CompanyJobId, openId: app.returnOpenId()},
       method: "get",
       header: {
         'content-type': 'application/x-www-form-urlencoded',// 默认值
@@ -121,7 +134,7 @@ Page({
       console.log("項目")
     wx.request({
       url: app.globalData.appUrl + 'WXCompanyJob/selectCompanyJob', //仅为示例，并非真实的接口地址
-      data: { CompanyJobId: options.CompanyJobId },
+      data: { CompanyJobId: that.data.CompanyJobId },
       method: "get",
       header: {
         'content-type': 'application/x-www-form-urlencoded',// 默认值
@@ -162,7 +175,7 @@ Page({
 
     wx.request({
       url: app.globalData.appUrl + 'WXCompanyJob/addCompanyJobJobBrowser', //仅为示例，并非真实的接口地址
-      data: { CompanyJobId: options.CompanyJobId,openId: openId},
+      data: { CompanyJobId: that.data.CompanyJobId,openId: openId},
       method: "get",
       header: {
         'content-type': 'application/x-www-form-urlencoded',// 默认值
@@ -178,7 +191,7 @@ Page({
     console.log(openId)
     wx.request({
       url: app.globalData.appUrl + 'WXBrowserHistory/selectBrowserHistoryFour', //仅为示例，并非真实的接口地址
-      data: { CompanyJobId: options.CompanyJobId },
+      data: { CompanyJobId: that.data.CompanyJobId },
       method: "get",
       header: {
         'content-type': 'application/x-www-form-urlencoded',// 默认值
@@ -284,10 +297,14 @@ Page({
   //生成海报事件
   getGoodsQrcode:function(){
     var that = this;
-    
+    console.info("生成海报事件触发")
     //获取Access_Token
     wx.request({
       url: app.globalData.appUrl + 'GetQR_CodeController/getewm', //仅为示例，并非真实的接口地址
+      data: {
+        scene:that.data.CompanyJobId,
+        page:"pages/index/index"
+        },
       method: "get",
       header: {
         'content-type': 'application/x-www-form-urlencoded',// 默认值
@@ -296,48 +313,63 @@ Page({
       },
       success: function (res) {
         console.info("返回的Tocken为：")
-        console.log(res)
-        
+        console.log(res.data)
+        that.setData({
+          access_tocken: res.data
+        })   
+        let scrollHeight = wx.getSystemInfoSync().windowHeight * 0.9;
+        let scrollWidth = wx.getSystemInfoSync().windowWidth * 0.9;
+        that.setData({
+          haibao: false,
+          zhuanfa: true,
+          shade: 'block',
+          height: scrollHeight,
+          width: scrollWidth
+        })
+        const ctx = wx.createCanvasContext('shareCanvas');
+        ctx.clearRect(0, 0, 300, 450);
+        ctx.drawImage("/img/postdetails/ren.png", 12.5, 12.5, 20, 20);
+        ctx.setFontSize(12)
+        ctx.font = '宋体';
+        ctx.fillStyle = 'blue';
+        ctx.fillText('用户昵...', 45, 26)
+        ctx.fillStyle = '#333';
+        ctx.fillText('分享给你一条消息', 93, 26)
+        ctx.drawImage("/img/postdetails/1.jpg ", 40, 35, scrollWidth * 0.9 - 80, scrollWidth * 0.9 - 80);
+        ctx.fillText('天下第一驿站', 12.5, scrollWidth * 0.9 - 25)
+        ctx.fillStyle = '#999';
+        ctx.setFontSize(12)
+        ctx.fillText('长按识别小程序码访问', 25, scrollHeight * 0.9 * 0.7)
+        ctx.drawImage(res.data, 175, scrollHeight * 0.9 * 0.55,70 , 70);
+        ctx.draw()
       }
-
-
-
     })
-    console.info("生成海报事件触发")
-    let scrollHeight = wx.getSystemInfoSync().windowHeight*0.9;
-    let scrollWidth = wx.getSystemInfoSync().windowWidth*0.9;
-    that.setData({
-      haibao:false,
-      zhuanfa: true,
-      shade: 'block',
-      height: scrollHeight,
-      width: scrollWidth
-    })
-    const ctx = wx.createCanvasContext('shareCanvas');
-    ctx.clearRect(0, 0, 300, 450);
-    ctx.drawImage("/img/postdetails/ren.png", 12.5, 12.5, 20, 20);
-    ctx.setFontSize(12)
-    ctx.font = '宋体';
-    ctx.fillStyle = 'blue';
-    ctx.fillText('用户昵...',45,26)
-    ctx.fillStyle = '#333';
-    ctx.fillText('分享给你一条消息', 93, 26)
-    ctx.drawImage("/img/postdetails/1.jpg ", 40, 35, scrollWidth * 0.9 - 80, scrollWidth * 0.9 - 80);
-    ctx.fillText('天下第一驿站', 12.5, scrollWidth * 0.9 - 25)
-    ctx.fillStyle = '#999';
-    ctx.setFontSize(16)
-    ctx.fillText('长按识别小程序码访问', 25, scrollHeight*0.9*0.7)
-    // //设置填充色。
-    // ctx.setFillStyle('yellow')
-    // ctx.fillRect(40, 80,4000,7000)
-    // // //设置边框颜色
-    // ctx.setStrokeStyle('#ccc')
-    // ctx.strokeRect(40, 80, 300, 450)
 
-    // ctx.setFontSize(50)
-    // ctx.fillText('Hello', 10, 20)
-    // ctx.fillText('MINA', 20, 30)
-     ctx.draw()
+    // let scrollHeight = wx.getSystemInfoSync().windowHeight*0.9;
+    // let scrollWidth = wx.getSystemInfoSync().windowWidth*0.9;
+    // that.setData({
+    //   haibao:false,
+    //   zhuanfa: true,
+    //   shade: 'block',
+    //   height: scrollHeight,
+    //   width: scrollWidth
+    // })
+    // const ctx = wx.createCanvasContext('shareCanvas');
+    // ctx.clearRect(0, 0, 300, 450);
+    // ctx.drawImage("/img/postdetails/ren.png", 12.5, 12.5, 20, 20);
+    // ctx.setFontSize(12)
+    // ctx.font = '宋体';
+    // ctx.fillStyle = 'blue';
+    // ctx.fillText('用户昵...',45,26)
+    // ctx.fillStyle = '#333';
+    // ctx.fillText('分享给你一条消息', 93, 26)
+    // ctx.drawImage("/img/postdetails/1.jpg ", 40, 35, scrollWidth * 0.9 - 80, scrollWidth * 0.9 - 80);
+    // ctx.fillText('天下第一驿站', 12.5, scrollWidth * 0.9 - 25)
+    // ctx.fillStyle = '#999';
+    // ctx.setFontSize(14)
+    // ctx.fillText('长按识别小程序码访问', 25, scrollHeight*0.9*0.7)
+    // ctx.drawImage(that.data.img_url, 40, 35, scrollWidth * 0.9 - 80, scrollWidth * 0.9 - 80);
+    //  ctx.draw()
 
 
 
@@ -383,6 +415,7 @@ Page({
       success: function (res) {
         console.info(res, res.data.resultNum == 1);
         if (res.data.resultNum == 1 || res.data.state==1){
+          console.log("11")
           that.data.shouimg = "/img/postdetails/shoucang.png";
           that.data.xianshi = 1; 
           that.setData({
@@ -552,6 +585,13 @@ else{
     })
   },
   
+  //已报名点击事件
+  yibaoming(){
+    wx.showModal({
+      title: '提示',
+      content: '您已经报名！',
+    })
+  },
   
 
 })
