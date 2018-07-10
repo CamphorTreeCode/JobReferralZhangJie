@@ -338,8 +338,8 @@ Page({
           width: scrollWidth
         })
         const ctx = wx.createCanvasContext('shareCanvas');
-        ctx.clearRect(0, 0, 300, 450); 
-        ctx.drawImage("/img/postdetails/background.jpg", 0, 0, 300, 450);
+        ctx.clearRect(0, 0, scrollWidth * 0.9, scrollHeight * 0.9); 
+        ctx.drawImage("/img/postdetails/background.jpg", 0, 0, scrollWidth * 0.9, scrollHeight * 0.9);
         ctx.drawImage(app.globalData.userInfo.avatarUrl, 12.5, 12.5, 20, 20);
         ctx.setFontSize(12)
         ctx.font = '宋体';
@@ -351,10 +351,24 @@ Page({
         ctx.fillText(companyName, 12.5, scrollWidth * 0.9 - 25)
         ctx.fillStyle = '#999';
         ctx.setFontSize(12)
-        ctx.fillText('长按识别小程序码访问', 25, scrollHeight * 0.9 * 0.7)
-        ctx.drawImage(QRCode, 175, scrollHeight * 0.9 * 0.55,70 , 70);
-        ctx.drawImage("/img/postdetails/logo.png", 196, scrollHeight * 0.9 * 0.60, 30, 30);
+        ctx.fillText('长按识别小程序码访问', 12.5, scrollHeight * 0.9 * 0.7)
+        ctx.drawImage(QRCode, scrollWidth * 0.9-118, scrollHeight * 0.9 * 0.525,110 , 110);
+        // ctx.drawImage("/img/postdetails/logo.png", scrollWidth * 0.9 - 80, scrollHeight * 0.9 * 0.587, 36, 36);
+        ctx.drawImage("/img/postdetails/logo.png", scrollWidth * 0.9 - 85, scrollHeight * 0.9 * 0.5875, 45.25, 45.5);
         ctx.draw()
+
+        wx.canvasToTempFilePath({
+          x: 100,
+          y: 200,
+          width: 50,
+          height: 50,
+          destWidth: 100,
+          destHeight: 100,
+          canvasId: 'shareCanvas',
+          success: function (res) {
+            console.log(res.tempFilePath)
+          }
+        })
       }
     })
   },
