@@ -30,7 +30,6 @@ function getLocationCheck(that) {
       }).catch(function (res) {
         //沒有授权true
       //  locationModel(that, resolve)   
-      
         wx.setStorageSync('isShow', false); 
         console.log("catch", res)   
         resolve()

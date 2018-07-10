@@ -427,6 +427,7 @@ Page({
       success: function (res) {
         console.info(res, res.data.resultNum == 1);
         if (res.data.resultNum == 1 || res.data.state==1){
+          console.log("11")
           that.data.shouimg = "/img/postdetails/shoucang.png";
           that.data.xianshi = 1; 
           that.setData({
@@ -602,6 +603,11 @@ else{
       content: '您已经报名！',
     })
   },
-  
+  phoneCall(e){
+    console.log(e,e.currentTarget.dataset.val)
+    wx.makePhoneCall({
+      phoneNumber: e.currentTarget.dataset.val //仅为示例，并非真实的电话号码
+    })
+  }
 
 })

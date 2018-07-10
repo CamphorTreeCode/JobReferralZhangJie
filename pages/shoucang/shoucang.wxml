@@ -3,7 +3,7 @@
 </my-component>
 <!--遮罩-->
 <scroll-view scroll-y="true"  style='height:{{scrollHeight}}px' class="scoll-h"   bindscrolltolower="lower">
-<view class='total {{item.state==true?"hua":" "}}' wx:for="{{collectionList}}" data-index='{{index}}' bindtouchstart='touchstart' bindtouchmove='touchmove' catchtap='companyJobDetails' data-id="{{collectionList[index].companyJobId}}">
+<view class='total {{item.state==true?"hua":" "}}' wx:for="{{collectionList}}" data-index='{{index}}' bindtouchstart='touchstart' bindtouchmove='touchmove' catchtap='companyJobDetails' data-id="{{item.companyJobId}}">
   <view class='zuo'>
     <view class='one' wx:for='{{item.companyJob}}' wx:for-item="ll">{{ll.company.companyName}}</view>
     <view class='two'>
@@ -14,7 +14,7 @@
         <text>{{item.companyJob[0].company.companyAddress}}</text>
     </view>
     <view class='four'>{{item.companyJob[0].jobSalaryMin}}-{{item.companyJob[0].jobSalaryMax}}/月</view>
-    <button bindtap="baoming">去报名</button>
+    <button bindtap="baoming">{{item.isCollection==0?'去报名':'已收藏'}}</button>
   </view>
   <view class='yincang' catchtap='quxiao' data-index="{{index}}" data-collectionId="{{item.collectionId}}">
       取消收藏

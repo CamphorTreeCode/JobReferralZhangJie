@@ -62,7 +62,7 @@ function getLocationDetails(that) {
         var district = res.result.address_component.district
         console.log( city + district)
    
-          wx.setStorageSync('companyAddress', city + "," + district );
+        wx.setStorageSync('companyAddress', city + "," + district );
         that.setData({
           city: city,
           district: district      
