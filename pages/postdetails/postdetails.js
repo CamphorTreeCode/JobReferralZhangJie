@@ -562,6 +562,11 @@ else{
       content: '您已经报名！',
     })
   },
-  
+  phoneCall(e){
+    console.log(e,e.currentTarget.dataset.val)
+    wx.makePhoneCall({
+      phoneNumber: e.currentTarget.dataset.val //仅为示例，并非真实的电话号码
+    })
+  }
 
 })

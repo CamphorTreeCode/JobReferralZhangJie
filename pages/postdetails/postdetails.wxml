@@ -87,7 +87,7 @@
     </view>
   </view>
   <!-- 联系电话 -->
-  <view class='lei'>
+  <view class='lei' catchtap='phoneCall' data-val="{{companyJob[0].recruitersTelphone}}">
     <image src='/img/postdetails/lianxi.png'></image>
     <text>联系电话</text>
     <text>{{companyJob[0].recruitersTelphone}}</text>
