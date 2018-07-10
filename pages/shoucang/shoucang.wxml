@@ -3,7 +3,7 @@
 </my-component>
 <!--遮罩-->
 <scroll-view scroll-y="true"  style='height:{{scrollHeight}}px' class="scoll-h"   bindscrolltolower="lower">
-<view class='total {{item.state==true?"hua":" "}}' wx:for="{{collectionList}}" data-index='{{index}}' bindtouchstart='touchstart' bindtouchmove='touchmove' catchtap='companyJobDetails' data-id="{{collectionList[index].companyJobId}}">
+<view class='total {{item.state==true?"hua":" "}}' wx:for="{{collectionList}}" data-index='{{index}}' bindtouchstart='touchstart' bindtouchmove='touchmove' catchtap='companyJobDetails' data-id="{{item.companyJobId}}">
   <view class='zuo'>
     <view class='one' wx:for='{{item.companyJob}}' wx:for-item="ll">{{ll.company.companyName}}</view>
     <view class='two'>

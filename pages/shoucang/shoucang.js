@@ -28,7 +28,6 @@ function selectApplicant(that) {
           res.data[0].lists[i].companyJob[0].jobLabels = JSON.parse(res.data[0].lists[i].companyJob[0].jobLabels)
           res.data[0].lists[i].companyJob[0].company.companyAddress = res.data[0].lists[i].companyJob[0].company.companyAddress.split(",")[2];
           res.data[0].lists[i].state= "false";
-
           collectionList.push(res.data[0].lists[i]);
 
           
@@ -66,13 +65,13 @@ Page({
   onLoad: function (options) {
 
     //获取系统高度
-    let scrollHeight = wx.getSystemInfoSync().windowHeight;
-    this.setData({
-      scrollHeight: scrollHeight
-    });
+    // let scrollHeight = wx.getSystemInfoSync().windowHeight;
+    // this.setData({
+    //   scrollHeight: scrollHeight
+    // });
 
-    pagesize = 0
-    selectApplicant(this)
+    // pagesize = 0
+    // selectApplicant(this)
   },
 
   /**
@@ -86,7 +85,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    //获取系统高度
+    let scrollHeight = wx.getSystemInfoSync().windowHeight;
+    this.setData({
+      collectionList:[],
+      scrollHeight: scrollHeight
+    });
+
+    pagesize = 0,
+    selectApplicant(this)
   },
 
   /**
@@ -170,13 +177,13 @@ Page({
     return 360 * Math.atan(_Y / _X) / (2 * Math.PI);
   },
 
-  // 去报名
-  baoming: function(){
-    // console.log("去报名");
-    wx.navigateTo({
-      url: '/pages/postdetails/postdetails',
-    })
-  },
+  // // 去报名
+  // baoming: function(){
+  //   // console.log("去报名");
+  //   wx.navigateTo({
+  //     url: '/pages/postdetails/postdetails',
+  //   })
+  // },
   // 取消收藏
   quxiao: function(e){
     console.log("取消收藏", e, e.currentTarget.dataset.collectionid);
