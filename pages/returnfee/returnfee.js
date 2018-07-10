@@ -185,8 +185,11 @@ Page({
     }
     this.setData({
       dates: e.detail.value,
-      date: yayay
+      date: yayay,
+      backFactory:[]
     }) 
+    pagesize = 0;
+    this.selectBackFactory();
   },
   chakan: function (e) {
     console.log(e)
@@ -195,6 +198,7 @@ Page({
     wx.navigateTo({
       url: '/pages/identical/identical?factoryId=' + factoryId,
     })
+    
   },
   pageon: function () {
     wx.showNavigationBarLoading()

@@ -80,8 +80,8 @@ App({
     userInfo: null,
     //用户是否有报名表
     applicantUser:"",
-    appUrl:"http://localhost/ZhangJie/",
-    //appUrl: "https://www.chuanshoucs.com/ZhangJie/",
+  //  appUrl:"http://localhost/ZhangJie/",
+    appUrl: "https://www.chuanshoucs.com/ZhangJie/",
     applicantUser: "",
     appId: "wxb39d67b4e5dda79d",
 
