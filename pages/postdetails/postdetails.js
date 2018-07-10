@@ -1,5 +1,5 @@
 // pages/postdetails/postdetails.js
-
+var promisify = require('../../utils/promise.util.js')
 //引入富文本
 var WxParse = require('../../wxParse/wxParse.js');
 var app = getApp()
@@ -58,6 +58,7 @@ Page({
       width:'',
       height:'',
       CompanyJobId:'',
+      companyJob:[],
   },
   /**
    * 生命周期函数--监听页面加载
@@ -164,7 +165,6 @@ Page({
       that.setData({
         companyJob: JSON.parse(options.CompanyJob),
         isInvalid: options.isInvalid
-
       })    
     }
    // 获取详细信息 end
@@ -312,13 +312,24 @@ Page({
         xcxuser_name: "xcxuser_name"
       },
       success: function (res) {
-        console.info("返回的Tocken为：")
-        console.log(res.data)
-        that.setData({
-          access_tocken: res.data
-        })   
+        console.info("返回的小程序码为：")
+        console.log(res.data) 
+        //画布高度
         let scrollHeight = wx.getSystemInfoSync().windowHeight * 0.9;
+        //画布宽度
         let scrollWidth = wx.getSystemInfoSync().windowWidth * 0.9;
+        //用户昵称
+        var nickname = app.globalData.userInfo.nickName;
+        if (nickname.length > 4) {
+          nickname = nickname.substring(0, 3) + "..."
+        }
+        //职位图片
+        var jobImage = that.data.companyJob[0].jobSwiperImages[0];
+        //公司名称
+        var companyName = that.data.companyJob[0].company.companyName;
+        //小程序码
+        var QRCode = res.data;
+
         that.setData({
           haibao: false,
           zhuanfa: true,
@@ -327,24 +338,54 @@ Page({
           width: scrollWidth
         })
         const ctx = wx.createCanvasContext('shareCanvas');
+        ctx.setFillStyle('red')
         ctx.clearRect(0, 0, 300, 450);
-        ctx.drawImage("/img/postdetails/ren.png", 12.5, 12.5, 20, 20);
+        ctx.drawImage(app.globalData.userInfo.avatarUrl, 12.5, 12.5, 20, 20);
         ctx.setFontSize(12)
         ctx.font = '宋体';
         ctx.fillStyle = 'blue';
-        ctx.fillText('用户昵...', 45, 26)
+        ctx.fillText(nickname, 45, 26)
         ctx.fillStyle = '#333';
-        ctx.fillText('分享给你一条消息', 93, 26)
-        ctx.drawImage("/img/postdetails/1.jpg ", 40, 35, scrollWidth * 0.9 - 80, scrollWidth * 0.9 - 80);
-        ctx.fillText('天下第一驿站', 12.5, scrollWidth * 0.9 - 25)
+        ctx.fillText('分享给你一条消息', 92, 26)
+        ctx.drawImage(jobImage, 12.5, 35, scrollWidth * 0.9-23, scrollWidth * 0.9 - 80);
+        ctx.fillText(companyName, 12.5, scrollWidth * 0.9 - 25)
         ctx.fillStyle = '#999';
         ctx.setFontSize(12)
         ctx.fillText('长按识别小程序码访问', 25, scrollHeight * 0.9 * 0.7)
-        ctx.drawImage(res.data, 175, scrollHeight * 0.9 * 0.55,70 , 70);
+        ctx.drawImage(QRCode, 175, scrollHeight * 0.9 * 0.55,70 , 70);
+        ctx.drawImage("/img/postdetails/logo.png", 196, scrollHeight * 0.9 * 0.6, 30, 30);
         ctx.draw()
       }
     })
+  },
+  
+  //保存图片
+  saveImage:function(){
+    const wxCanvasToTempFilePath = promisify.promisify(wx.canvasToTempFilePath)
 
+    const wxSaveImageToPhotosAlbum = promisify.promisify(wx.saveImageToPhotosAlbum)
+
+    wxCanvasToTempFilePath({
+
+      canvasId: 'shareCanvas'
+
+    }, this).then(res => {
+
+      return wxSaveImageToPhotosAlbum({
+
+        filePath: res.tempFilePath
+
+      })
+
+    }).then(res => {
+
+      wx.showToast({
+
+        title: '已保存到相册'
+
+      })
+
+    })
   },
 
   //关闭海报
