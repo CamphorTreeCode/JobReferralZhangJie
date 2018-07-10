@@ -338,8 +338,8 @@ Page({
           width: scrollWidth
         })
         const ctx = wx.createCanvasContext('shareCanvas');
-        ctx.setFillStyle('red')
-        ctx.clearRect(0, 0, 300, 450);
+        ctx.clearRect(0, 0, 300, 450); 
+        ctx.drawImage("/img/postdetails/background.jpg", 0, 0, 300, 450);
         ctx.drawImage(app.globalData.userInfo.avatarUrl, 12.5, 12.5, 20, 20);
         ctx.setFontSize(12)
         ctx.font = '宋体';
@@ -353,7 +353,7 @@ Page({
         ctx.setFontSize(12)
         ctx.fillText('长按识别小程序码访问', 25, scrollHeight * 0.9 * 0.7)
         ctx.drawImage(QRCode, 175, scrollHeight * 0.9 * 0.55,70 , 70);
-        ctx.drawImage("/img/postdetails/logo.png", 196, scrollHeight * 0.9 * 0.6, 30, 30);
+        ctx.drawImage("/img/postdetails/logo.png", 196, scrollHeight * 0.9 * 0.60, 30, 30);
         ctx.draw()
       }
     })
@@ -362,29 +362,17 @@ Page({
   //保存图片
   saveImage:function(){
     const wxCanvasToTempFilePath = promisify.promisify(wx.canvasToTempFilePath)
-
     const wxSaveImageToPhotosAlbum = promisify.promisify(wx.saveImageToPhotosAlbum)
-
     wxCanvasToTempFilePath({
-
       canvasId: 'shareCanvas'
-
     }, this).then(res => {
-
       return wxSaveImageToPhotosAlbum({
-
         filePath: res.tempFilePath
-
       })
-
     }).then(res => {
-
       wx.showToast({
-
         title: '已保存到相册'
-
       })
-
     })
   },
 
