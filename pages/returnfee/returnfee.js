@@ -197,6 +197,7 @@ Page({
     })
   },
   pageon: function () {
+    wx.showNavigationBarLoading()
     var datea = this.data.date;
     var monthDaySize;
     if (datea.day == 1){
@@ -261,8 +262,10 @@ Page({
     });
     pagesize = 0;
     this.selectBackFactory();
+
   },
   pageup: function () {
+    wx.showNavigationBarLoading()
     var datea = this.data.date;
     // 根据月份来判断当前对应月份的天数
     var monthDaySize;
@@ -393,12 +396,14 @@ Page({
             showLoading: true,
           })
           console.log(backFactory)
+          wx.hideNavigationBarLoading()
         } else {
           that.setData({
             //pagesize:page,
             bottomText: false,
             showLoading: true,
           })
+          wx.hideNavigationBarLoading()
 
         }
       }
@@ -408,6 +413,7 @@ Page({
 
   //下拉刷新功能
   lower() {
+    wx.showNavigationBarLoading()
     console.log("下拉刷新")
     var that = this
     this.setData({
