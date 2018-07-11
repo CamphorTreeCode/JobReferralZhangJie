@@ -129,7 +129,7 @@
     <view class='baoming' wx:if="{{isInvalid==1}}" catchtap='zhuanfa'>  
     <image mode='aspectFill' src='/img/postdetails/zhuanfa.png'></image>
     <!-- <button open-type='share'>转发</button> -->
-    <button>转发</button>
+     <button>转发</button> 
   </view>
   <view class='shixiao' wx:if="{{isInvalid==0}}">已失效</view>
 
