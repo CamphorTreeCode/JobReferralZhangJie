@@ -49,7 +49,9 @@ App({
         xcxuser_name: "xcxuser_name"
       },
       success: function(res) {
+        console.info("下面是用户是否填写报名百信息")
         that.globalData.applicantUser = res.data.applicantUser;
+        console.info(that.globalData.applicantUser)
       }
     })
     // }, 500);

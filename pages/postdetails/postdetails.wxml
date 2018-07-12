@@ -143,7 +143,7 @@
     <image mode='aspectFill' src='/img/postdetails/quxiaoshoucang.png'></image>
     <text>取消收藏</text>
   </view>
-
+ 
   <!--转发&生成海报start-->
   <view wx:if='{{zhuanfa==false}}' class='tankuang'>
     <view class='flex-one'>
@@ -162,9 +162,10 @@
 
   <view wx:if="{{haibao==false}}" class="canvas" style='width:{{width}}px;height:{{height}}px'>
     <image mode='aspectFill' src="/img/postdetails/cha.png" catchtap='closeHaiBao'></image>
-    <canvas canvas-id="shareCanvas" disable-scroll="true" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd"></canvas>
-    <button catchtap="saveImage" class='btn'>保存图片</button>
-    <view class='dibu'>保存至相册可以分享到朋友圈</view>
+    <canvas canvas-id="shareCanvas" disable-scroll="true" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd" catchtap='preview_img'></canvas>
+    <!-- <button catchtap="saveImage" class='btn' >保存图片</button> -->
+    <view class='dibu'>点击预览大图就可以了保存至相册</view>
+    <view class='dibu aaa'>您可以分享到朋友圈或者好友啦</view>
   </view>
 
   <!-- 去报名 -->

@@ -15,7 +15,10 @@
 }
 
 .fenlei {
-  border-top: 15rpx solid #f2f2f2;
+  border-top:15rpx solid #f2f2f2;
+ height:911rpx; 
+ overflow-y:auto; 
+
 }
 
 .fenlei .leimu {
@@ -75,8 +78,9 @@
 }
 
 scroll-view {
-  line-height: 65rpx;
-  height: 65rpx;
+   line-height: 65rpx; 
+   height: 65rpx; 
+  /* height:911rpx !important; */
 }
 
 .foter {

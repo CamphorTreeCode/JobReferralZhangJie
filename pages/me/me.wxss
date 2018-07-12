@@ -55,3 +55,14 @@
 .active {
     display: none;
 }
+
+.advertising{ 
+    position: fixed; 
+    bottom: 3%; 
+    color: #ccc; 
+    font-size: 0.7rem; 
+    width: 100%;
+}
+.advertising view{ 
+    text-align: center;
+}

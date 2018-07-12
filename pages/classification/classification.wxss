@@ -107,6 +107,15 @@
   margin-left: 40rpx;
 }
 
+
+.active:nth-of-type(1) text{
+padding:3rpx 20rpx 15rpx;
+line-height:21rpx;
+}
+
+
+
+
 .active input {
   height: 40rpx;
   display: inline-block;
@@ -225,12 +234,12 @@
   margin: 20rpx 0;
 }
 
-/* .bottom  .mingpian>view:nth-of-type(1){
+.bottom  .gongsi{
   overflow: hidden;
-text-overflow:ellipsis;
-white-space: nowrap;
-width: 70%;
-} */
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  width: 63%;
+}  
 
 /* 设置卡片title的边框颜色和背景颜色 */
 

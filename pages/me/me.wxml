@@ -44,3 +44,9 @@
    <text>关于我们</text>
    <image class="jiantou" src='../../image/jinatou.png'></image>
 </view>
+<!--广告栏位-->
+<view class='advertising'>
+  <view>传手小程序提供技术支持</view>
+  <view>电话热线：021-5763-0970</view>
+</view>
+
