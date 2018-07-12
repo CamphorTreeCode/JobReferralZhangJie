@@ -319,13 +319,13 @@ Page({
         console.info("返回的小程序码为：")
         console.log(res.data) 
 
-
+        var imgs = res.data
         wx.downloadFile({
           url: res.data,
           success: function (res) {
             console.log(res.tempFilePath);
             that.setData({
-              Img: res.tempFilePath,
+              Img: imgs,
             })
             console.info(that.data.Img)
             //画布高度
