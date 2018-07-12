@@ -346,7 +346,7 @@ Page({
       success: function(res) {
         ss = res.screenHeight;
       },
-    })
+    }) 
     this.setData({
       clientY: ss
     })
