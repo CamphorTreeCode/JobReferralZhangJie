@@ -348,7 +348,7 @@ Page({
       },
     }) 
     this.setData({
-      clientY: ss
+      clientY: ss 
     })
 
 
