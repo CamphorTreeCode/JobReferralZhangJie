@@ -125,9 +125,11 @@
   <view class='baoming baoming2' wx:if="{{isApplicant==true && isInvalid==1}}" catchtap='yibaoming'>
     已报名
   </view>
-  <view class='baoming' wx:if="{{isInvalid==1}}" catchtap='zhuanfa'>
+  <!-- <view class='baoming' wx:if="{{isInvalid==1}}"> -->
+    <view class='baoming' wx:if="{{isInvalid==1}}" catchtap='zhuanfa'>  
     <image mode='aspectFill' src='/img/postdetails/zhuanfa.png'></image>
-    <button>转发</button>
+    <!-- <button open-type='share'>转发</button> -->
+     <button>转发</button> 
   </view>
   <view class='shixiao' wx:if="{{isInvalid==0}}">已失效</view>
 

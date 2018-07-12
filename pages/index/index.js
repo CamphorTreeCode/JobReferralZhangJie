@@ -397,7 +397,7 @@ Page({
           var goodJob1 = that.data.goodJob;
           for (var i = 0; i < res.data.length; i++) {
             res.data[i].jobLabels = JSON.parse(res.data[i].jobLabels);
-            if ((res.data[i].jobLabels).length <= 0) {
+            if ((res.data[i].jobLabels).length <= 1) {
               goodJob1.push(res.data[i]);
             } else {
               var a = [];
@@ -505,8 +505,8 @@ Page({
   
   //换一批事件start
   changeJob: function(e) {
-    // console.info("换一批事件开始")
-    // console.info(e)
+    console.info("换一批事件开始")
+    console.info(e)
     var that=this;
     wx.request({
       url: app.globalData.appUrl + 'WXCompanyJob/findTwoCompanyJob',
@@ -526,7 +526,8 @@ Page({
           var goodJob1 = that.data.goodJob;
           for (var i = 0; i < res.data.length; i++) {
             res.data[i].jobLabels = JSON.parse(res.data[i].jobLabels)
-            if ((res.data[i].jobLabels).length <= 0) {
+            // console.info((res.data[i].jobLabels).length)
+            if ((res.data[i].jobLabels).length <=1) {
               goodJob1.push(res.data[i]);
             } else {
               var a = [];

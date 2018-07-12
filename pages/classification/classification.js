@@ -319,7 +319,7 @@ Page({
           for (var i = 0; i < res.data.length; i++) {
             res.data[i].jobLabels = JSON.parse(res.data[i].jobLabels)
             res.data[i].jobSwiperImages = JSON.parse(res.data[i].jobSwiperImages)
-            if ((res.data[i].jobLabels).length <= 0) {
+            if ((res.data[i].jobLabels).length <= 1) {
               goodJob1.push(res.data[i]);
             } else {
               var a = [];
@@ -423,7 +423,7 @@ Page({
           for (var i = 0; i < res.data.length; i++) {
             res.data[i].jobSwiperImages = JSON.parse(res.data[i].jobSwiperImages)
             res.data[i].jobLabels = JSON.parse(res.data[i].jobLabels)
-            if ((res.data[i].jobLabels).length<=0){
+            if ((res.data[i].jobLabels).length<=1){
                 goodJob1.push(res.data[i]);
             }else{
               var a = [];
