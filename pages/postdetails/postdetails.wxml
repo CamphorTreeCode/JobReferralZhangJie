@@ -143,7 +143,7 @@
     <image mode='aspectFill' src='/img/postdetails/quxiaoshoucang.png'></image>
     <text>取消收藏</text>
   </view>
-
+ 
   <!--转发&生成海报start-->
   <view wx:if='{{zhuanfa==false}}' class='tankuang'>
     <view class='flex-one'>

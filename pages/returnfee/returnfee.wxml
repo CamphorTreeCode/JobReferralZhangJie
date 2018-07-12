@@ -3,7 +3,7 @@
 <my-component>
 </my-component>
 <!--遮罩-->
-<scroll-view scroll-y="true"  style='height:{{scrollHeight}}px' class="scoll-h" bindscrolltolower="lower">
+<!-- <scroll-view scroll-y="true"  style='height:{{scrollHeight}}px' class="scoll-h" bindscrolltolower="lower"> -->
 
 <view class='header'>
   <picker mode="date" value="{{date}}" start="1978-01-01" end="{{dateend}}" bindchange="bindDateChange" name="entryTime">
@@ -11,8 +11,8 @@
     <image bindchange="bindDateChange" src='/img/postdetails/rili.png'></image>
   </picker>
 </view>
-<!--  -->
-
+<!-- {{scrollHeight}} -->
+<scroll-view scroll-y="true"  style='height:911rpx' class="scoll-h" bindscrolltolower="lower">
 <view class='fenlei'>
   <view class='leimu'>
     <view>
@@ -44,10 +44,19 @@
         <text wx:for='{{item.labels}}' wx:for-item='idx'>{{idx}}</text>
       </scroll-view>
     </view>
+
+    <!-- showLoading -->
   </view>
-
+  <view class="spinner cl" hidden='{{showLoading}}'>
+    <view class="rect1"></view>
+    <view class="rect2"></view>
+    <view class="rect3"></view>
+    <view class="rect4"></view>
+    <view class="rect5"></view>
+  </view>
+  <view class="bottomText" hidden='{{bottomText}}'>已经到底了</view>
 </view>
-
+</scroll-view>
 <!-- 底部 -->
 <view class='foter'>
   <view class='left' bindtap='pageon'>
@@ -64,12 +73,5 @@
   </view>
 </view>
 <!--没有数据暂无数据  -->
-<view class="spinner cl" hidden='{{showLoading}}'>
-  <view class="rect1"></view>
-  <view class="rect2"></view>
-  <view class="rect3"></view>
-  <view class="rect4"></view>
-  <view class="rect5"></view>
-</view>
-  <view class="bottomText" hidden='{{bottomText}}'>已经到底了</view>
-</scroll-view>
+
+<!-- </scroll-view> -->

@@ -302,12 +302,16 @@ Page({
     console.log(options)
     console.info(this.data.companyJob[0].company.companyName)
     var companyName = this.data.companyJob[0].company.companyName;
+    var salary = "工资：" + this.data.companyJob[0].jobSalaryMin + " - " + this.data.companyJob[0].jobSalaryMax;
+    var returnMoney = "返费金额："+this.data.companyJob[0].returnMoney;
     if (options.from === 'button') {
       // 来自页面内转发按钮
       console.log(options.target)
     }
     return {
-      title: companyName,
+      title:returnMoney,
+      desc: companyName, 
+      // title: returnMoney,
       //path: '/page/user?id=123'
     }
 
@@ -391,13 +395,22 @@ Page({
                     var nickname = app.globalData.userInfo.nickName;
                     if (nickname.length > 4) {
                       nickname = nickname.substring(0, 3) + "..."
-                    }
+                    };
                     //用户头像
                     var userImg = that.data.userImg;
                     //职位图片
                     var jobImage = that.data.jobImage;
                     //公司名称
                     var companyName = that.data.companyJob[0].company.companyName;
+                    if (companyName.length > 9) {
+                      companyName = companyName.substring(0, 8) + "..."
+                    }
+                    //岗位最大工资
+                    var jobSalaryMax = that.data.companyJob[0].jobSalaryMax;
+                    //岗位最小工资
+                    var jobSalaryMin = that.data.companyJob[0].jobSalaryMin;
+                    //返现工资
+                    var returnMoney = that.data.companyJob[0].returnMoney;
                     //小程序码
                     // var QRCode = res.data;
                     var QRCode = that.data.Img;
@@ -421,9 +434,11 @@ Page({
                     ctx.fillText('分享给你一条消息', 92, 26)
                     ctx.drawImage(jobImage, 12.5, 35, scrollWidth * 0.9 - 23, scrollWidth * 0.9 - 90);
                     ctx.fillText(companyName, 12.5, scrollWidth * 0.9 - 25)
+                    ctx.fillText("工资：" + jobSalaryMin + " - " + jobSalaryMax, 12.5, scrollWidth * 0.9 - 5)
+                    ctx.fillText("返现金额：" + returnMoney, 12.5, scrollWidth * 0.9 +15)
                     ctx.fillStyle = '#999';
                     ctx.setFontSize(12)
-                    ctx.fillText('长按识别小程序码访问', 12.5, scrollHeight * 0.9 * 0.7)
+                    ctx.fillText('长按识别小程序码访问', 12.5, scrollHeight * 0.9 * 0.7+25)
                     ctx.drawImage(QRCode, scrollWidth * 0.9 - 118, scrollHeight * 0.9 * 0.525, 110, 110);
                     ctx.drawImage("/img/postdetails/logo.png", scrollWidth * 0.9 - 85, scrollHeight * 0.9 * 0.5875, 45.25, 45.5);
                     ctx.draw()
@@ -433,10 +448,10 @@ Page({
                       wx.canvasToTempFilePath({
                         x: 0,
                         y: 0,
-                        width: wx.getSystemInfoSync().windowWidth*0.9,
-                        height: wx.getSystemInfoSync().windowHeight*0.9,
-                        destWidth: wx.getSystemInfoSync().windowWidth*0.9,
-                        destHeight: wx.getSystemInfoSync().windowHeight*0.9,
+                        // width: wx.getSystemInfoSync().windowWidth*0.9,
+                        // height: wx.getSystemInfoSync().windowHeight*0.9,
+                        // destWidth: wx.getSystemInfoSync().windowWidth*0.9,
+                        // destHeight: wx.getSystemInfoSync().windowHeight*0.9,
                         canvasId: 'shareCanvas',
                         success: function(res) {
                           console.log('朋友圈分享图生成成功:' + res.tempFilePath)
@@ -481,7 +496,30 @@ Page({
     })
   },
 
-
+  touchStart:function(){
+    var that = this;
+    console.info(that.data.filePath);
+    wx.previewImage({
+      current: that.data.filePath, // 当前显示图片的http链接
+      urls: [that.data.filePath] // 需要预览的图片http链接列表
+    })
+  },
+  touchMove:function(){
+    var that = this;
+    console.info(that.data.filePath); 
+    wx.previewImage({
+      current: that.data.filePath, // 当前显示图片的http链接
+      urls: [that.data.filePath] // 需要预览的图片http链接列表
+    })
+  },
+  touchEnd:function(){
+    var that = this;
+    console.info(that.data.filePath);
+    wx.previewImage({
+      current: that.data.filePath, // 当前显示图片的http链接
+      urls: [that.data.filePath] // 需要预览的图片http链接列表
+    })
+  },
   
 
 

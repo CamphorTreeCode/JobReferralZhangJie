@@ -77,7 +77,7 @@
           <image mode='aspectFill' src='{{item.jobSwiperImages[0]}}'></image>
         </view>
         <view class='right'>
-          <view>{{item.company.companyName}}</view>
+          <view class='gongsi'>{{item.company.companyName}}</view>
           <view>
             <text wx:for='{{item.jobLabels}}' wx:for-item="idx">{{idx}}</text>
           </view>
@@ -95,7 +95,7 @@
     <view class='bottom'>
       <view class="mingpian {{item.jobStick==1?'zhiding':''}}" wx:for='{{shopList}}' data-id="{{item.companyJobId}}" catchtap='shopDetails'>
         <view class='left'>
-          <image mode='aspectFill' src='/img/index/banner.jpg'></image>
+          <image mode='aspectFill' src='{{item.jobSwiperImages[0]}}'></image>
         </view>
         <view class='right'>
           <view>{{item.company.companyName}}</view>

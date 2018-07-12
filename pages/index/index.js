@@ -47,6 +47,7 @@ function selectTypePage(that) {
     },
     method: 'POST',
     success: function(res) {
+      console.info("下面是首页列表数据")
       console.log(res)
 
       if (res.data[0].lists.length > 0) {
@@ -54,6 +55,7 @@ function selectTypePage(that) {
         var shopList = that.data.shopList
         for (var i = 0; i < res.data[0].lists.length; i++) {
           res.data[0].lists[i].jobLabels = JSON.parse(res.data[0].lists[i].jobLabels)
+          res.data[0].lists[i].jobSwiperImages = JSON.parse(res.data[0].lists[i].jobSwiperImages)
           shopList.push(res.data[0].lists[i])
         }
 
