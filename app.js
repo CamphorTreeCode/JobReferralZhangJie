@@ -39,8 +39,9 @@ App({
     //   //获取用户是否填写报名表 
     //   var that = pg;
     var that = this;
+    console.log(wx.getStorageSync('openid'))
     wx.request({
-      url: that.globalData.appUrl + 'WXApplicant/findUserApplicant?openId=' + wx.getStorageSync('openid') + '', //仅为示例，并非真实的接口地址
+      url: that.globalData.appUrl + 'WXApplicant/findUserApplicant', //仅为示例，并非真实的接口地址
       data: {
         openId: wx.getStorageSync('openid')
       },
@@ -49,7 +50,7 @@ App({
         xcxuser_name: "xcxuser_name"
       },
       success: function(res) {
-        console.info("下面是用户是否填写报名百信息")
+        console.info("下面是用户是否填写报名信息")
         that.globalData.applicantUser = res.data.applicantUser;
         console.info(that.globalData.applicantUser)
       }

@@ -302,15 +302,15 @@ Page({
     console.log(options)
     console.info(this.data.companyJob[0].company.companyName)
     var companyName = this.data.companyJob[0].company.companyName;
-    var salary = "工资：" + this.data.companyJob[0].jobSalaryMin + " - " + this.data.companyJob[0].jobSalaryMax;
-    var returnMoney = "返费金额："+this.data.companyJob[0].returnMoney;
+    var salary = "【工资】￥" + this.data.companyJob[0].jobSalaryMin + " - " + this.data.companyJob[0].jobSalaryMax+"/月";
+    var returnMoney = "【返费金额】￥"+this.data.companyJob[0].returnMoney;
     if (options.from === 'button') {
       // 来自页面内转发按钮
       console.log(options.target)
     }
     return {
-      title:returnMoney,
-      desc: companyName, 
+      title: "【"+companyName +" 】"+" "+ salary +""+ returnMoney,
+      // desc: companyName, 
       // title: returnMoney,
       //path: '/page/user?id=123'
     }
