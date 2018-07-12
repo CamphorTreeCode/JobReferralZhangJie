@@ -350,7 +350,7 @@ Page({
     this.setData({
       clientY: ss 
     })
-
+ 
 
     //判断用户是否有报名表start
     if (app.globalData.applicantUser == true) {
