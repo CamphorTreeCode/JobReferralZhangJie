@@ -423,4 +423,8 @@ color: #fff;
   text-align: center;
   font-size: 32rpx;
   color: #999;
+  margin-top: 60rpx;
+}
+.aaa {
+  margin-top:10rpx;
 }
