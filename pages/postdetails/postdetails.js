@@ -639,6 +639,7 @@ Page({
           openId: openid,
           CompanyJob: CompanyJob
         },
+        method: "post",
         header: {
           'content-type': 'application/x-www-form-urlencoded', // 默认值
           xcxuser_name: "xcxuser_name"
