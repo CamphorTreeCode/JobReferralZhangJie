@@ -1,5 +1,6 @@
 // pages/postdetails/postdetails.js
 var promisify = require('../../utils/promise.util.js')
+var util = require('../../utils/util.js')
 //引入富文本
 var WxParse = require('../../wxParse/wxParse.js');
 var app = getApp()
@@ -748,7 +749,7 @@ Page({
         openId: openId,
         applicantContent: applicantContent
       },
-      method: "get",
+      method: "post",
       header: {
         'content-type': 'application/x-www-form-urlencoded', // 默认值
         xcxuser_name: "xcxuser_name"
@@ -769,18 +770,21 @@ Page({
             },
             success: function (res) {
               console.info(res);
+              console.log(app.globalData.userInfo.nickName)
+              console.log(util.formatTime(new Date()))
+              console.log(that.data.companyJob[0].recruitersTelphone)
               let url = 'https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=' + res.data
-              var openId = app.returnOpenId();
+           
                let _jsonData = {
-                  touser: openId ,
+                 touser: openId ,
                   template_id: 'VTmOq3-riR--KoILiMZu8-bSi3hjchq_yvhHnyAnRv0',
                   form_id: that.data.formId,
                   page: "pages/index/index",
                   data: {
-                    "keyword1": { "value": "测试数据一", "color": "#173177" },
-                    "keyword2": { "value": "测试数据二", "color": "#173177" },
-                    "keyword3": { "value": "测试数据三", "color": "#173177" },
-                    "keyword4": { "value": "测试数据四", "color": "#173177" },
+                    "keyword1": { "value": app.globalData.userInfo.nickName, "color": "#173177" },
+                    "keyword2": { "value": util.formatTime(new Date()), "color": "#173177" },
+                    "keyword3": { "value": "通过", "color": "#173177" },
+                    "keyword4": { "value": "恭喜你报名成功，请联系这个电话" + that.data.companyJob[0].recruitersTelphone+"请尽快确认报名信息", "color": "#173177" },
                   }
                 }
               wx.request({
