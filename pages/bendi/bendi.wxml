@@ -67,7 +67,7 @@
   <view class='bottom'>
     <view class="mingpian " wx:for='{{shopList}}' data-id="{{item.companyJobId}}" catchtap='shopDetails'>
       <view class='left'>
-        <image mode='aspectFill' src='/img/index/banner.jpg'></image>
+        <image mode='aspectFill' src='{{item.jobSwiperImages[0]}}'></image>
       </view>
       <view class='right'>
         <view>{{item.company.companyName}}</view>
