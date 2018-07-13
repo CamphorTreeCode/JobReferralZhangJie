@@ -355,7 +355,7 @@ Page({
       url: app.globalData.appUrl + 'GetQR_CodeController/getewm', //仅为示例，并非真实的接口地址
       data: {
         scene: that.data.CompanyJobId,
-        page: "pages/index/index"
+        page: "pages/postdetails/postdetails"
       },
       method: "get",
       header: {
