@@ -79,12 +79,12 @@ App({
 
 
   globalData: {
-    userInfo: null,
+    userInfo: null, 
     //用户是否有报名表
     applicantUser:"",
     //appUrl:"http://localhost/ZhangJie/",
-    appUrl: "https://www.chuanshoucs.com/ZhangJie/",
-    applicantUser: "",
+   appUrl: "https://www.chuanshoucs.com/ZhangJie/",
+  //  appUrl: "https://www.zjzj999.com/ZhangJie/",
     appId: "wxb39d67b4e5dda79d",
 
   }

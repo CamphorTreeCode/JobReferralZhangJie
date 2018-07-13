@@ -826,6 +826,9 @@ Page({
     wx.makePhoneCall({
       phoneNumber: e.currentTarget.dataset.val //仅为示例，并非真实的电话号码
     })
-  }
-
+  },
+//推送信息
+  testSubmit(e){
+  console.log(e,e.detail.formId)
+}
 })
