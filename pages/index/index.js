@@ -332,7 +332,7 @@ Page({
   onLoad: function(options) {
     console.info("****************************************************");
     console.info(options);
-   
+
     //设置下滑高度
     var that = this
     let scrollHeight = wx.getSystemInfoSync().windowHeight;

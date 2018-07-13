@@ -1,5 +1,6 @@
 // pages/postdetails/postdetails.js
 var promisify = require('../../utils/promise.util.js')
+var util = require('../../utils/util.js')
 //引入富文本
 var WxParse = require('../../wxParse/wxParse.js');
 var app = getApp()
@@ -80,6 +81,7 @@ Page({
     userImg: '',
     jobImage: '',
     filePath: [],
+    formId:''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -759,6 +761,56 @@ Page({
           that.setData({
             isApplicant: true,
           })
+
+         //推送消息
+           //1.获取token
+          wx.request({
+            url: app.globalData.appUrl + 'WXUser/getToken',
+            header: {
+              'content-type': 'application/x-www-form-urlencoded', // 默认值
+              xcxuser_name: "xcxuser_name"
+            },
+            success: function (res) {
+              console.info(res);
+              console.log(app.globalData.userInfo.nickName)
+              console.log(util.formatTime(new Date()))
+              console.log(that.data.companyJob[0].recruitersTelphone)
+              let url = 'https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=' + res.data
+           
+               let _jsonData = {
+                 touser: openId ,
+                  template_id: 'VTmOq3-riR--KoILiMZu8-bSi3hjchq_yvhHnyAnRv0',
+                  form_id: that.data.formId,
+                  page: "pages/index/index",
+                  data: {
+                    "keyword1": { "value": app.globalData.userInfo.nickName, "color": "#173177" },
+                    "keyword2": { "value": util.formatTime(new Date()), "color": "#173177" },
+                    "keyword3": { "value": "通过", "color": "#173177" },
+                    "keyword4": { "value": "恭喜你报名成功，请联系这个电话" + that.data.companyJob[0].recruitersTelphone+"请尽快确认报名信息", "color": "#173177" },
+                  }
+                }
+              wx.request({
+                url: url,
+                data: _jsonData,
+                method: "POST",
+                success: function (res) {
+                  console.log(res)
+                },
+                fail: function (err) {
+                  console.log('request fail ', err);
+                },
+                complete: function (res) {
+                  console.log("request completed!");
+                }
+
+              })
+            }
+          })
+           //2.发送推送消息
+
+
+
+         
         }, 1000)
       }
     })
@@ -828,6 +880,12 @@ Page({
     wx.makePhoneCall({
       phoneNumber: e.currentTarget.dataset.val //仅为示例，并非真实的电话号码
     })
-  }
-
+  },
+//推送信息
+  testSubmit(e){
+  console.log(e,e.detail.formId)
+  this.setData({
+    formId: e.detail.formId
+  })
+}
 })

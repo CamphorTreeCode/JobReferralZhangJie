@@ -118,9 +118,11 @@
   <view class='dianhua' catchtap='shoucan' data-id="{{companyJob[0].companyJobId}}" data-collectionId="{{collectionId}}" wx:if="{{isInvalid==1}}">
     <image mode='aspectFill' src='{{shouimg}}'></image>
   </view>
-  <view class='baoming' catchtap='baoming' wx:if="{{isApplicant==false && isInvalid==1}}">
+  <view class='baoming' bindtap='baoming' wx:if="{{isApplicant==false && isInvalid==1}}">
     <image mode='aspectFill' src='/img/postdetails/baoming.png'></image>
-    <text>报名</text>
+    <form bind:submit="testSubmit" report-submit="true">
+    <button   formType="submit">报名</button>
+    </form>
   </view>
   <view class='baoming baoming2' wx:if="{{isApplicant==true && isInvalid==1}}" catchtap='yibaoming'>
     已报名
