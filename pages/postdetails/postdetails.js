@@ -752,6 +752,7 @@ Page({
     console.info(companyJobId);
     var openId = app.returnOpenId();
     console.info(openId);
+    console.info(that.data.companyJob)
     var ApplicantContent = that.data.companyJob;
     var applicantContent = JSON.stringify(ApplicantContent)
     wx.request({
