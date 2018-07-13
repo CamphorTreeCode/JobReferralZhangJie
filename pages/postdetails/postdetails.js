@@ -80,6 +80,7 @@ Page({
     userImg: '',
     jobImage: '',
     filePath: [],
+    formId:''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -757,6 +758,53 @@ Page({
           that.setData({
             isApplicant: true,
           })
+
+         //推送消息
+           //1.获取token
+          wx.request({
+            url: app.globalData.appUrl + 'WXUser/getToken',
+            header: {
+              'content-type': 'application/x-www-form-urlencoded', // 默认值
+              xcxuser_name: "xcxuser_name"
+            },
+            success: function (res) {
+              console.info(res);
+              let url = 'https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=' + res.data
+              var openId = app.returnOpenId();
+               let _jsonData = {
+                  touser: openId ,
+                  template_id: 'VTmOq3-riR--KoILiMZu8-bSi3hjchq_yvhHnyAnRv0',
+                  form_id: that.data.formId,
+                  page: "pages/index/index",
+                  data: {
+                    "keyword1": { "value": "测试数据一", "color": "#173177" },
+                    "keyword2": { "value": "测试数据二", "color": "#173177" },
+                    "keyword3": { "value": "测试数据三", "color": "#173177" },
+                    "keyword4": { "value": "测试数据四", "color": "#173177" },
+                  }
+                }
+              wx.request({
+                url: url,
+                data: _jsonData,
+                method: "POST",
+                success: function (res) {
+                  console.log(res)
+                },
+                fail: function (err) {
+                  console.log('request fail ', err);
+                },
+                complete: function (res) {
+                  console.log("request completed!");
+                }
+
+              })
+            }
+          })
+           //2.发送推送消息
+
+
+
+         
         }, 1000)
       }
     })
@@ -830,5 +878,8 @@ Page({
 //推送信息
   testSubmit(e){
   console.log(e,e.detail.formId)
+  this.setData({
+    formId: e.detail.formId
+  })
 }
 })
