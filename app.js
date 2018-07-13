@@ -88,5 +88,8 @@ App({
 //appUrl: "https://www.chuanshoucs.com/ZhangJie/",
   appUrl: "https://www.zjzj999.com/ZhangJie/",
 
+  // appId: "wxb39d67b4e5dda79d",
+  homeImg:"https://www.chuanshoucs.com/ServerImg/2018-07-12/4b6715a6-ab08-4a53-a5cf-1d6d81eedea2.jpg"
+
   }
 })

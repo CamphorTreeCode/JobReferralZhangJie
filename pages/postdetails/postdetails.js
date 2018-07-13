@@ -767,26 +767,31 @@ Page({
           wx.request({
             url: app.globalData.appUrl + 'WXUser/getToken',
             header: {
-              'content-type': 'application/x-www-form-urlencoded', // 默认值
+              'content-type': 'application/x- -form-urlencoded', // 默认值
               xcxuser_name: "xcxuser_name"
+            },
+            data:{
+              openId: openId
             },
             success: function (res) {
               console.info(res);
               console.log(app.globalData.userInfo.nickName)
               console.log(util.formatTime(new Date()))
               console.log(that.data.companyJob[0].recruitersTelphone)
-              let url = 'https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=' + res.data
+               //2.发送推送消息
+              let url = 'https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=' + res.data.Tocken
            
                let _jsonData = {
                  touser: openId ,
-                  template_id: 'VTmOq3-riR--KoILiMZu8-bSi3hjchq_yvhHnyAnRv0',
+                 template_id: 'VTmOq3-riR--KoILiMZu82yRQhm1cvktlAhN9tF5Wos',
                   form_id: that.data.formId,
                   page: "pages/index/index",
                   data: {
-                    "keyword1": { "value": app.globalData.userInfo.nickName, "color": "#173177" },
+                    "keyword1": { "value": res.data.applicantName, "color": "#173177" },
                     "keyword2": { "value": util.formatTime(new Date()), "color": "#173177" },
-                    "keyword3": { "value": "通过", "color": "#173177" },
-                    "keyword4": { "value": "恭喜你报名成功，请联系这个电话" + that.data.companyJob[0].recruitersTelphone+"请尽快确认报名信息", "color": "#173177" },
+                    "keyword3": { "value": that.data.companyJob[0].company.companyName, "color": "#173177" },
+                    "keyword4": { "value": "通过", "color": "#173177" },
+                    "keyword5": { "value": "恭喜你报名成功，请联系客服电话" + that.data.companyJob[0].recruitersTelphone + "，尽快确认报名信息，安排面试时间", "color": "#173177" },
                   }
                 }
               wx.request({
@@ -806,7 +811,7 @@ Page({
               })
             }
           })
-           //2.发送推送消息
+
 
 
 
