@@ -27,7 +27,7 @@
 <view class='classification'>
   <view bindtap='fanli'>
     <image src='/img/index/fanli.png'> </image>
-    <text>高返利</text>
+    <text>高返费</text>
   </view>
   <view bindtap='zuixin'>
     <image src='/img/index/zuixin.png'> </image>

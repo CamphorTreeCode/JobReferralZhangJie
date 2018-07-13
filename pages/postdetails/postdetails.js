@@ -92,6 +92,7 @@ Page({
     console.log("Path: " + scene)
     console.info("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
     console.info(options.CompanyJobId);
+    console.info(options.CompanyJob);
 
     if (options.CompanyJobId) {
       this.setData({
@@ -365,17 +366,14 @@ Page({
       success: function(res) {
         console.info("返回的小程序码为：")
         console.log(res.data)
-        console.info(app.globalData.userInfo.avatarUrl)
+        var localCode = res.data;
+        console.info(localCode)
 
         wx.downloadFile({
           url: res.data,
           success: function(QRCode) {
             that.setData({
-
-
-
               Img: QRCode.tempFilePath,
-
             })
             console.info(app.globalData.userInfo.avatarUrl)
             wx.downloadFile({
@@ -465,10 +463,22 @@ Page({
                           that.setData({
                             filePath: res.tempFilePath
                           })
-                          // wx.previewImage({
-                          //   current: res.tempFilePath, // 当前显示图片的http链接
-                          //   urls: [res.tempFilePath] // 需要预览的图片http链接列表
-                          // })
+
+                          //删除本地存放的小程序码
+
+                          wx.request({
+                            url: app.globalData.appUrl + 'GetQR_CodeController/deleteLocalCode',
+                            data: {
+                              localCode: localCode,
+                            },
+                            header: {
+                              'content-type': 'application/x-www-form-urlencoded', // 默认值
+                              xcxuser_name: "xcxuser_name"
+                            },
+                            success: function (res) {
+                              console.info(res)
+                            }
+                          })
                         },
                         fail: function(err) {
                           console.log('失败')
