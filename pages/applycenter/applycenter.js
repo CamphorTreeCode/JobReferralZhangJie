@@ -152,6 +152,7 @@ Page({
     var isInvalid = that.data.applicantList[index].isInvalid;
     var applicantList = that.data.applicantList
     var applicantContent = applicantList[index].applicantContent
+    app.globalData.applicantContent = applicantContent
     wx.navigateTo({
       url: '/pages/postdetails/postdetails?CompanyJobId=' + companyJobId + '&CompanyJob=' + applicantContent + '&isInvalid=' + isInvalid, 
     })

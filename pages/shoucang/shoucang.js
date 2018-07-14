@@ -177,13 +177,27 @@ Page({
     return 360 * Math.atan(_Y / _X) / (2 * Math.PI);
   },
 
-  // // 去报名
-  // baoming: function(){
-  //   // console.log("去报名");
-  //   wx.navigateTo({
-  //     url: '/pages/postdetails/postdetails',
-  //   })
-  // },
+  // 去报名
+  baoming: function(e){
+    console.log("去报名");
+    console.info(e)
+    var index = e.target.dataset.index;
+    console.log(this.data.collectionList[index].isCollection);
+    var isCollection = this.data.collectionList[index].isCollection;
+    if (isCollection==1){
+      wx.showModal({
+        title: '提示',
+        content: '您已经报名！',
+      })
+    }else {
+      var companyJobId = e.currentTarget.dataset.id;
+      console.info(companyJobId)
+      wx.navigateTo({
+        url: '/pages/postdetails/postdetails?CompanyJobId=' + companyJobId,
+      })
+    }
+    
+  },
   // 取消收藏
   quxiao: function(e){
     console.log("取消收藏", e, e.currentTarget.dataset.collectionid);
@@ -239,6 +253,7 @@ Page({
     var collectionList = that.data.collectionList
     var index = e.currentTarget.dataset.index
     var collectionContent=collectionList[index].collectionContent
+    app.globalData.collectionContent = collectionContent
     wx.navigateTo({
       url: '/pages/postdetails/postdetails?CompanyJobId=' + companyJobId + '&CompanyJob=' + collectionContent,
     })

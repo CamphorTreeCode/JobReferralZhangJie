@@ -16,7 +16,8 @@
     "pages/huiyuan/huiyuan",
     "pages/baoming/baoming",
     "pages/yijian/yijian",
-    "pages/guanyu/guanyu"
+    "pages/guanyu/guanyu",
+    "pages/mendian/mendian"
   ],
   "window":{
     "backgroundTextStyle":"light",
