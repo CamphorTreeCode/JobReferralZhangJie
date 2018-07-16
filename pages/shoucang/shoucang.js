@@ -253,11 +253,11 @@ Page({
     var collectionList = that.data.collectionList
     var index = e.currentTarget.dataset.index
     var collectionContent=collectionList[index].collectionContent
-<<<<<<< HEAD
+
     console.log(collectionContent)
-=======
+
     app.globalData.collectionContent = collectionContent
->>>>>>> ae9cb9aeb9e6522201126024a9a85094a00a0449
+
     wx.navigateTo({
       url: '/pages/postdetails/postdetails?CompanyJobId=' + companyJobId + '&CompanyJob=' + collectionContent,
     })
