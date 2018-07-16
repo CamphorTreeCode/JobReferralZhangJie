@@ -797,6 +797,7 @@ Page({
               xcxuser_name: "xcxuser_name"
             },
             data:{
+              form_id: that.data.formId,
               openId: openId
             },
             success: function (res) {

@@ -585,6 +585,11 @@ Page({
       url: '/pages/bendi/bendi?key=mqzp'
     })
   },
+  mendian: function(){
+    wx.navigateTo({
+      url: '/pages/mendian/mendian',
+    })
+  },
   returnfee: function() {
     wx.navigateTo({
       url: '/pages/returnfee/returnfee',

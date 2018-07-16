@@ -1,13 +1,6 @@
-<view class="section">
-  <input placeholder="输入关键字以搜索"/>
-   <!-- <view class="btn-area">
-    <button bindtap="bindButtonTap">搜索</button>
-  </view>  -->
-   <button bindtap="bindButtonTap">搜索</button> 
-</view>
 <view class='xia'>
   <view>
-    <image class='img-one' src='../../image/xing.png'></image>
+    <image class='img-one' src='../../img/postdetails/logo.png'></image>
   </view>
   <view class='dian'>
     <view class='zzz'>张杰职介松江店</view>
