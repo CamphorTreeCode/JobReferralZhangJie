@@ -88,13 +88,8 @@ Page({
    */
   onLoad: function(options) {
     console.info("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-<<<<<<< HEAD
     console.info(options.CompanyJob, options.CompanyJobId);
-=======
-    console.info(options.CompanyJobId);
-    console.info(options.CompanyJob);
     console.info(app.globalData.applicantContent)
->>>>>>> ae9cb9aeb9e6522201126024a9a85094a00a0449
 
     if (options.CompanyJobId) {
       this.setData({
