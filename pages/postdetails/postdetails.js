@@ -798,7 +798,8 @@ Page({
             },
             data:{
               form_id: that.data.formId,
-              openId: openId
+              openId: openId,
+              companyName: that.data.companyJob[0].company.companyName,
             },
             success: function (res) {
               console.info(res);
