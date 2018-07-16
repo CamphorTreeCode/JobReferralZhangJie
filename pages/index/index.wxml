@@ -44,11 +44,11 @@
 </view>
 <!-- 头部分类 -->
 
-<view class='returnfee' catchtap='mendian'>
+<!-- <view class='returnfee' catchtap='mendian'>
   <image src='/img/index/fafei.png'></image>
   <text>门店导航</text>
   <image src='/img/index/xiangiqng.png'></image>
-</view>
+</view> -->
 
 <!-- 返费通知start-->
 <view class='returnfee' catchtap='returnfee'>
@@ -141,6 +141,7 @@
   <view class='bottom'>
     <view class="mingpian {{item.jobStick==1?'zhiding':''}}" wx:for='{{shopList}}' data-id="{{item.companyJobId}}" catchtap='xiangqing'>
       <view class='left'>
+      <view class='boty'>{{item.jobCategory.jobCategoryName}}</view>
         <image mode='aspectFill' src='{{item.jobSwiperImages[0]}}'></image>
       </view>
       <view class='right'>

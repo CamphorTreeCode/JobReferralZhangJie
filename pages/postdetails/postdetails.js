@@ -6,7 +6,9 @@ var WxParse = require('../../wxParse/wxParse.js');
 var app = getApp()
 
 function getDate(str) {
-  var date = new Date(str);
+  // var date = new Date(str);
+  var date1 = str.replace(/-/g, '/');//兼容ios  IOS只识别2017/01/01这种格式
+  var date = new Date(date1);
   var year = date.getFullYear();
   var month = date.getMonth() + 1;
   var day = date.getDate();
@@ -17,6 +19,7 @@ function getDate(str) {
     day = "0" + day;
   }
   var nowDate = year + "年" + month + "月" + day + '日';
+  
   return nowDate
 }
 Page({
@@ -785,65 +788,37 @@ Page({
           that.setData({
             isApplicant: true,
           })
-
-         //推送消息
-           //1.获取token
-          wx.request({
-            url: app.globalData.appUrl + 'WXUser/getToken',
-            header: {
-              'content-type': 'application/x- -form-urlencoded', // 默认值
-              xcxuser_name: "xcxuser_name"
-            },
-            data:{
-              form_id: that.data.formId,
-              openId: openId,
-              companyName: that.data.companyJob[0].company.companyName,
-            },
-            success: function (res) {
-              console.info(res);
-              console.log(app.globalData.userInfo.nickName)
-              console.log(util.formatTime(new Date()))
-              console.log(that.data.companyJob[0].recruitersTelphone)
-               //2.发送推送消息
-              let url = 'https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=' + res.data.Tocken
-           
-               let _jsonData = {
-                 touser: openId ,
-                 template_id: 'VTmOq3-riR--KoILiMZu82yRQhm1cvktlAhN9tF5Wos',
-                  form_id: that.data.formId,
-                  page: "pages/index/index",
-                  data: {
-                    "keyword1": { "value": res.data.applicantName, "color": "#173177" },
-                    "keyword2": { "value": util.formatTime(new Date()), "color": "#173177" },
-                    "keyword3": { "value": that.data.companyJob[0].company.companyName, "color": "#173177" },
-                    "keyword4": { "value": "通过", "color": "#173177" },
-                    "keyword5": { "value": "恭喜你报名成功，请联系客服电话" + that.data.companyJob[0].recruitersTelphone + "，尽快确认报名信息，安排面试时间", "color": "#173177" },
-                  }
-                }
-              wx.request({
-                url: url,
-                data: _jsonData,
-                method: "POST",
-                success: function (res) {
-                  console.log(res)
-                },
-                fail: function (err) {
-                  console.log('request fail ', err);
-                },
-                complete: function (res) {
-                  console.log("request completed!");
-                }
-
-              })
-            }
-          })
-
-
-
-
-         
         }, 1000)
+
+        //推送消息
+        //1.获取token
+        // console.info("*************************************************************")
+        // console.info(that.data.formId)
+        // console.info(app.returnOpenId())
+        // console.info(that.data.companyJob[0].company.companyName)
+        // console.info(that.data.companyJob[0].recruitersTelphone)
+        // console.info("*************************************************************")
+        wx.request({
+          url: app.globalData.appUrl + 'WXUser/getToken',
+          header: {
+            'content-type': 'application/x- -form-urlencoded', // 默认值
+            xcxuser_name: "xcxuser_name"
+          },
+          data: {
+            formId: that.data.formId,
+            openId: app.returnOpenId(),
+            companyName: that.data.companyJob[0].company.companyName,
+            cpmpanyTelphone: that.data.companyJob[0].recruitersTelphone,
+          },
+          success: function (res) {
+            console.info("末班发送成功啦")
+          }
+        })
       }
+
+
+      
+
     })
 
     if (that.data.hidden == true) {
@@ -914,9 +889,11 @@ Page({
   },
 //推送信息
   testSubmit(e){
+    var that = this;
   console.log(e,e.detail.formId)
-  this.setData({
+  that.setData({
     formId: e.detail.formId
   })
+
 }
 })

@@ -203,6 +203,16 @@ line-height:21rpx;
   margin-top: 20rpx;
   height: 200rpx;
   border-radius: 10rpx;
+  position: relative;
+}
+
+.bottom .left .boty{
+position:absolute;
+bottom:0;
+width:100%;
+color: white;
+text-align:center;
+background: rgba(0, 0, 0, 0.5);
 }
 
 .bottom .left image {
