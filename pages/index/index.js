@@ -420,8 +420,6 @@ Page({
     //优职推荐end
 
 
-
-
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -583,6 +581,11 @@ Page({
   mingqi: function() {
     wx.navigateTo({
       url: '/pages/bendi/bendi?key=mqzp'
+    })
+  },
+  mendian: function(){
+    wx.navigateTo({
+      url: '/pages/mendian/mendian',
     })
   },
   returnfee: function() {

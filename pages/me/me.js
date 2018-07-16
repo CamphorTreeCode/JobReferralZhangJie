@@ -36,7 +36,7 @@ Page({
     //查询用户信息是否填写完整
     var that = this;
     wx.request({
-      url: app.globalData.appUrl + 'WXApplicant/findUserFullApplicantMsg?openId=' + wx.getStorageSync('openid') + '', //仅为示例，并非真实的接口地址
+      url: app.globalData.appUrl + 'WXApplicant/findUserFullApplicantMsg?openId=' + app.returnOpenId() + '', //仅为示例，并非真实的接口地址
       header: {
         'content-type': 'application/x-www-form-urlencoded', // 默认值
         xcxuser_name: "xcxuser_name"

@@ -27,7 +27,7 @@
 <view class='classification'>
   <view bindtap='fanli'>
     <image src='/img/index/fanli.png'> </image>
-    <text>高返利</text>
+    <text>高返费</text>
   </view>
   <view bindtap='zuixin'>
     <image src='/img/index/zuixin.png'> </image>
@@ -43,6 +43,12 @@
   </view>
 </view>
 <!-- 头部分类 -->
+
+<view class='returnfee' catchtap='mendian'>
+  <image src='/img/index/fafei.png'></image>
+  <text>门店导航</text>
+  <image src='/img/index/xiangiqng.png'></image>
+</view>
 
 <!-- 返费通知start-->
 <view class='returnfee' catchtap='returnfee'>
@@ -76,8 +82,8 @@
 
 <!-- 底部分类 -->
 <view class='foter' >
-<!-- style='height:{{clientY}}px' -->
-  <view class='waw' wx:if='{{gao!=0}}' >
+<!-- -->
+  <view class='waw' wx:if='{{gao!=0}}'  style='height:{{clientY}}px' >
     <swiper class='dingwei' bindchange='gaibain' current='{{curren}}' style=' height:{{gao}}rpx' duration='0'>
       <swiper-item  class='active' data-index='{{index}}'>
         <text wx:for='{{leixing}}' wx:for-item="idx" class='ass  {{idx.state==1?"beijing":""}}' catchtap='textdianji' data-ind='{{index}}'>{{idx.jobCategoryName}}              </text>
@@ -161,11 +167,11 @@
 <!-- 底部分类 -->
 
 <!-- 填写报名信息 -->
-<view class='danchuang' style='display:{{dcancel}}'>
+<!-- <view class='danchuang' style='display:{{dcancel}}'>
   <image mode='scaleToFill' src='/img/index/baomingbiao.png'></image>
   <text class='twt1'>是否去填写报名信息？</text>
   <text class='twt2'>报名信息用于报名企业</text>
   <view class='btn1' catchtap='dcancel'>取消</view>
   <view class='btn2' catchtap='dconfirm'>确认</view>
-</view>
+</view> -->
   </scroll-view>

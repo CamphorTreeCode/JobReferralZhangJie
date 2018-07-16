@@ -56,11 +56,11 @@
     <text>身份证号</text>
     <input type='text' placeholder='填写你的身份证号(必填)' name='applicantIDCardNo' value='{{applicantList.applicantIDCardNo}}'></input>
   </view>
-  <view class='section dianhua'>
+  <!-- <view class='section dianhua'>
     <image src='/image/zhengzhi.png'></image>
     <text>政治面貌</text>
     <input type='text' placeholder='填写你的政治面貌' name='applicantEducation' value='{{applicantList.applicantEducation}}'></input>
-  </view>
+  </view> -->
   <view class='section address'>
     <image src='/image/pingjia.png'></image>
     <text>自我评价</text>

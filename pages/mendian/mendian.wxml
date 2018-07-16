@@ -1,0 +1,18 @@
+<view class='xia'>
+  <view>
+    <image class='img-one' src='../../img/postdetails/logo.png'></image>
+  </view>
+  <view class='dian'>
+    <view class='zzz'>张杰职介松江店</view>
+    <view>
+      <text>评分：</text>
+      <image wx:for="{{state}}" class='img-two' src='../../image/xing.png'></image>
+    </view>
+    <view>电话：13522101123</view>
+    <view>距离：1.97KM</view>
+  </view>
+  <view class='daohang' bindtap='weizhi'>
+    <image class='img-three' src='../../image/daohang.png'></image>
+    <view>到这里去</view>
+  </view>
+</view>

@@ -242,7 +242,7 @@ Page({
         key:key
       })
       wx.setNavigationBarTitle({
-        title: "高返利",
+        title: "高返费",
         success: function (res) { }
 
       })

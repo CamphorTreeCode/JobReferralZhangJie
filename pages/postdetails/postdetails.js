@@ -87,11 +87,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
-    var scene = decodeURIComponent(options.scene)
-    console.log("Path: " + scene)
     console.info("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+<<<<<<< HEAD
     console.info(options.CompanyJob, options.CompanyJobId);
+=======
+    console.info(options.CompanyJobId);
+    console.info(options.CompanyJob);
+    console.info(app.globalData.applicantContent)
+>>>>>>> ae9cb9aeb9e6522201126024a9a85094a00a0449
 
     if (options.CompanyJobId) {
       this.setData({
@@ -196,11 +199,21 @@ Page({
       })
     } else {
       console.log("有值")
-      //console.log(options.isInvalid)
+      console.log(options)
+
+      
+
+      if (options.isInvalid){
       that.setData({
-        companyJob: JSON.parse(options.CompanyJob),
+        companyJob: JSON.parse(app.globalData.applicantContent),
         isInvalid: options.isInvalid
       })
+      }else{
+        that.setData({
+          companyJob: JSON.parse(app.globalData.collectionContent),
+          isInvalid: options.isInvalid
+        })
+      }
     }
     // 获取详细信息 end
     // 增加商品浏览量  增加用户浏览 start
@@ -353,7 +366,7 @@ Page({
       url: app.globalData.appUrl + 'GetQR_CodeController/getewm', //仅为示例，并非真实的接口地址
       data: {
         scene: that.data.CompanyJobId,
-        page: "pages/index/index"
+        page: "pages/postdetails/postdetails"
       },
       method: "get",
       header: {
@@ -364,22 +377,24 @@ Page({
       success: function(res) {
         console.info("返回的小程序码为：")
         console.log(res.data)
-        console.info(app.globalData.userInfo.avatarUrl)
+        var localCode = res.data;
+        console.info(localCode)
 
         wx.downloadFile({
           url: res.data,
           success: function(QRCode) {
+            console.info(QRCode.tempFilePath)
             that.setData({
-
-
-
               Img: QRCode.tempFilePath,
-
             })
             console.info(app.globalData.userInfo.avatarUrl)
             wx.downloadFile({
-              url: app.globalData.userInfo.avatarUrl,
+              url: that.data.companyJob[0].jobSwiperImages[0],
+              // url: app.globalData.userInfo.avatarUrl,
               success: function(userImg) {
+                console.info("*****************************************************")
+                console.info(userImg.tempFilePath)
+                console.info("*****************************************************")
                 that.setData({
                   //用户头像下载缓存
                   userImg: userImg.tempFilePath,
@@ -430,13 +445,13 @@ Page({
                     const ctx = wx.createCanvasContext('shareCanvas');
                     ctx.clearRect(0, 0, scrollWidth * 0.9, scrollHeight * 0.9);
                     ctx.drawImage("/img/postdetails/background.jpg", 0, 0, scrollWidth * 0.9, scrollHeight * 0.9);
-                    ctx.drawImage(userImg, 12.5, 12.5, 20, 20);
-                    ctx.setFontSize(12)
-                    ctx.font = '宋体';
-                    ctx.fillStyle = 'blue';
-                    ctx.fillText(nickname, 45, 26)
-                    ctx.fillStyle = '#333';
-                    ctx.fillText('分享给你一条消息', 92, 26)
+                    //ctx.drawImage(userImg, 12.5, 12.5, 20, 20);
+                    // ctx.setFontSize(12)
+                    // ctx.font = '宋体';
+                    // ctx.fillStyle = 'blue';
+                    // ctx.fillText(nickname, 45, 26)
+                    // ctx.fillStyle = '#333';
+                    // ctx.fillText('分享给你一条消息', 92, 26)
                     ctx.drawImage(jobImage, 12.5, 35, scrollWidth * 0.9 - 23, scrollWidth * 0.9 - 90);
                     ctx.fillText(companyName, 12.5, scrollWidth * 0.9 - 25)
                     ctx.fillText("工资：" + jobSalaryMin + " - " + jobSalaryMax, 12.5, scrollWidth * 0.9 - 5)
@@ -464,10 +479,22 @@ Page({
                           that.setData({
                             filePath: res.tempFilePath
                           })
-                          // wx.previewImage({
-                          //   current: res.tempFilePath, // 当前显示图片的http链接
-                          //   urls: [res.tempFilePath] // 需要预览的图片http链接列表
-                          // })
+
+                          //删除本地存放的小程序码
+
+                          wx.request({
+                            url: app.globalData.appUrl + 'GetQR_CodeController/deleteLocalCode',
+                            data: {
+                              localCode: localCode,
+                            },
+                            header: {
+                              'content-type': 'application/x-www-form-urlencoded', // 默认值
+                              xcxuser_name: "xcxuser_name"
+                            },
+                            success: function (res) {
+                              console.info(res)
+                            }
+                          })
                         },
                         fail: function(err) {
                           console.log('失败')
@@ -509,22 +536,22 @@ Page({
       urls: [that.data.filePath] // 需要预览的图片http链接列表
     })
   },
-  touchMove:function(){
-    var that = this;
-    console.info(that.data.filePath); 
-    wx.previewImage({
-      current: that.data.filePath, // 当前显示图片的http链接
-      urls: [that.data.filePath] // 需要预览的图片http链接列表
-    })
-  },
-  touchEnd:function(){
-    var that = this;
-    console.info(that.data.filePath);
-    wx.previewImage({
-      current: that.data.filePath, // 当前显示图片的http链接
-      urls: [that.data.filePath] // 需要预览的图片http链接列表
-    })
-  },
+  // touchMove:function(){
+  //   var that = this;
+  //   console.info(that.data.filePath); 
+  //   wx.previewImage({
+  //     current: that.data.filePath, // 当前显示图片的http链接
+  //     urls: [that.data.filePath] // 需要预览的图片http链接列表
+  //   })
+  // },
+  // touchEnd:function(){
+  //   var that = this;
+  //   console.info(that.data.filePath);
+  //   wx.previewImage({
+  //     current: that.data.filePath, // 当前显示图片的http链接
+  //     urls: [that.data.filePath] // 需要预览的图片http链接列表
+  //   })
+  // },
   
 
 
@@ -631,8 +658,7 @@ Page({
     var openid = wx.getStorageSync('openid')
     var companyJob = that.data.companyJob
     var CompanyJob = JSON.stringify(companyJob)
-    
-    console.log(CompanyJob, JSON.parse(CompanyJob))
+    app.globalData.CompanyJob = CompanyJob
     if (that.data.shouimg == "/img/postdetails/weishoucang.png") {
       //请求收藏接口 start
       wx.request({
@@ -743,9 +769,10 @@ Page({
     console.info(companyJobId);
     var openId = app.returnOpenId();
     console.info(openId);
+    console.info(that.data.companyJob)
     var ApplicantContent = that.data.companyJob;
     var applicantContent = JSON.stringify(ApplicantContent)
-    console.log(applicantContent)
+
     wx.request({
       url: app.globalData.appUrl + 'WXApplicantCompantJob/addApplicantCompanyJob', //仅为示例，并非真实的接口地址
       data: {
@@ -773,6 +800,7 @@ Page({
               xcxuser_name: "xcxuser_name"
             },
             data:{
+              form_id: that.data.formId,
               openId: openId
             },
             success: function (res) {
