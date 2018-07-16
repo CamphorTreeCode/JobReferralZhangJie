@@ -1,32 +1,32 @@
 // pages/applycenter/applycenter.js
 var app = getApp();
 var pagesize = 0
-function selectApplicant(that) { 
+function selectApplicant(that) {
   var openId = app.returnOpenId()
   wx.request({
     url: app.globalData.appUrl + 'WXApplicantCompantJob/selectApplicantCompanyJobPage',
     data: {
-      openId: openId, 
+      openId: openId,
       currentPage: ++pagesize
     },
     header: {
-      // 'content-type': 'application/x-www-form-urlencoded' // Ä¬ÈÏÖµ
-      'content-type': 'application/x-www-form-urlencoded', // Ä¬ÈÏÖµ
+      // 'content-type': 'application/x-www-form-urlencoded' // é»˜è®¤å€¼
+      'content-type': 'application/x-www-form-urlencoded', // é»˜è®¤å€¼
       xcxuser_name: "xcxuser_name"
     },
     method: 'get',
     success: function (res) {
-      console.info("ÏÂÃæÊÇÓÃ»§ÉêÇëÖ°Î»µÄÐÅÏ¢£º")
+      console.info("ä¸‹é¢æ˜¯ç”¨æˆ·ç”³è¯·èŒä½çš„ä¿¡æ¯ï¼š")
       console.log(res.data[0])
       if (res.data[0].lists.length > 0) {
         var applicantList = that.data.applicantList;
-         for (var i = 0; i < res.data[0].lists.length; i++) {
-           res.data[0].lists[i].companyJob[0].jobLabels = JSON.parse(res.data[0].lists[i].companyJob[0].jobLabels)
-           res.data[0].lists[i].companyJob[0].company.companyAddress=res.data[0].lists[i].companyJob[0].company.companyAddress.split(",")[2];
-           applicantList.push(res.data[0].lists[i])
-         }
-         console.info(res.data[0].lists, applicantList)
-         
+        for (var i = 0; i < res.data[0].lists.length; i++) {
+          res.data[0].lists[i].companyJob[0].jobLabels = JSON.parse(res.data[0].lists[i].companyJob[0].jobLabels)
+          res.data[0].lists[i].companyJob[0].company.companyAddress = res.data[0].lists[i].companyJob[0].company.companyAddress.split(",")[2];
+          applicantList.push(res.data[0].lists[i])
+        }
+        console.info(res.data[0].lists, applicantList)
+
         that.setData({
           applicantList,
           showLoading: true,
@@ -47,19 +47,19 @@ function selectApplicant(that) {
 Page({
 
   /**
-   * Ò³ÃæµÄ³õÊ¼Êý¾Ý 
+   * é¡µé¢çš„åˆå§‹æ•°æ® 
    */
   data: {
     flag: true,
-    // ±¨Ãû³É¹¦Êý¾Ý
-  applicantList:[],
+    // æŠ¥åæˆåŠŸæ•°æ®
+    applicantList: [],
   },
 
   /**
-   * ÉúÃüÖÜÆÚº¯Êý--¼àÌýÒ³Ãæ¼ÓÔØ
+   * ç”Ÿå‘½å‘¨æœŸå‡½æ•°--ç›‘å¬é¡µé¢åŠ è½½
    */
   onLoad: function (options) {
-    //»ñÈ¡ÏµÍ³¸ß¶È
+    //èŽ·å–ç³»ç»Ÿé«˜åº¦
     let scrollHeight = wx.getSystemInfoSync().windowHeight;
     this.setData({
       scrollHeight: scrollHeight
@@ -68,18 +68,18 @@ Page({
   },
 
   /**
-   * ÉúÃüÖÜÆÚº¯Êý--¼àÌýÒ³Ãæ³õ´ÎäÖÈ¾Íê³É
+   * ç”Ÿå‘½å‘¨æœŸå‡½æ•°--ç›‘å¬é¡µé¢åˆæ¬¡æ¸²æŸ“å®Œæˆ
    */
   onReady: function () {
-  
+
   },
 
   /**
-   * ÉúÃüÖÜÆÚº¯Êý--¼àÌýÒ³ÃæÏÔÊ¾
+   * ç”Ÿå‘½å‘¨æœŸå‡½æ•°--ç›‘å¬é¡µé¢æ˜¾ç¤º
    */
   onShow: function () {
 
-    this.data.applicantList=[];
+    this.data.applicantList = [];
     this.setData({
       applicantList: this.data.applicantList
     })
@@ -88,38 +88,38 @@ Page({
   },
 
   /**
-   * ÉúÃüÖÜÆÚº¯Êý--¼àÌýÒ³ÃæÒþ²Ø
+   * ç”Ÿå‘½å‘¨æœŸå‡½æ•°--ç›‘å¬é¡µé¢éšè—
    */
   onHide: function () {
-      
+
   },
 
   /**
-   * ÉúÃüÖÜÆÚº¯Êý--¼àÌýÒ³ÃæÐ¶ÔØ
+   * ç”Ÿå‘½å‘¨æœŸå‡½æ•°--ç›‘å¬é¡µé¢å¸è½½
    */
   onUnload: function () {
-   
-  },  
+
+  },
 
   /**
-   * Ò³ÃæÏà¹ØÊÂ¼þ´¦Àíº¯Êý--¼àÌýÓÃ»§ÏÂÀ­¶¯×÷
+   * é¡µé¢ç›¸å…³äº‹ä»¶å¤„ç†å‡½æ•°--ç›‘å¬ç”¨æˆ·ä¸‹æ‹‰åŠ¨ä½œ
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
-   * Ò³ÃæÉÏÀ­´¥µ×ÊÂ¼þµÄ´¦Àíº¯Êý
+   * é¡µé¢ä¸Šæ‹‰è§¦åº•äº‹ä»¶çš„å¤„ç†å‡½æ•°
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
-   * ÓÃ»§µã»÷ÓÒÉÏ½Ç·ÖÏí
+   * ç”¨æˆ·ç‚¹å‡»å³ä¸Šè§’åˆ†äº«
    */
   onShareAppMessage: function () {
-  
+
   },
   show: function () {
 
@@ -127,34 +127,34 @@ Page({
 
   },
 
-  //ÏÂÀ­Ë¢ÐÂ¹¦ÄÜ
+  //ä¸‹æ‹‰åˆ·æ–°åŠŸèƒ½
   lower() {
-    console.log("·ÖÒ³À²")
+    console.log("åˆ†é¡µå•¦")
     this.setData({
       showLoading: false
     })
     selectApplicant(this)
   },
-  //ÏûÊ§
+  //æ¶ˆå¤±
 
   hide: function () {
 
     this.setData({ flag: true })
 
   },
-  //¸ÚÎ»ÏêÇé
-  companyJobDetails:function(e){
+  //å²—ä½è¯¦æƒ…
+  companyJobDetails: function (e) {
     var that = this
     console.log(e.currentTarget.dataset.id);
     var companyJobId = e.currentTarget.dataset.id;
     var index = e.currentTarget.dataset.index
-     //ÅÐ¶Ï¸ÚÎ»ÊÇ·ñÉúÐ§
+    //åˆ¤æ–­å²—ä½æ˜¯å¦ç”Ÿæ•ˆ
     var isInvalid = that.data.applicantList[index].isInvalid;
     var applicantList = that.data.applicantList
     var applicantContent = applicantList[index].applicantContent
     app.globalData.applicantContent = applicantContent
     wx.navigateTo({
-      url: '/pages/postdetails/postdetails?CompanyJobId=' + companyJobId + '&CompanyJob=' + applicantContent + '&isInvalid=' + isInvalid, 
+      url: '/pages/postdetails/postdetails?CompanyJobId=' + companyJobId + '&CompanyJob=' + applicantContent + '&isInvalid=' + isInvalid,
     })
   }
 })
