@@ -10,13 +10,13 @@ function selectApplicant(that) {
       currentPage: ++pagesize
     },
     header: {
-      // 'content-type': 'application/x-www-form-urlencoded' // é»˜è®¤å€¼
-      'content-type': 'application/x-www-form-urlencoded', // é»˜è®¤å€¼
+      // 'content-type': 'application/x-www-form-urlencoded' // Ä¬ÈÏÖµ
+      'content-type': 'application/x-www-form-urlencoded', // Ä¬ÈÏÖµ
       xcxuser_name: "xcxuser_name"
     },
     method: 'get',
     success: function (res) {
-      console.info("ä¸‹é¢æ˜¯ç”¨æˆ·ç”³è¯·èŒä½çš„ä¿¡æ¯ï¼š")
+      console.info("ÏÂÃæÊÇÓÃ»§ÉêÇëÖ°Î»µÄĞÅÏ¢£º")
       console.log(res.data[0])
       if (res.data[0].lists.length > 0) {
         var applicantList = that.data.applicantList;
@@ -47,19 +47,19 @@ function selectApplicant(that) {
 Page({
 
   /**
-   * é¡µé¢çš„åˆå§‹æ•°æ® 
+   * Ò³ÃæµÄ³õÊ¼Êı¾İ 
    */
   data: {
     flag: true,
-    // æŠ¥åæˆåŠŸæ•°æ®
+    // ±¨Ãû³É¹¦Êı¾İ
   applicantList:[],
   },
 
   /**
-   * ç”Ÿå‘½å‘¨æœŸå‡½æ•°--ç›‘å¬é¡µé¢åŠ è½½
+   * ÉúÃüÖÜÆÚº¯Êı--¼àÌıÒ³Ãæ¼ÓÔØ
    */
   onLoad: function (options) {
-    //è·å–ç³»ç»Ÿé«˜åº¦
+    //»ñÈ¡ÏµÍ³¸ß¶È
     let scrollHeight = wx.getSystemInfoSync().windowHeight;
     this.setData({
       scrollHeight: scrollHeight
@@ -68,14 +68,14 @@ Page({
   },
 
   /**
-   * ç”Ÿå‘½å‘¨æœŸå‡½æ•°--ç›‘å¬é¡µé¢åˆæ¬¡æ¸²æŸ“å®Œæˆ
+   * ÉúÃüÖÜÆÚº¯Êı--¼àÌıÒ³Ãæ³õ´ÎäÖÈ¾Íê³É
    */
   onReady: function () {
   
   },
 
   /**
-   * ç”Ÿå‘½å‘¨æœŸå‡½æ•°--ç›‘å¬é¡µé¢æ˜¾ç¤º
+   * ÉúÃüÖÜÆÚº¯Êı--¼àÌıÒ³ÃæÏÔÊ¾
    */
   onShow: function () {
 
@@ -88,35 +88,35 @@ Page({
   },
 
   /**
-   * ç”Ÿå‘½å‘¨æœŸå‡½æ•°--ç›‘å¬é¡µé¢éšè—
+   * ÉúÃüÖÜÆÚº¯Êı--¼àÌıÒ³ÃæÒş²Ø
    */
   onHide: function () {
       
   },
 
   /**
-   * ç”Ÿå‘½å‘¨æœŸå‡½æ•°--ç›‘å¬é¡µé¢å¸è½½
+   * ÉúÃüÖÜÆÚº¯Êı--¼àÌıÒ³ÃæĞ¶ÔØ
    */
   onUnload: function () {
    
   },  
 
   /**
-   * é¡µé¢ç›¸å…³äº‹ä»¶å¤„ç†å‡½æ•°--ç›‘å¬ç”¨æˆ·ä¸‹æ‹‰åŠ¨ä½œ
+   * Ò³ÃæÏà¹ØÊÂ¼ş´¦Àíº¯Êı--¼àÌıÓÃ»§ÏÂÀ­¶¯×÷
    */
   onPullDownRefresh: function () {
   
   },
 
   /**
-   * é¡µé¢ä¸Šæ‹‰è§¦åº•äº‹ä»¶çš„å¤„ç†å‡½æ•°
+   * Ò³ÃæÉÏÀ­´¥µ×ÊÂ¼şµÄ´¦Àíº¯Êı
    */
   onReachBottom: function () {
   
   },
 
   /**
-   * ç”¨æˆ·ç‚¹å‡»å³ä¸Šè§’åˆ†äº«
+   * ÓÃ»§µã»÷ÓÒÉÏ½Ç·ÖÏí
    */
   onShareAppMessage: function () {
   
@@ -127,28 +127,28 @@ Page({
 
   },
 
-  //ä¸‹æ‹‰åˆ·æ–°åŠŸèƒ½
+  //ÏÂÀ­Ë¢ĞÂ¹¦ÄÜ
   lower() {
-    console.log("åˆ†é¡µå•¦")
+    console.log("·ÖÒ³À²")
     this.setData({
       showLoading: false
     })
     selectApplicant(this)
   },
-  //æ¶ˆå¤±
+  //ÏûÊ§
 
   hide: function () {
 
     this.setData({ flag: true })
 
   },
-  //å²—ä½è¯¦æƒ…
+  //¸ÚÎ»ÏêÇé
   companyJobDetails:function(e){
     var that = this
     console.log(e.currentTarget.dataset.id);
     var companyJobId = e.currentTarget.dataset.id;
     var index = e.currentTarget.dataset.index
-     //åˆ¤æ–­å²—ä½æ˜¯å¦ç”Ÿæ•ˆ
+     //ÅĞ¶Ï¸ÚÎ»ÊÇ·ñÉúĞ§
     var isInvalid = that.data.applicantList[index].isInvalid;
     var applicantList = that.data.applicantList
     var applicantContent = applicantList[index].applicantContent

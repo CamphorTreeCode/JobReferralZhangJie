@@ -88,8 +88,7 @@ Page({
    */
   onLoad: function(options) {
     console.info("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-    console.info(options.CompanyJobId);
-    console.info(options.CompanyJob);
+    console.info(options.CompanyJob, options.CompanyJobId);
     console.info(app.globalData.applicantContent)
 
     if (options.CompanyJobId) {
@@ -313,19 +312,18 @@ Page({
     console.log(options)
     console.info(this.data.companyJob[0].company.companyName)
     var companyName = this.data.companyJob[0].company.companyName;
-    var salary = "【工资】￥" + this.data.companyJob[0].jobSalaryMin + " - " + this.data.companyJob[0].jobSalaryMax + "/月";
-    var returnMoney = "【返费金额】￥" + this.data.companyJob[0].returnMoney;
+    var salary = "【工资】￥" + this.data.companyJob[0].jobSalaryMin + " - " + this.data.companyJob[0].jobSalaryMax+"/月";
+    var returnMoney = "【返费金额】￥"+this.data.companyJob[0].returnMoney;
     if (options.from === 'button') {
       // 来自页面内转发按钮
       console.log(options.target)
     }
     return {
-      title: "【" + companyName + " 】" + " " + salary + "" + returnMoney,
+      title: "【"+companyName +" 】"+" "+ salary +""+ returnMoney,
       // desc: companyName, 
       // title: returnMoney,
       //path: '/page/user?id=123'
     }
-
 
   },
 
@@ -769,7 +767,7 @@ Page({
     console.info(that.data.companyJob)
     var ApplicantContent = that.data.companyJob;
     var applicantContent = JSON.stringify(ApplicantContent)
-    // app.globalData.applicantContent=applicantContent,
+
     wx.request({
       url: app.globalData.appUrl + 'WXApplicantCompantJob/addApplicantCompanyJob', //仅为示例，并非真实的接口地址
       data: {
