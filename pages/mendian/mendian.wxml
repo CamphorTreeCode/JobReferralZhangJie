@@ -1,17 +1,17 @@
-<view class='xia'>
+<view class='xia' wx:for="{{shopList}}">
   <view>
-    <image class='img-one' src='../../img/postdetails/logo.png'></image>
+    <image class='img-one' src='{{item.storeImage}}'></image>
   </view>
   <view class='dian'>
-    <view class='zzz'>张杰职介松江店</view>
+    <view class='zzz'>{{item.storeName}}</view>
     <view>
       <text>评分：</text>
-      <image wx:for="{{state}}" class='img-two' src='../../image/xing.png'></image>
+      <image wx:for="{{item.storeStars}}" class='img-two' src='../../image/xing.png'></image>
     </view>
-    <view>电话：13522101123</view>
-    <view>距离：1.97KM</view>
+    <view>电话：{{item.storePhone}}</view>
+    <view>距离：{{item.storeDistance}}</view>
   </view>
-  <view class='daohang' bindtap='weizhi'>
+  <view class='daohang' bindtap='weizhi' data-latitude="{{item.storeLatitude}}" data-longitude="{{item.storeLongitude}}">
     <image class='img-three' src='../../image/daohang.png'></image>
     <view>到这里去</view>
   </view>
