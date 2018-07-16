@@ -196,8 +196,7 @@ Page({
   onLoad: function (options) {
     var that = this
     //获取所有分类的方法 start
-
-    wx.request({
+   wx.request({
       url: app.globalData.appUrl + 'WXJobCategory/selectJobCategoryType',
       header: {
         'content-type': 'application/x-www-form-urlencoded', // 默认值

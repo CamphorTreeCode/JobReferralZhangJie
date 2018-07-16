@@ -239,6 +239,7 @@ Page({
     var collectionList = that.data.collectionList
     var index = e.currentTarget.dataset.index
     var collectionContent=collectionList[index].collectionContent
+    console.log(collectionContent)
     wx.navigateTo({
       url: '/pages/postdetails/postdetails?CompanyJobId=' + companyJobId + '&CompanyJob=' + collectionContent,
     })

@@ -494,10 +494,8 @@ Page({
    */
   onShareAppMessage: function() {
     return {
-
       imageUrl: app.globalData.homeImg
-    
-  
+
     }
   },
 
