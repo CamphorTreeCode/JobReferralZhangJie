@@ -44,11 +44,11 @@
 </view>
 <!-- 头部分类 -->
 
-<!-- <view class='returnfee' catchtap='mendian'>
+ <view class='returnfee' catchtap='mendian'>
   <image src='/img/index/fafei.png'></image>
   <text>门店导航</text>
   <image src='/img/index/xiangiqng.png'></image>
-</view> -->
+</view> 
 
 <!-- 返费通知start-->
 <view class='returnfee' catchtap='returnfee'>

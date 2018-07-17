@@ -27,7 +27,6 @@ function selectApplicant(that) {
           applicantList.push(res.data[0].lists[i])
         }
         console.info(res.data[0].lists, applicantList)
-
         that.setData({
           applicantList,
           showLoading: true,
