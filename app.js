@@ -82,15 +82,12 @@ App({
   globalData: {
    userInfo: null, 
     //用户是否有报名表
-    applicantUser:"",
     //appUrl:"http://localhost/ZhangJie/",
-    appUrl: "https://www.zjzj999.com/ZhangJie/",
-    applicantUser: "",
-    appId: "wx7786b678789f848c",
+    //appUrl: "https://www.zjzj999.com/ZhangJie/",
+   appUrl: "https://www.chuanshoucs.com/ZhangJie/",
+   
+    //appId: "wx7786b678789f848c",
   applicantUser:"",
-//appUrl:"http://localhost/ZhangJie/",
-//appUrl: "https://www.chuanshoucs.com/ZhangJie/",
-  appUrl: "https://www.zjzj999.com/ZhangJie/",
   appId: "wxb39d67b4e5dda79d",
 
   }

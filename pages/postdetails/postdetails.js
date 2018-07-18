@@ -744,6 +744,7 @@ Page({
     console.info(openId);
     var ApplicantContent = that.data.companyJob;
     var applicantContent = JSON.stringify(ApplicantContent)
+    console.info(applicantContent)
     wx.request({
       url: app.globalData.appUrl + 'WXApplicantCompantJob/addApplicantCompanyJob', //仅为示例，并非真实的接口地址
       data: {
