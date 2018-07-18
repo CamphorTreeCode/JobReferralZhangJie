@@ -91,18 +91,19 @@ Page({
    */
   onLoad: function(options) {
     console.info("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-    console.info(options.CompanyJob, options.CompanyJobId);
+    //console.info(options.CompanyJob, options.CompanyJobId);
     console.info(app.globalData.applicantContent)
 
     if (options.CompanyJobId) {
       this.setData({
         CompanyJobId: options.CompanyJobId
       });
+      console.log("Path1: " + options.CompanyJobId)
     } else {
       this.setData({
         CompanyJobId: decodeURIComponent(options.scene)
       });
-      console.log("Path: " + scene)
+      console.log("Path2: " + decodeURIComponent(options.scene))
     }
 
 
@@ -359,6 +360,7 @@ Page({
 
     var that = this;
     console.info("生成海报事件触发")
+    console.info(that.data.CompanyJobId)
     //获取Access_Token
     wx.request({
       url: app.globalData.appUrl + 'GetQR_CodeController/getewm', //仅为示例，并非真实的接口地址

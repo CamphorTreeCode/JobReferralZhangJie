@@ -57,7 +57,7 @@ function getLocationDetails(that) {
         });
           console.log(res)
 
-     var  province = res.result.address_component.province
+        var province = res.result.address_component.province
         var city = res.result.address_component.city
         var district = res.result.address_component.district
         console.log( city + district)
