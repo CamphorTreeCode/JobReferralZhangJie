@@ -323,7 +323,8 @@ Page({
     key:null,
     //优职推荐
     goodJob: [],
-
+    //首页导航开始
+    homeNavigation:[],
   },
 
   /**
@@ -419,8 +420,31 @@ Page({
     })
     //优职推荐end
 
-
-
+    //首页导航栏start
+    wx.request({
+      url: app.globalData.appUrl + 'WXHomeNavigation/findHomeNavigationList',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded', // 默认值
+        xcxuser_name: "xcxuser_name"
+      },
+      success: function (res) {
+          console.info("首页导航栏开始")
+          console.info(res.data)
+        if (res.data.length > 0) {
+          var homeNavigation = that.data.homeNavigation;
+          for (var i = 0; i < res.data.length; i++) {
+            // res.data[i].labelName = JSON.parse(res.data[i].labelName);
+            homeNavigation.push(res.data[i]);
+            }
+          }
+          that.setData({
+            homeNavigation: homeNavigation
+          })
+        console.info(homeNavigation)
+        console.info("首页导航栏结束")
+      }
+    })
+    //首页导航栏end
 
   },
   /**
@@ -493,7 +517,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
+    return {
+      imageUrl: app.globalData.homeImg
 
+    }
   },
 
 
@@ -562,24 +589,40 @@ Page({
     })
   },
   // 头部4个分类跳转
-  fanli: function() {
+  fanli: function(e) {
+    var that = this;
+    console.info("导航栏点击事件开始")
+    console.info(e.currentTarget.dataset.index);
+    // console.info(that.data.homeNavigation)
+    var index = e.currentTarget.dataset.index;
+    console.info(that.data.homeNavigation[index].labelName);
+    var homeNavigation = that.data.homeNavigation[index];
+    app.globalData.homeNavigation = homeNavigation
+    var labelName = that.data.homeNavigation[index].labelName;
+
     wx.navigateTo({
-      url: '/pages/bendi/bendi?key=gfl'
+      url: '/pages/bendi/bendi?key=' + labelName + '&homeNavigation' + JSON.stringify(homeNavigation)
     })
+    console.info("导航栏点击事件结束")
   },
-  zuixin: function() {
+  // zuixin: function() {
+  //   wx.navigateTo({
+  //     url: '/pages/bendi/bendi?key=jrzx'
+  //   })
+  // },
+  // bendi: function() {
+  //   wx.navigateTo({
+  //     url: '/pages/bendi/bendi?key=bdzp'
+  //   })
+  // },
+  // mingqi: function() {
+  //   wx.navigateTo({
+  //     url: '/pages/bendi/bendi?key=mqzp'
+  //   })
+  // },
+  mendian: function(){
     wx.navigateTo({
-      url: '/pages/bendi/bendi?key=jrzx'
-    })
-  },
-  bendi: function() {
-    wx.navigateTo({
-      url: '/pages/bendi/bendi?key=bdzp'
-    })
-  },
-  mingqi: function() {
-    wx.navigateTo({
-      url: '/pages/bendi/bendi?key=mqzp'
+      url: '/pages/mendian/mendian',
     })
   },
   returnfee: function() {

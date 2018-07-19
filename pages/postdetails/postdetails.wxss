@@ -324,7 +324,7 @@ line-height: 470rpx;
  .tankuang{
   /* border: 1px solid red; */
   width: 100%;
-  height: 35%;
+  /* height: 35%; */
   position: fixed;
   bottom: 0rpx;
   left: 0;

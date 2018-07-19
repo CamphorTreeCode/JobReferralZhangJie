@@ -95,7 +95,7 @@
   <!-- 感兴趣用户 -->
   <view class='lei liulan'>
     <image src='/img/postdetails/lianlian.png'></image>
-    <text>感兴趣用户</text>
+    <text>感兴趣的人</text>
     <text>{{companyJob[0].jobBrowser}}</text>
     <image src='/img/postdetails/liulanliang.png'></image>
   </view>

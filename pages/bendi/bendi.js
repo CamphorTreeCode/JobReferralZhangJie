@@ -196,8 +196,7 @@ Page({
   onLoad: function (options) {
     var that = this
     //获取所有分类的方法 start
-
-    wx.request({
+   wx.request({
       url: app.globalData.appUrl + 'WXJobCategory/selectJobCategoryType',
       header: {
         'content-type': 'application/x-www-form-urlencoded', // 默认值
@@ -233,6 +232,8 @@ Page({
 
     //接收首页参数  start
     var key =options.key
+    console.info(app.globalData.homeNavigation)
+    console.info(options)
     console.log(key)
     if (key=="gfl"){
      var hezong = this.data.hezong
@@ -243,7 +244,7 @@ Page({
         key:key
       })
       wx.setNavigationBarTitle({
-        title: "高返利",
+        title: "高返费",
         success: function (res) { }
 
       })
@@ -289,9 +290,9 @@ Page({
         selectTypePage(that)
       })
       return;
-    } else if (key == "mqzp"){
+    } else if (key == app.globalData.homeNavigation.labelName){
       wx.setNavigationBarTitle({
-        title: "名企招聘",
+        title: app.globalData.homeNavigation.homeNavigationName,
         success: function (res) { }
       })
       this.setData({

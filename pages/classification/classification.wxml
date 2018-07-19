@@ -11,8 +11,8 @@
   </view>
 <!-- 底部分类 -->
 <view class='foter' >
-<!-- style='height:{{clientY}}px' -->
-  <view class='waw' wx:if='{{gao!=0}}' >
+
+  <view class='waw' wx:if='{{gao!=0}}' style='height:{{clientY}}px'>
     <swiper class='dingwei' bindchange='gaibain' current='{{curren}}' style=' height:{{gao}}rpx' duration='0'>
       <swiper-item  class='active' data-index='{{index}}'>
         <text wx:for='{{leixing}}' wx:for-item="idx" class='ass  {{idx.state==1?"beijing":""}}' catchtap='textdianji' data-ind='{{index}}'>
@@ -74,6 +74,7 @@
       <view class='mingpian' wx:for='{{goodJob}}' catchtap='jobDetails' data-id='{{goodJob[index].companyJobId}}'>
         <image class='imga' mode='aspectFill' src='https://www.chuanshoucs.com/ServerImg/2018-05-28/56c2d674-1537-41cc-b4e6-f99c827bc844.png'></image>
         <view class='left'>
+          <view class='boty'>{{item.jobCategory.jobCategoryName}}</view>
           <image mode='aspectFill' src='{{item.jobSwiperImages[0]}}'></image>
         </view>
         <view class='right'>
@@ -95,6 +96,7 @@
     <view class='bottom'>
       <view class="mingpian {{item.jobStick==1?'zhiding':''}}" wx:for='{{shopList}}' data-id="{{item.companyJobId}}" catchtap='shopDetails'>
         <view class='left'>
+        <view class='boty'>{{item.jobCategory.jobCategoryName}}</view>
           <image mode='aspectFill' src='{{item.jobSwiperImages[0]}}'></image>
         </view>
         <view class='right'>

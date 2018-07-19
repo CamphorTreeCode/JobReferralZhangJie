@@ -105,7 +105,13 @@
 					"id": 11,
 					"name": "测是从小程序吗",
 					"pathName": "pages/postdetails/postdetails",
-					"query": "scene=51"
+					"query": "scene=45"
+				},
+				{
+					"id": -1,
+					"name": "门店",
+					"pathName": "pages/mendian/mendian",
+					"query": ""
 				}
 			]
 		}
