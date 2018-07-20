@@ -1,13 +1,14 @@
 /* pages/index/index.wxss */
 
+
 /* 头部轮播start */
 swiper{
   height: 450rpx;
 }
 .zhiding{
-  background: url("https://www.chuanshoucs.com/ServerImg/2018-05-28/0c13b495-3c37-4627-a1b2-a063f4e42c8e.png") no-repeat top;
+  background: url("https://www.chuanshoucs.com/ServerImg/2018-07-17/fa0b00a4-a740-4d71-b1d9-a1bd65d40a1e.png") no-repeat top;
   background-position-x: 95%;
-  background-size: 8%;
+  background-size: 20%;
 }
 swiper-item image{
   width: 100%;

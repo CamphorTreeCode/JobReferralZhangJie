@@ -5,7 +5,8 @@
 <!--遮罩-->
 
 <!-- 头部轮播 -->
- <scroll-view scroll-y="false" style='height:100%' bindscroll='bindscro' scroll-top='{{abba}}'  bindscrolltolower="lower">  
+ <!-- <scroll-view scroll-y="false" style='height:100%' bindscroll='azv,bindscro' scroll-top='{{abba}}'  bindscrolltolower="lower" bindscrolltoupper='up'>   -->
+<view>
 <view class="swiper-container">
   <swiper circular='true' current="{{swiperCurrent}}" bindchange="swiperChange" class="swiper">
     <block wx:for="{{HomeSwiper}}" wx:key="unique">
@@ -83,7 +84,7 @@
 <!-- 底部分类 -->
 <view class='foter' >
 <!-- -->
-  <view class='waw' wx:if='{{gao!=0}}'  style='height:{{clientY}}px' >
+  <view class='waw'  catchtouchmove="true" wx:if='{{gao!=0}}'  style='height:{{clientY}}px' >
     <swiper class='dingwei' bindchange='gaibain' current='{{curren}}' style=' height:{{gao}}rpx' duration='0'>
       <swiper-item  class='active' data-index='{{index}}'>
         <text wx:for='{{leixing}}' wx:for-item="idx" class='ass  {{idx.state==1?"beijing":""}}' catchtap='textdianji' data-ind='{{index}}'>{{idx.jobCategoryName}}              </text>
@@ -165,6 +166,7 @@
 <view class="bottomText cl" hidden='{{bottomText}}'>已经到底了</view>
 
 </view>
+</view>
 <!-- 底部分类 -->
 
 <!-- 填写报名信息 -->
@@ -175,4 +177,4 @@
   <view class='btn1' catchtap='dcancel'>取消</view>
   <view class='btn2' catchtap='dconfirm'>确认</view>
 </view> -->
-  </scroll-view>
+  <!-- </scroll-view> -->

@@ -26,22 +26,33 @@ function selectTypePage(that) {
     },
     method: 'POST',
     success: function(res) {
-
+      console.info("下面是分类页面数据")
       console.log(res)
 
       if (res.data[0].lists.length > 0) {
 
         var shopList = that.data.shopList
+        var shopZD = []
+        var shop = []
         for (var i = 0; i < res.data[0].lists.length; i++) {
+          if (res.data[0].lists[i].jobStick == 1) {
           res.data[0].lists[i].jobLabels = JSON.parse(res.data[0].lists[i].jobLabels)
           res.data[0].lists[i].jobSwiperImages = JSON.parse(res.data[0].lists[i].jobSwiperImages)
-          shopList.push(res.data[0].lists[i])
+          shopZD.push(res.data[0].lists[i])
+          }else{
+            res.data[0].lists[i].jobLabels = JSON.parse(res.data[0].lists[i].jobLabels)
+            res.data[0].lists[i].jobSwiperImages = JSON.parse(res.data[0].lists[i].jobSwiperImages)
+            shop.push(res.data[0].lists[i])
+          }
         }
-
+        var s = shopZD.concat(shop)
+        console.info("下面是指定数据")
+        console.info(s)
+        console.info(shop)
 
         console.info(res.data[0].lists, shopList)
         that.setData({
-          shopList,
+          shopList:s,
           showData: true,
           showLoading: true
         })

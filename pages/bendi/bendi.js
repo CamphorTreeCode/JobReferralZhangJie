@@ -278,6 +278,7 @@ Page({
       // })
       //获取地理位置
       authorizationCheck.getLocationCheck(this).then(function (result) {
+        console.info("我的地理位置是")
         console.log(result)
         var isShow = wx.getStorageSync('isShow');
         that.setData({

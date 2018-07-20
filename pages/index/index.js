@@ -52,17 +52,28 @@ function selectTypePage(that) {
 
       if (res.data[0].lists.length > 0) {
 
+
         var shopList = that.data.shopList
+        var shopZD = []
+        var shop = []
         for (var i = 0; i < res.data[0].lists.length; i++) {
+          if (res.data[0].lists[i].jobStick==1){
           res.data[0].lists[i].jobLabels = JSON.parse(res.data[0].lists[i].jobLabels)
           res.data[0].lists[i].jobSwiperImages = JSON.parse(res.data[0].lists[i].jobSwiperImages)
-          shopList.push(res.data[0].lists[i])
+          shopZD.push(res.data[0].lists[i])
+          }else{
+            res.data[0].lists[i].jobLabels = JSON.parse(res.data[0].lists[i].jobLabels)
+            res.data[0].lists[i].jobSwiperImages = JSON.parse(res.data[0].lists[i].jobSwiperImages)
+            shop.push(res.data[0].lists[i])
+          }
         }
-
-
-        console.info(res.data[0].lists, shopList)
+        var s = shopZD.concat(shop)
+        console.info("下面是指定数据")
+        console.info(s)
+        console.info(shop)
+        // console.info(res.data[0].lists, shopList)
         that.setData({
-          shopList,
+          shopList: s,
           showData: true,
           showLoading: true
         })
@@ -478,28 +489,37 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    wx.reLaunch({
+        url: '/pages/index/index'
+      })
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    console.log("..")
+    var that = this
+    that.setData({
+      showLoading: false
+    })
+    selectTypePage(that)
   },
-  onPageScroll: function(e) {
-    console.log(e); //{scrollTop:99}
-    if (e.scrollTop >= 565) {
-      this.setData({
-        post: 'fixed',
-        juli: '140'
-      })
-    } else {
-      this.setData({
-        post: 'relative',
-        juli: '0',
-      })
-    }
+
+
+  // onPageScroll: function(e) {
+  //   console.log(e); //{scrollTop:99}
+  //   if (e.scrollTop >= 565) {
+  //     this.setData({
+  //       post: 'fixed',
+  //       juli: '140'
+  //     })
+  //   } else {
+  //     this.setData({
+  //       post: 'relative',
+  //       juli: '0',
+  //     })
+  //   }
     // else if (this.data.gao != 0) {
     //   this.setData({
     //     post: 'fixed',
@@ -512,7 +532,7 @@ Page({
     //     disi: "true",
     //       dier: "true",
     //         disan: "true"
-  },
+  // },
   /**
    * 用户点击右上角分享
    */
@@ -601,7 +621,7 @@ Page({
     var labelName = that.data.homeNavigation[index].labelName;
 
     wx.navigateTo({
-      url: '/pages/bendi/bendi?key=' + labelName + '&homeNavigation' + JSON.stringify(homeNavigation)
+      url: '/pages/bendi/bendi?key=' + labelName
     })
     console.info("导航栏点击事件结束")
   },
@@ -1285,13 +1305,27 @@ Page({
   },
   //下拉刷新
   lower: function() {
-    console.log("..")
-    var that = this
-    that.setData({
-      showLoading: false
-    })
-    selectTypePage(that)
+    // console.log("..")
+    // var that = this
+    // that.setData({
+    //   showLoading: false
+    // })
+    // selectTypePage(that)
   },
+
+  //上拉刷新
+  up:function(){
+   
+    // setTimeout(function(){
+    //   wx.reLaunch({
+    //     url: '/pages/index/index'
+    //   })
+    // },1000)
+    
+  },
+
+
+
   //工资输入框
   inputTyping: function(e) {
     var id = e.currentTarget.id
