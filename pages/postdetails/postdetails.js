@@ -363,7 +363,7 @@ Page({
     console.info(that.data.CompanyJobId)
     //获取Access_Token
     wx.request({
-      url: app.globalData.appUrl + 'GetQR_CodeController/getewm', //仅为示例，并非真实的接口地址
+      url: app.globalData.appUrl + 'WXGetQR_CodeController/getewm', //仅为示例，并非真实的接口地址
       data: {
         scene: that.data.CompanyJobId,
         page: "pages/postdetails/postdetails"
