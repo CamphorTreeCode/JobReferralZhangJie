@@ -25,7 +25,7 @@ var util = require('../../utils/util')
 var pagesize = 0;
 
 function selectTypePage(that) {
-  console.log("21")
+  console.log("22")
   wx.request({
     url: app.globalData.appUrl + 'WXCompanyJob/selectCompanyJobPage',
     data: {
@@ -336,6 +336,7 @@ Page({
     goodJob: [],
     //首页导航开始
     homeNavigation:[],
+    scene:''
   },
 
   /**
@@ -343,7 +344,23 @@ Page({
    */
   onLoad: function(options) {
     console.info("****************************************************");
-    console.info(options);
+    // console.info(options)
+    if (options.scene) {
+      this.setData({
+        scene: decodeURIComponent(options.scene)
+      });
+      console.log("Path1: " + decodeURIComponent(options.scene))
+
+      wx.navigateTo({
+        url: '/pages/postdetails/postdetails' + '?CompanyJobId=' + this.data.scene
+      })
+    } 
+    
+    // var scene ='';
+    // this.setData({
+    //   scene:options.scene
+    // })
+    
 
     //设置下滑高度
     var that = this
@@ -352,7 +369,7 @@ Page({
       scrollHeight: scrollHeight
     });
     //查找轮播图
-    getHomeSwiper(this)
+    getHomeSwiper(this);
     var ss = 0;
     wx.getSystemInfo({
       success: function(res) {
@@ -469,7 +486,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    // console.info("哈哈哈哈哈哈哈哈哈哈")
+    // if (this.data.scene != '') {
+    //   console.info("****************")
+    //   wx.navigateTo({
+    //     url: '/pages/postdetails/postdetails' + '?CompanyJobId=' + this.data.scene
+    //   })
+    // }
+    // console.info("哈哈哈哈哈哈哈哈哈哈")
   },
 
   /**

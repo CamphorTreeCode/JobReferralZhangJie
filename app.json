@@ -23,8 +23,8 @@
     "backgroundTextStyle":"dark",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "张杰职介总店",
-    "navigationBarTextStyle":"black",
-    "enablePullDownRefresh": true
+    "navigationBarTextStyle":"black"
+    
   },
   "tabBar": {
     "borderStyle": "white",

@@ -26,7 +26,7 @@ function selectApplicant(that) {
         console.info(collectionList)
         for (var i = 0; i < res.data[0].lists.length; i++) {
           res.data[0].lists[i].companyJob[0].jobLabels = JSON.parse(res.data[0].lists[i].companyJob[0].jobLabels)
-          res.data[0].lists[i].companyJob[0].company.companyAddress = res.data[0].lists[i].companyJob[0].company.companyAddress.split(",")[2];
+          res.data[0].lists[i].companyJob[0].company.companyAddress = res.data[0].lists[i].companyJob[0].company.companyAddress.split(",")[1];
           res.data[0].lists[i].state= "false";
           collectionList.push(res.data[0].lists[i]);
 

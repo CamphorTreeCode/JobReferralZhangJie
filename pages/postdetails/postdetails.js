@@ -105,7 +105,7 @@ Page({
       });
       console.log("Path2: " + decodeURIComponent(options.scene))
     }
-
+    
 
     // console.log(options)
     // this.setData({
@@ -366,7 +366,7 @@ Page({
       url: app.globalData.appUrl + 'WXGetQR_CodeController/getewm', //仅为示例，并非真实的接口地址
       data: {
         scene: that.data.CompanyJobId,
-        page: "pages/postdetails/postdetails"
+        page: "/pages/postdetails/postdetails"
       },
       method: "get",
       header: {
@@ -483,7 +483,7 @@ Page({
                           //删除本地存放的小程序码
 
                           wx.request({
-                            url: app.globalData.appUrl + 'GetQR_CodeController/deleteLocalCode',
+                            url: app.globalData.appUrl + 'WXGetQR_CodeController/deleteLocalCode',
                             data: {
                               localCode: localCode,
                             },
