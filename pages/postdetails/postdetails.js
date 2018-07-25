@@ -387,18 +387,18 @@ Page({
             that.setData({
               Img: QRCode.tempFilePath,
             })
-            console.info(app.globalData.userInfo.avatarUrl)
-            wx.downloadFile({
-              url: that.data.companyJob[0].jobSwiperImages[0],
-              // url: app.globalData.userInfo.avatarUrl,
-              success: function(userImg) {
-                console.info("*****************************************************")
-                console.info(userImg.tempFilePath)
-                console.info("*****************************************************")
-                that.setData({
-                  //用户头像下载缓存
-                  userImg: userImg.tempFilePath,
-                })
+            // console.info(app.globalData.userInfo.avatarUrl)
+            // wx.downloadFile({
+            //   url: that.data.companyJob[0].jobSwiperImages[0],
+            //   // url: app.globalData.userInfo.avatarUrl,
+            //   success: function(userImg) {
+            //     console.info("*****************************************************")
+            //     console.info(userImg.tempFilePath)
+            //     console.info("*****************************************************")
+            //     that.setData({
+            //       //用户头像下载缓存
+            //       userImg: userImg.tempFilePath,
+            //     })
                 wx.downloadFile({
                   url: that.data.companyJob[0].jobSwiperImages[0],
                   success: function(jobImage) {
@@ -417,7 +417,7 @@ Page({
                       nickname = nickname.substring(0, 3) + "..."
                     };
                     //用户头像
-                    var userImg = that.data.userImg;
+                    // var userImg = that.data.userImg;
                     //职位图片
                     var jobImage = that.data.jobImage;
                     //公司名称
@@ -460,7 +460,7 @@ Page({
                     ctx.setFontSize(12)
                     ctx.fillText('长按识别小程序码访问', 12.5, scrollHeight * 0.9 * 0.7+25)
                     ctx.drawImage(QRCode, scrollWidth * 0.9 - 118, scrollHeight * 0.9 * 0.525, 110, 110);
-                    ctx.drawImage("/img/postdetails/logo.png", scrollWidth * 0.9 - 85, scrollHeight * 0.9 * 0.5875, 45.25, 45.5);
+                    // ctx.drawImage("/img/postdetails/logo.png", scrollWidth * 0.9 - 85, scrollHeight * 0.9 * 0.5875, 45.25, 45.5);
                     ctx.draw()
 
                     wx.hideLoading()
@@ -504,8 +504,8 @@ Page({
                     }, 1000)
                   },
                 })
-              },
-            })
+            //   },
+            // })
           },
         })
 

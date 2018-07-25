@@ -1,6 +1,5 @@
 var app = getApp();
 // pages/index/index.js
-var app = getApp()
 
 function getHomeSwiper(that) {
   wx.request({
@@ -73,7 +72,7 @@ function selectTypePage(that) {
         console.info(shop)
         // console.info(res.data[0].lists, shopList)
         that.setData({
-          shopList: s,
+          shopList: that.data.shopList.concat(s),
           showData: true,
           showLoading: true
         })

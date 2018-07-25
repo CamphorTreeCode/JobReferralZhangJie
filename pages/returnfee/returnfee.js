@@ -90,7 +90,7 @@ Page({
     }
     // 再通过setData更改Page()里面的data，动态更新页面的数据  
     this.setData({
-      // dateend: myDate,      
+      dateend: myDate,      
       dates: myDate,
       date: yayay
     });
