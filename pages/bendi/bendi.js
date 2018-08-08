@@ -903,5 +903,11 @@ else{
     wx.navigateTo({
       url: '/pages/postdetails/postdetails?CompanyJobId=' + e.currentTarget.dataset.id,
     })
-  }
+  },
+  xuanfu:function(){
+    wx.reLaunch({
+      url: '/pages/index/index'
+    })
+  },
+
 })

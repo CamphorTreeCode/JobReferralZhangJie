@@ -113,7 +113,7 @@ scroll-view {
   color: white;
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 82%;
   margin-left: -155rpx;
   margin-top: -40rpx;
 }
@@ -142,7 +142,7 @@ scroll-view {
   color: white;
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 56%;
   margin-left: -145rpx;
   margin-top: -40rpx;
 }
@@ -159,4 +159,11 @@ scroll-view {
 .foter .right text {
   position: absolute;
   left: 17%;
+}
+.shouye{
+  position: absolute;
+  width: 100rpx !important;
+  height: 100rpx !important;
+  top: -18rpx !important;
+  left: 5% !important;
 }

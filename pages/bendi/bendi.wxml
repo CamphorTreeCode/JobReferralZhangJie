@@ -51,7 +51,7 @@
     </view>
     <view bindtap='sanprice' class='{{xuanze==1?"activeshow":""}}'>
       <image src='/img/index/xiala.png'></image>
-      返现金额
+      奖励金额
     </view>
     <view bindtap='sanzong' class='{{xuanze==2?"activeshow":""}}'>
       <image src='/img/index/xiala.png'></image>
@@ -75,7 +75,7 @@
         <view>
           <text wx:for='{{item.jobLabels}}' wx:for-item="idx">{{idx}}</text>
         </view>
-        <view>返{{item.returnMoney}}</view>
+        <view>奖励{{item.returnMoney}}</view>
         <view>{{item.jobSalaryMin}}-{{item.jobSalaryMax}}/月</view>
       </view>
     </view>
@@ -92,3 +92,6 @@
   </scroll-view>
 </view>
 <!-- 底部分类 -->
+<view class='xuanfu' catchtap='xuanfu'>
+  <image src='/img/postdetails/shouye1.png'></image>
+</view>

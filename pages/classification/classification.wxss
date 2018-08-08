@@ -263,7 +263,7 @@ background: rgba(0, 0, 0, 0.5);
 }
 
 .bottom  .mingpian view:nth-of-type(3) {
-  color: #999;
+  color: red;
 }
 
 .bottom  .mingpian view:nth-of-type(4) {

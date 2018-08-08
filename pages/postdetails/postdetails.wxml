@@ -22,13 +22,20 @@
   <view class='lei'>
     <image src='/img/postdetails/gongsi.png'></image>
     <text>{{companyJob[0].company.companyName}}</text>
-    <text>返{{companyJob[0].returnMoney}}</text>
+    <!-- <text>返{{companyJob[0].returnMoney}}</text> -->
+    <text>{{companyJob[0].returnMoney==0?"":'奖励'+companyJob[0].returnMoney}}</text>
   </view>
   <view class='lei'>
     <image src='/img/postdetails/gongzi.png'></image>
     <text>工资</text>
     <text>{{companyJob[0].jobSalaryMin}}-{{companyJob[0].jobSalaryMax}}月</text>
   </view>
+  <view class='lei' wx:if="{{companyJob[0].manageCost!=0}}">
+    <image src='/img/postdetails/gongzi.png'></image>
+    <text>管理费</text>
+    <text>{{companyJob[0].manageCost}}元</text>
+  </view>
+  
   <view class='lei'>
     <image src='/img/postdetails/leixing.png'></image>
     <text>招聘类型</text>
@@ -111,6 +118,7 @@
 <!-- 类别信息 -->
 
 <!-- 底部信息 -->
+
 <view class='foter'>
   <view class='dianhua' catchtap='shouye'>
     <image mode='aspectFill' src='/img/postdetails/shouye.png'></image>
@@ -128,7 +136,7 @@
     已报名
   </view>
   <!-- <view class='baoming' wx:if="{{isInvalid==1}}"> -->
-    <view class='baoming' wx:if="{{isInvalid==1}}" catchtap='zhuanfa'>  
+  <view class='baoming' wx:if="{{isInvalid==1}}" catchtap='zhuanfa'>  
     <image mode='aspectFill' src='/img/postdetails/zhuanfa.png'></image>
     <!-- <button open-type='share'>转发</button> -->
      <button>转发</button> 
@@ -146,6 +154,12 @@
     <text>取消收藏</text>
   </view>
  
+
+
+  
+</view>
+
+
   <!--转发&生成海报start-->
   <view wx:if='{{zhuanfa==false}}' class='tankuang'>
     <view class='flex-one'>
@@ -170,7 +184,8 @@
     <view class='dibu aaa'>您可以分享到朋友圈或者好友啦</view>
   </view>
 
-  <!-- 去报名 -->
+
+<!-- 去报名 -->
   <view class='hide' wx:if='{{xinxi==1}}'>
     <image mode='aspectFit' src='/img/postdetails/youjian.png'></image>
     <view class='text'>是否将报名信息提交</view>
@@ -197,5 +212,6 @@
     <image mode='aspectFit' src='/img/postdetails/youjian.png'></image>
     <view class='text'>已提交</view>
   </view>
-</view>
+
+
 <view class='shade' style='display:{{shade}}' disable-scroll="true" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd"></view>

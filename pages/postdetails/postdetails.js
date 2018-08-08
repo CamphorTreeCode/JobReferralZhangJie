@@ -188,9 +188,10 @@ Page({
           res.data[0].jobSwiperImages = JSON.parse(res.data[0].jobSwiperImages)
           //富文本解析
           var article = res.data[0].jobDescription;
-          WxParse.wxParse('article', 'html', article, that, 5);
+          
           var article1 = res.data[0].jobNotes;
-          WxParse.wxParse('article1', 'html', article1, that, 5);
+          WxParse.wxParse('article', 'html', article1, that, 5);
+          WxParse.wxParse('article1', 'html', article, that, 5);
           that.setData({
             companyJob: res.data
           })
@@ -818,10 +819,6 @@ Page({
           }
         })
       }
-
-
-      
-
     })
 
     if (that.data.hidden == true) {

@@ -6,10 +6,11 @@
 <!-- <scroll-view scroll-y="true"  style='height:{{scrollHeight}}px' class="scoll-h" bindscrolltolower="lower"> -->
 
 <view class='header'>
-  <picker mode="date" value="{{date}}" start="1978-01-01" end="{{dateend}}" bindchange="bindDateChange" name="entryTime">
-    <text>{{dates}} </text>
+<text>{{dates}} </text>
+  <!-- <picker mode="date" value="{{date}}" start="1978-01-01" end="{{dateend}}" bindchange="bindDateChange" name="entryTime">
+    
     <image bindchange="bindDateChange" src='/img/postdetails/rili.png'></image>
-  </picker>
+  </picker> -->
 </view>
 <!-- {{scrollHeight}} -->
 <scroll-view scroll-y="true"  style='height:911rpx' class="scoll-h" bindscrolltolower="lower">
@@ -59,16 +60,18 @@
 </scroll-view>
 <!-- 底部 -->
 <view class='foter'>
+
   <view class='left' bindtap='pageon'>
+  <image class='shouye' src='/img/postdetails/shouye.png' catchtap='shouye'></image>
     <view>
       <image src='/img/postdetails/xiayiye.png'> </image>
-      <text>上一天</text>
+      <text>上一页</text>
     </view>
   </view>
   <view class='right' bindtap='pageup'>
     <view>
       <image src='/img/postdetails/xiayiye2.png'> </image>
-      <text>下一天</text>
+      <text>下一页</text>
     </view>
   </view>
 </view>

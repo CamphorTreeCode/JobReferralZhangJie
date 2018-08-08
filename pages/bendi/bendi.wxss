@@ -170,7 +170,8 @@ background: rgba(0, 0, 0, 0.5);
 }
 
 .bottom  .mingpian view:nth-of-type(3){
-  color: #999;
+  color: red;
+  font-weight:700
 }
 
 .bottom  .mingpian view:nth-of-type(4){
@@ -239,4 +240,13 @@ background: rgba(0, 0, 0, 0.5);
   left: 226rpx;
   width: 40rpx;
   height: 4rpx;
+}
+.xuanfu {
+  position: fixed;
+  bottom: 100rpx;
+  right: 50rpx;
+}
+.xuanfu image {
+  width: 100rpx;
+  height: 100rpx
 }
