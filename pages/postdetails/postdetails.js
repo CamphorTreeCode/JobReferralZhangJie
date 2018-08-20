@@ -331,7 +331,6 @@ Page({
     }
 
   },
-
   //转发按钮事件
   zhuanfa: function() {
     var that = this;
