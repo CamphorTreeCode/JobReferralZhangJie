@@ -4,7 +4,7 @@ var util = require('../../utils/util.js')
 //引入富文本
 var WxParse = require('../../wxParse/wxParse.js');
 var app = getApp()
-
+ 
 function getDate(str) {
   // var date = new Date(str);
   var date1 = str.replace(/-/g, '/');//兼容ios  IOS只识别2017/01/01这种格式
