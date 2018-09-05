@@ -109,7 +109,7 @@ Page({
       })
       setTimeout(function() {
         wx.switchTab({
-          url: '/pages/me/me',
+          url: '/pages/me/me',  
         })
       }, 1000)
     }

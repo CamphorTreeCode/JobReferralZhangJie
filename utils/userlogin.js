@@ -9,7 +9,7 @@ function login(that){
          var app =getApp()
            console.log(res)
           var userInfo = res.userInfo
-
+          
           getOpenid()
           var openid = wx.getStorageSync('openid')
           userInfo.openId = openid
